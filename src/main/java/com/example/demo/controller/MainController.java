@@ -11,5 +11,4 @@ public class MainController {
         return "index"; //just for initial testing purpose
     }
 
-
 }
