@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-test
+
+
+<!--Greets the user with the username entered-->
+<h3 >Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout"/>
+</form>
+<br>
+<form th:action="@{/employees}" method="post">
+    <input type="submit" value="Employees"/>
+</form>
+
+
 </body>
 </html>
