@@ -1,0 +1,105 @@
+body, button{
+    font-family: Tahoma, sans-serif ;
+    color: #212121;
+}
+
+#tabs{
+    padding: 0 10%;
+}
+
+.flex-container{
+    display: flex;
+    /*background-color: #f1f1f1;*/
+    margin : 0;
+    padding: 0%;
+}
+button.menu_item{
+    /*  color: black;*/
+    border: 0;
+    background: none;
+
+}
+.menu_item:hover{
+    color: cornflowerblue;
+}
+a.menu_link{
+    flex-grow: 1;
+}
+
+.menu_item{
+    text-align: left;
+    /* align-content: flex-star;*/
+    padding:1% 1%;
+    width:100%;
+    font-size: 1em;
+}
+
+
+#menu {
+    /*  list-style-type: none;*/
+    padding: 0 15%;
+    margin : 0;
+}
+#logout{
+    position: fixed;
+    right:10px;
+    top:10px;
+    width:100px;
+    border: none;
+}
+input{
+    font-size: 16px;
+    border: none;
+    text-decoration: none;
+}
+input:hover{
+    background-color: cornflowerblue;
+    color: white;
+}
+#banner{
+    position: fixed;
+    left:10px;
+    top:10px;
+    width:100px;
+}
+
+#navigation{
+    position:fixed;
+    top: 0;
+    background-color: #c9ccf0;
+}
+
+.main{
+    position:relative;
+    margin : 5% 15%;
+    padding: 0%;
+    background-color: white;
+    min-height:650px;
+}
+
+table {
+    width: 100%;
+    border: none;
+}
+th {
+    background-color: cornflowerblue;
+    color: white;
+}
+
+td th{
+    padding: 5em;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f1f1f1;
+}
+
+footer {
+    background: cornflowerblue;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 0;
+}

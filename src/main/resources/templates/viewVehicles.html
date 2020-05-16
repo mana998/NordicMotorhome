@@ -3,8 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Vehicles</title>
+    <link rel="stylesheet" type="text/css" href="css/layout.css?Num=2"/>
 </head>
 <body>
+<div class="navigation">
+    <nav class="flex-container" id="menu">
+        <!-- <a th:if="${#authorization.expression('hasAuthority(''admin'')')}" href="/viewEmployees" class="menu_link" id="about"><button class="menu_item">Employees</button></a>-->
+        <a href="/" class="menu_link" id="home"><button class="menu_item">Home</button></a>
+        <a href="/viewVehicles" class="menu_link" id="vehicle"><button class="menu_item">Vehicles</button></a>
+        <a href="/viewRenters" class="menu_link" id="renters"><button class="menu_item">Renters</button></a>
+        <a href="/viewAgreements" class="menu_link" id="agreements"><button class="menu_item">Agreements</button></a>
+        <!--<a th:href="@{/logout}" class="menu_link" id="logout"><button class="menu_item" class="menu_item">Log Out</button></a>-->
+    </nav>
+</div>
+
+<div>
+    <a href="/" class="menu_link" id="banner"><img src="logo.png" height="30" width="30"></a>
+</div>
+
+<div>
+    <form th:action="@{/logout}" method="post" id="logout">
+        <input type="submit" value="LOG OUT"/>
+    </form>
+</div>
+<div class="main" id="main">
         <table>
             <thead>
             <tr>
@@ -12,10 +34,10 @@
                 <th>Plates</th>
                 <th>Brand</th>
                 <th>Model</th>
-                <th>Number of beds</th>
+                <th>Beds</th>
                 <th>Price</th>
                 <th>Availability</th>
-                <th></th>
+                <!--<th></th>-->
             </tr>
             </thead>
             <tbody>
@@ -27,14 +49,19 @@
                 <td th:text="${vehicle.beds}" />
                 <td th:text="${vehicle.price}" />
                 <td th:text="${vehicle.isAvailable}" />
-                <td><!--
+                <!--<td>
                     <a th:href=""><button>ADD</button></a>
                     <a th:href=""><button>DELETE</button></a>
-                    <a th:href=""><button>UPDATE</button></a>-->
-                </td>
+                    <a th:href=""><button>UPDATE</button></a>
+                </td>-->
             </tr>
             </tbody>
         </table>
-        <a href=""><button>ADD NEW VEHICLE</button></a>
+        <!--<a href=""><button>ADD NEW VEHICLE</button></a>-->
+</div>
+<footer>
+    <p class="copyright">Copyright 2020 Nordic</p>
+    <!--&copy;Nordic-->
+</footer>
 </body>
 </html>
