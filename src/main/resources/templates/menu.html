@@ -1,0 +1,22 @@
+<div th:fragment="menu_template">
+    <div class="navigation">
+        <nav class="flex-container" id="menu">
+            <a href="/" class="menu_link" id="home"><button class="menu_item">Home</button></a>
+            <a href="/viewVehicles" class="menu_link" id="vehicle"><button class="menu_item">Vehicles</button></a>
+            <a href="/viewRenters" class="menu_link" id="renters"><button class="menu_item">Renters</button></a>
+            <a href="/viewAgreements" class="menu_link" id="agreements"><button class="menu_item">Agreements</button></a>
+            <a th:if="${#authorization.expression('hasAuthority(''admin'')')}" th:href="@{/viewEmployees}" class="menu_link" id="about"><button class="menu_item">Employees</button></a>
+            <!--<a th:href="@{/logout}" class="menu_link" id="logout"><button class="menu_item" class="menu_item">Log Out</button></a>-->
+        </nav>
+    </div>
+
+    <div>
+        <a href="/" class="menu_link" id="banner"><img src="logo.png" height="30" width="30"></a>
+    </div>
+
+    <div>
+        <form th:action="@{/logout}" method="post" id="logout">
+            <input type="submit" value="LOG OUT"/>
+        </form>
+    </div>
+</div>
