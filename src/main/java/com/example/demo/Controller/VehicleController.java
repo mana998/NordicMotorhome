@@ -15,7 +15,7 @@ public class VehicleController { //Karolina
     @Autowired
     VehicleService vehicleService;
 
-    @GetMapping("/vehicles")
+    @GetMapping("/viewVehicles")
     public String showVehicleList(Model model){
         List<Vehicle> vehicleList = vehicleService.showVehicleList();
         model.addAttribute("vehicles", vehicleList);
