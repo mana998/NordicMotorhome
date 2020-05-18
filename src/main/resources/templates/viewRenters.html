@@ -1,0 +1,44 @@
+<!DOCTYPE html> <!--Marianna-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head th:insert="header :: header_template">
+        <title>Renteres</title>
+        <!-- import header part-->
+    </head>
+    <body>
+        <!-- import menu-->
+        <div th:insert="menu :: menu_template"></div>
+        <div class="main" id="main">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>CPR</th>
+                    <th>Phone</th>
+                    <th>Driver License</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- print each renter in a new row-->
+                <tr th:each="renter: ${renters}">
+                    <td th:text="${renter.id}"></td>
+                    <td th:text="${renter.firstName}"></td>
+                    <td th:text="${renter.lastName}"></td>
+                    <td th:text="${renter.cpr}"></td>
+                    <td th:text="${renter.phone}"></td>
+                    <td th:text="${renter.licenseNumber}"></td>
+                    <td>
+                        <a href=""><button>VIEW</button></a>
+                        <a href=""><button>UPDATE</button></a>
+                        <a href=""><button>DELETE</button></a> <!-- cant delete members with active contract-->
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- insert footer -->
+        <div th:insert="footer :: footer_template"></div>
+    </body>
+</html>

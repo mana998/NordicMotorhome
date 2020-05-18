@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<head th:insert="header :: header_template">
+    <title>Nordic Motorhomes</title>
+    <!-- import header part-->
 </head>
 <body>
-
+<!-- import menu-->
+<div th:insert="menu :: menu_template"></div>
 
 <!--Greets the user with the username entered-->
 <h3 >Welcome [[${#httpServletRequest.remoteUser}]]</h3>
@@ -17,7 +18,12 @@
 <form th:action="@{/employees}" method="post">
     <input type="submit" value="Employees"/>
 </form>
+<br>
+<form th:action="@{/viewVehicles}" method="get">
+    <input type="submit" value="Vehicles"/>
+</form>
 
-
+<!-- insert footer -->
+<div th:insert="footer :: footer_template"></div>
 </body>
 </html>
