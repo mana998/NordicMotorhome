@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 @Controller
-public class RenterController { //Marianna
+public class RenterController {
 
     @Autowired
     RenterService renterService;
 
     //show table of all employees
-    @GetMapping("/renters")
+    @GetMapping("/viewRenters")
     public String renters(Model model){
         List<Renter> renterList = renterService.showRentersList(); //saves renters into the list
         model.addAttribute("renters",renterList); //adds renters list to the model
