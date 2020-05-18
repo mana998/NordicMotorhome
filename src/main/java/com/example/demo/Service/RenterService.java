@@ -15,4 +15,7 @@ public class RenterService { //Marianna
     public List<Renter> showRentersList() {
         return renterRepository.showRentersList();
     }
+
+    public Renter getRenter(int id) { return renterRepository.getRenter(id);}
+
 }
