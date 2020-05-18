@@ -137,6 +137,65 @@ footer {
     margin-bottom: 0;
 }
 
+
+
+fieldset{
+    border:1px solid lightgrey;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+    border-radius:8px;
+    background-color: whitesmoke;
+    max-width:500px;
+    padding:16px;
+    color: black;
+    margin: auto;
+    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+}
+
+fieldset input{
+    font-size: 14px;
+    text-decoration: none;
+    border:1px solid lightgrey;
+    border-radius: 4px;
+}
+
+fieldset input:hover{
+    border: 1px solid cornflowerblue;
+    background-color: white;
+    color: black;
+}
+
+fieldset select{
+    border-radius: 4px;
+}
+
+fieldset p{
+    color: #324960;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 10px;
+    padding-top:0;
+}
+fieldset label{
+    font-size:14px;
+}
+
+h1.emp{
+    text-align: center;
+    font-size: 1.5em;
+}
+
+input.btn-submit-add{
+    margin: 0 auto;
+    border: 2px solid black;
+    border-radius: 4px;
+    display:block;
+}
+
+
+
+
 /* Responsive */
 
 @media (max-width: 767px) {
@@ -201,4 +260,5 @@ footer {
         display: block;
         text-align: center;
     }
+
 }

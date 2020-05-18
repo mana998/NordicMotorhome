@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="header :: header_template">
+    <title>Employees</title>
+    <!-- import header part-->
+</head>
+<body>
+    <!-- import menu-->
+    <div th:insert="menu :: menu_template"></div>
+
+    <h1>Employees [[${#httpServletRequest.remoteUser}]]</h1>
+    <a th:href="@{/addEmployee}">
+        <button class="btn-add" id="btn">Add New Employee</button>
+    </a>
+        <main class="main_body">
+            <div class="main table-wrapper" id="main">
+                <table class="fl-table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>CPR</th>
+                <th>Job</th>
+                <th>Telephone</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr th:each="employee : ${employees}">
+                    <td th:text="${employee.id}"/>
+                    <td th:text="${employee.firstName}"/>
+                    <td th:text="${employee.lastName}"/>
+                    <td th:text="${employee.cpr}"/>
+                    <td th:text="${employee.type}"/>
+                    <td th:text="${employee.phone}"/>
+                    <td th:text="${employee.username}"/>
+                    <td th:text="${employee.password}"/>
+                    <td th:text="${employee.role}"/>
+                    <td>
+                        <a th:href="@{'/viewEmployee/'+${employee.id}}">
+                            <button class="btn-view">View</button>
+                        </a>
+                        <a th:href="@{'/deleteEmployee/'+${employee.id}}">
+                            <button class="btn-delete">Delete</button>
+                        </a>
+                        <a th:href="@{'/updateEmployee/'+${employee.id}}">
+                            <button class="btn-update">Update</button>
+                        </a>
+                    </td>
+                </tr>
+        </tbody>
+
+    </table>
+    </div>
+        </main>
+    <div th:insert="footer :: footer_template"></div>
+</body>
+</html>
+
