@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.Security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.sql.DataSource;
 
-
-
 @Configuration
 @EnableWebSecurity
 public class LoginConfig extends WebSecurityConfigurerAdapter {
@@ -21,9 +19,12 @@ public class LoginConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     protected void configureAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+        //uses jdbc authentication
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
+                //Encodes the password to hash
                 .passwordEncoder(new BCryptPasswordEncoder())
+                //finds the users inside our database
                 .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username = ?")
                 .authoritiesByUsernameQuery("SELECT username, role FROM users WHERE username = ?");
     }
@@ -33,9 +34,10 @@ public class LoginConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .anyRequest().authenticated()
-                .and()
+                .and() //used to chain methods
+                //basic login form
                 .formLogin().permitAll()
-                .and()
+                .and() //used to chain methods
                 .logout().permitAll();
     }
 
