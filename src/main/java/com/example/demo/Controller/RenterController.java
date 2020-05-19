@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Controller
-public class RenterController { //Marianna
+public class RenterController {
 
     @Autowired
     RenterService renterService;
