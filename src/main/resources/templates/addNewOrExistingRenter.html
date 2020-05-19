@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Create Agreement</title>
+</head>
+
+<body>
+<div>
+    <p>Create agreement</p>
+    <hr>
+    <a th:href="@{/agreements/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/new-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}">New Renter</a>
+    <a th:href="@{/agreements/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}">Existing Renter</a>
+    <hr>
+    <a th:href="@{/agreements/create/selectDates}">Back</a>
+</div>
+</body>
+</html>

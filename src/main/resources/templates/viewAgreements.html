@@ -1,0 +1,52 @@
+<!DOCTYPE html> <!--Dimitrios-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="header :: header_template">
+    <title>Agreements</title>
+    <!-- import header part-->
+</head>
+<body>
+<!-- import menu-->
+<div th:insert="menu :: menu_template"></div>
+<main class="main_body">
+    <div class="main table-wrapper" id="main">
+
+        <!-- Add button -->
+        <a th:href="@{/agreements/create/selectDates}" class="btn btn-primary btn-sm mb-3">Add Agreement</a>
+
+        <table class="fl-table">
+            <thead>
+            <tr>
+                <th>Agreement ID</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Renter Name</th>
+                <th>Vehicle License Plate</th>
+                <th>Total Price</th>
+                <th>Action</th>
+                <!--<th></th>-->
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="agreement:${agreements}">
+                <td th:text="${agreement.id}"></td>
+                <td th:text="${#temporals.format(agreement.startDate, 'dd-MM-yyyy')}"></td>
+                <td th:text="${#temporals.format(agreement.endDate, 'dd-MM-yyyy')}"></td>
+                <td th:text="${agreement.renter.firstName + ' ' + agreement.renter.lastName}"></td>
+                <!-- add license plate here!!! -->
+                <td th:text="${agreement.totalCost}"></td>
+                <td th:text="${agreement.totalCost}"></td>
+                <td>
+                    <!-- Add view function -->
+                    <a th:href="@{/agreements/view/{id}(id=${agreement.id})}" class="btn btn-info btn-sm">View</a>
+                    <a th:href="@{/agreements/update/{id}(id=${agreement.id})}" class="btn btn-info btn-sm">Update</a>
+                    <a th:href="@{/agreements/delete/{id}(id=${agreement.id})}" class="btn btn-info btn-sm">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <!--<a href=""><button>ADD NEW VEHICLE</button></a>-->
+    </div>
+</main>
+<div th:insert="footer :: footer_template"></div>
+</body>
+</html>

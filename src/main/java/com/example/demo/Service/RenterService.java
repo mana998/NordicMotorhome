@@ -15,4 +15,10 @@ public class RenterService { //Marianna
     public List<Renter> showRentersList() {
         return renterRepository.showRentersList();
     }
+
+    public void addRenter(Renter renter) {renterRepository.addRenter(renter);}
+
+
+    public Renter findRenterById(int id) { return renterRepository.findRenterById(id);}
+
 }

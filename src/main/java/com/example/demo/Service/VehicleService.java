@@ -16,5 +16,11 @@ public class VehicleService { //Karolina
     public List<Vehicle> showVehicleList(){
         return vehicleRepository.showVehicleList();
     }
+    public Vehicle findVehicleById(int vehicleID){
+        return vehicleRepository.findVehicleById(vehicleID);
+    }
+    public Vehicle addVehicle(Vehicle vehicle){
+        return vehicleRepository.addVehicle(vehicle);
+    }
 
 }
