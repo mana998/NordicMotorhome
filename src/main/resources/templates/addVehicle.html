@@ -1,0 +1,57 @@
+<!DOCTYPE html> <!--Karolina-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="header :: header_template">
+    <title>View Vehicles</title>
+    <!-- import header part-->
+</head>
+<body>
+    <!-- import menu-->
+    <div th:insert="menu :: menu_template"></div>
+
+    <!-- back button-->
+    <div class="btn-undermenu">
+        <a th:href="@{/viewVehicles}">
+            <img src="SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
+        </a>
+    </div>
+
+    <h1 class="heading">Add New Vehicle</h1>
+
+    <main class="main_body">
+        <fieldset>
+            <form th:action="@{/addVehicle}" method="post">
+                <p>Vehicle Information</p>
+                <label>Enter Plates:</label>
+                <input type="text" name="plates" placeholder="ex. XM23640" required><br><br>
+                <!--<label>Select brand from existing:</label>  !--check later if possible to select from existing OR type new--
+                <select id="brand" name="brand">
+                    <option th:value="${brand}" selected hidden><span th:text="${brand}"></span></option>
+                    <option th:each="brand: ${brands}" th:value="${brand}"><span th:text="${brand}"></span></option>
+                </select>-->
+                <label>Enter brand:</label>
+                <input type="text" name="brand" placeholder="ex. Sunlight" required><br><br>
+                <!--<label>Select or type the model:</label>  !--doesn't work, doesn't take name--
+                <input type="text" list="model" />
+                <datalist id="model" name="model">
+                    <option th:value="${model}" selected hidden><span th:text="${model}"></span></option>
+                <option th:each="model: ${models}" th:value="${model}"><span th:text="${model}"></span></option>
+                </datalist>-->
+                <label>Type model:</label>
+                <input type="text" name="model" placeholder="ex. V 66" required><br><br>
+                <label>Enter Number of Beds:</label>
+                <input type="number" name="beds" placeholder="ex. 4" required><br><br>
+                <label>Enter Price per Day:</label>
+                <input type="number" name="price" placeholder="ex. 400" required><br><br>
+                <label >Select availability:</label>
+                <input type="radio" id="available" name="isAvailable" value="1" checked="checked">
+                <label for="available">available</label>
+                <input type="radio" id="unavailable" name="isAvailable" value="0">
+                <label for="unavailable">unavailable</label><br><br>
+                <input class="btn-submit-add" type="submit" value="Submit Entry">
+            </form>
+        </fieldset>
+    </main>
+    <!-- import footer-->
+    <div th:insert="footer :: footer_template"></div>
+</body>
+</html>
