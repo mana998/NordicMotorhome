@@ -53,4 +53,8 @@ public class VehicleRepository { //Karolina
 
 
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 6bade741a56ad1abe43e6ffead2ab9d09cbf3b42

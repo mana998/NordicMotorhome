@@ -17,7 +17,7 @@ public class RenterRepository {
     JdbcTemplate template;
 
     private static RowMapper<Renter> rowMapper = new BeanPropertyRowMapper<>(Renter.class);
-
+    
     //get all the information about renters from the database
     public List<Renter> showRentersList(){
         String sql = "SELECT renterID AS id, first_name AS firstName, last_name AS lastName, CPR AS cpr, email, phone, " +

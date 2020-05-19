@@ -11,12 +11,13 @@
     </div>
 
     <div>
-        <a href="/" class="menu_link" id="banner"><img src="image/logo.png" height="50" width="50"></a>
+        <a href="/" class="menu_link" id="banner"><img src="../image/logo.png" height="50" width="50"></a>
     </div>
 
-    <div>
-        <form th:action="@{/logout}" method="post" id="logout">
-            <img src="SVG/sign-out-alt-solid.svg" class="svg logout_button" height="30" width="30"><button class="logout"><strong>LOG OUT</strong></button>
+    <div id="logout">
+        <form th:action="@{/logout}" method="post">
+            <button class="logout"><strong>LOG OUT</strong></button>
+            <img src="../SVG/sign-out-alt-solid.svg" class="svg logout_button" height="30" width="30">
         </form>
     </div>
 </div>
