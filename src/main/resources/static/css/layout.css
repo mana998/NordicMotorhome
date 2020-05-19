@@ -18,13 +18,18 @@ button.menu_item{
     background: none;
 
 }
-.menu_item:hover{
-    color: cornflowerblue;
-}
+
 a.menu_link{
     flex-grow: 1;
     margin-top: 15px;
 }
+
+a.menu_link:hover{
+    flex-grow: 1;
+    margin-top: 15px;
+    filter: invert(72%) sepia(37%) saturate(6284%) hue-rotate(194deg) brightness(96%) contrast(93%);
+}
+
 .menu_item{
     /* align-content: flex-star;*/
     font-size: 1em;
@@ -33,27 +38,32 @@ a.menu_link{
     padding: 0 12%;
     filter: invert(24%) sepia(50%) saturate(395%) hue-rotate(169deg) brightness(95%) contrast(92%);
 }
-.svg:hover{
-    filter: invert(72%) sepia(37%) saturate(6284%) hue-rotate(194deg) brightness(96%) contrast(93%);
-}
-.logout{
+
+#logout{
     position: fixed;
-    right:40px;
-    top:20px;
-    width:100px;
+    right:0px;
+    top:10px;
+    width:60px;
     border: none;
     font-size: 15px;
     background: none;
 }
-.logout:hover{
-    color: cornflowerblue;
+
+#logout:hover{
+    filter: invert(72%) sepia(37%) saturate(6284%) hue-rotate(194deg) brightness(96%) contrast(93%);
 }
-.logout_button{
-    position: fixed;
+
+button.logout{
+    background:none;
+    width: 90px;
+    border: 0;
+    position: relative;
     padding: 0;
-    top: 15px;
-    right: 15px;
+    top: 26px;
+    right: 90px;
+    font-size: 15px;
 }
+
 #menu {
     /*  list-style-type: none;*/
     padding: 0 40% 0 15%;
@@ -128,6 +138,24 @@ input:hover{
     background: #F8F8F8;
 }
 
+.grid-container{
+    display: grid;
+    margin : 0;
+    padding: 1em 10em;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+li {
+    list-style-type: none;
+    text-align: left;
+}
+
+
 footer {
     background: cornflowerblue;
     color: white;
@@ -177,18 +205,25 @@ fieldset p{
     padding-bottom: 10px;
     padding-top:0;
 }
+
+
 fieldset label{
     font-size:14px;
 }
 
-h1.emp{
+fieldset small{
+    font-size: 10px;
+    color: #a7a7a7;
+}
+
+h1.heading{
     text-align: center;
     font-size: 1.5em;
 }
 
 input.btn-submit-add{
-    margin: 0 auto;
-    border: 2px solid black;
+    margin: 2% auto;
+    border: 1px solid #8e8e8e;
     border-radius: 4px;
     display:block;
 }
@@ -260,5 +295,3 @@ input.btn-submit-add{
         display: block;
         text-align: center;
     }
-
-}
