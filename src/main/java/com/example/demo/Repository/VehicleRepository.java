@@ -48,9 +48,14 @@ public class VehicleRepository { //Karolina
         return null;
     }
 
-
-
-
-
+    //display all available vehicles
+    public List<Vehicle> showAvailableVehicles(){
+        String sql = "SELECT vehicleID, plates, brand_name AS brand, model_name AS model, model.beds, model.price\n" +
+                "FROM vehicle\n" +
+                "JOIN brand USING (brandID)\n" +
+                "JOIN model USING (modelID)" +
+                "WHERE is_available = '1';";
+        return template.query(sql, rowMapper);
+    }
 
 }
