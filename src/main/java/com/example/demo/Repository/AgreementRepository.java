@@ -50,6 +50,12 @@ public class AgreementRepository {
         template.update(sql, agreement.getRenter().getId(), agreement.getVehicle().getVehicleID(), agreement.getStartDate(),
         agreement.getEndDate(), agreement.getPickUpPoint(), agreement.getDropOffPoint());
     }
+
+    public Item findItemById(int id) {
+        String sql = "SELECT extrasID AS id, extras_name AS name, extras_price AS price FROM extras WHERE extrasID = ? ";
+        return template.queryForObject(sql, itemRowMapper, id);
+    }
+
 }
 
 class AgreementRowMapper implements RowMapper<Agreement> {

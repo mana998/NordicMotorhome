@@ -5,6 +5,7 @@ import com.example.demo.Model.Item;
 import com.example.demo.Model.Renter;
 import com.example.demo.Model.Vehicle;
 import com.example.demo.Service.AgreementService;
+import com.example.demo.Service.CountryService;
 import com.example.demo.Service.RenterService;
 import com.example.demo.Service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,12 +28,15 @@ public class AgreementController {
     private AgreementService agreementService;
     private VehicleService vehicleService;
     private RenterService renterService;
+    private CountryService countryService;
 
     @Autowired
-    public AgreementController(AgreementService agreementService, VehicleService vehicleService, RenterService renterService) {
+    public AgreementController(AgreementService agreementService, VehicleService vehicleService,
+                               RenterService renterService, CountryService countryService) {
         this.agreementService = agreementService;
         this.vehicleService = vehicleService;
         this.renterService = renterService;
+        this.countryService = countryService;
     }
 
     // create a mapping for "/list"
@@ -98,8 +103,14 @@ public class AgreementController {
         theModel.addAttribute("endDate", endDate);
         theModel.addAttribute("vehicleId", vehicleId);
         theModel.addAttribute("agreement", agreement);
-        List<Item> items = agreementService.findAllItems();
-        theModel.addAttribute("items", items);
+        List<Item> itemsList = agreementService.findAllItems();
+        System.out.println(itemsList);
+        theModel.addAttribute("itemsList", itemsList);
+
+        List<String> countries = countryService.showCountriesList();
+        System.out.println(countries);
+        theModel.addAttribute("countries", countries);
+
         // in case we want to add a list of countries for the dropdown?
         //theModel.addAttribute("countryList", countryList.getCountries());
         return "addNewAgreementDetails";
@@ -112,28 +123,20 @@ public class AgreementController {
                                 Model theModel,
                                 @ModelAttribute Renter renter, @ModelAttribute Agreement agreement) {
 
-        // renterService.addRenter(renter);
+        renterService.addRenter(renter);
+        int renterId = renterService.findMaxRenterId();
+        renter.setId(renterId);
         agreement.setRenter(renter);
         Vehicle vehicle = vehicleService.findVehicleById(vehicleId);
         agreement.setVehicle(vehicle);
-
-        System.out.println("Inside save agreement function before the formatter: " + " " + startDate + " " + endDate);
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDateConverted = LocalDate.parse(startDate, formatter);
         LocalDate endDateConverted = LocalDate.parse(endDate, formatter);
-
-        System.out.println("Inside save agreement function after the formatter: " + " " + startDate + " " + endDate);
-
         agreement.setStartDate(startDateConverted);
         agreement.setEndDate(endDateConverted);
-
         agreementService.addAgreement(agreement);
-
-        //theModel.addAttribute("contract", theContract);
-        //theModel.addAttribute("contractId", contractId);
-        return "redirect:/agreements/viewAgreements";
-        //return "contracts/create/add-details";
+        theModel.addAttribute(agreement);
+        return "showAgreementCharges";
     }
 
 

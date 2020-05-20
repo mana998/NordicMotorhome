@@ -58,10 +58,10 @@ public class Employee extends Person{
         this.password = password;
     }
 
-    public Employee(String firstName, String lastName, String cpr, String email,
-        int phone, String street, int building, int floor, String door,
-        int zip, String city, String country, int countryID, int id, String type,
-        int salary, String username, String password, String role){
+    /*public Employee(String firstName, String lastName, String cpr, String email,
+                    int phone, String street, int building, int floor, String door,
+                    int zip, String city, String country, int countryID, int id, String type,
+                    int salary, String username, String password, String role){
 
         super(firstName, lastName, cpr, email, phone, street, building, floor, door, zip, city, countryID, country);
         this.id = id;
@@ -70,7 +70,7 @@ public class Employee extends Person{
         this.username = username;
         this.password = password;
         this.role = role;
-    }
+    }*/
 
     public Employee() {}
 

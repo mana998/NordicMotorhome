@@ -18,11 +18,9 @@ public class RenterService { //Marianna
 
     public void addRenter(Renter renter) {renterRepository.addRenter(renter);}
 
-
-<<<<<<< HEAD
     public Renter findRenterById(int id) { return renterRepository.findRenterById(id);}
-=======
-    public Renter findRenterById(int id) { return renterRepository.getRenter(id);}
->>>>>>> 6bade741a56ad1abe43e6ffead2ab9d09cbf3b42
 
+    public int findMaxRenterId() {
+        return renterRepository.findMaxRenterId();
+    }
 }
