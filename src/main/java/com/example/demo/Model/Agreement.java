@@ -240,9 +240,9 @@ public class Agreement {
         double price = vehicle.getPrice();
         String month = valueOf(startDate.getMonth());
         if (highSeason.contains(month)) {
-            price *= 0.5;
+            price *= 0.6;
         } else if (shoulderSeason.contains(month)) {
-            price *= 0.2;
+            price *= 0.3;
         }
         return daysBetween * price;
     }
