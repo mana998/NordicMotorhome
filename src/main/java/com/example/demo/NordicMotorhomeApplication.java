@@ -19,12 +19,7 @@ import static java.lang.String.valueOf;
 public class NordicMotorhomeApplication {
 
     public static void main(String[] args) {
-
-        double price = 1;
-        price *= price * 0.6;
-        System.out.println(price);
-
-        //SpringApplication.run(NordicMotorhomeApplication.class, args);
+        SpringApplication.run(NordicMotorhomeApplication.class, args);
     }
 
 }
