@@ -85,4 +85,26 @@ public class VehicleRepository { //Karolina
         return template.query(sql, rowMapper);
     }
 
+    //find available vehicles with X number of beds
+    public List<Vehicle> findAvailableVehiclesWBeds(int beds){
+        String sql = "SELECT vehicleID, plates, brand_name AS brand, model_name AS model, model.beds, model.price\n" +
+                "FROM vehicle\n" +
+                "JOIN brand USING (brandID)\n" +
+                "JOIN model USING (modelID)" +
+                "WHERE is_available = '1'" +
+                "AND model.beds = ?;";
+        return template.query(sql, rowMapper, beds);
+    }
+
+    //find available vehicles with X price
+    public List<Vehicle> findAvailableVehiclesWPrice(double price){
+        String sql = "SELECT vehicleID, plates, brand_name AS brand, model_name AS model, model.beds, model.price\n" +
+                "FROM vehicle\n" +
+                "JOIN brand USING (brandID)\n" +
+                "JOIN model USING (modelID)" +
+                "WHERE is_available = '1'" +
+                "AND model.price = ?;";
+        return template.query(sql, rowMapper, price);
+    }
+
 }
