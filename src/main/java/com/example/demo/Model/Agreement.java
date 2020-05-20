@@ -213,12 +213,8 @@ public class Agreement {
         this.cancellationCost = cancellationCost;
     }
 
-    public void addItem(Item item) {
-        items.add(item);
-    }
-
-    public void calculateTotalCost() {
-        totalCost = extraKmCost + vehicleCost + itemsCost + transferCost + tankCost;
+    public double calculateTotalCost() {
+        return calculateExtraKmCost() + calculateVehicleCost() + calculateItemsCost() + calculateTransferCost() + calculateTankCost();
     }
 
     public double calculateExtraKmCost() {
@@ -232,43 +228,48 @@ public class Agreement {
         }
     }
 
-    public void calculateVehicleCost() {
+    public double calculateVehicleCost() {
         int daysBetween = findDifferenceInDays(startDate, endDate);
-        //vehicleCost = daysBetween * vehicleId.getPrice();
+        return daysBetween * vehicle.getPrice();
     }
 
-    public void calculateItemsCost() {
+    public double calculateItemsCost() {
+        double result = 0;
         for (Item item : items) {
-            itemsCost += item.getPrice();
+            result += item.getPrice();
         }
+        return result;
     }
 
-    public void calculateTransferCost() {
+    public double calculateTransferCost() {
         if (pickUpPoint != 0 || dropOffPoint != 0) {
-            transferCost = pickUpPoint * transferCostPerKm + dropOffPoint * transferCostPerKm;
+            return pickUpPoint * transferCostPerKm + dropOffPoint * transferCostPerKm;
         }
+        return 0;
     }
 
-    public void calculateTankCost() {
+    public double calculateTankCost() {
         if (!levelGasoline) {
-            tankCost = tankCharge;
+            return tankCharge;
         }
+        return 0;
     }
 
-    public void calculateCancellationCost() {
+    public double calculateCancellationCost() {
         LocalDate currentDate = LocalDate.now();
         int daysDifference = findDifferenceInDays(currentDate, startDate);
         if (daysDifference >= maxDaysPriorToRental) {
             cancellationCost = totalCost * percentageMaximumDays;
             if (cancellationCost < minimumCancellationCost) {
-                cancellationCost = minimumCancellationCost;
+                return minimumCancellationCost;
             }
+            return cancellationCost;
         } else if (daysDifference >= minDaysPriorToRental) {
-            cancellationCost = totalCost * percentageMinimumDays;
+            return totalCost * percentageMinimumDays;
         } else if (daysDifference >= 1) {
-            cancellationCost = totalCost * percentageLessThanMinimumDays;
+            return totalCost * percentageLessThanMinimumDays;
         } else {
-            cancellationCost = totalCost * percentageSameDay;
+            return totalCost * percentageSameDay;
         }
     }
 

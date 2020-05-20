@@ -7,6 +7,26 @@
 <body>
 <div>
     <p>Agreement Charges</p>
+    <table class="fl-table">
+        <thead>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Vehicle License Plate</th>
+            <th>Basic Fee</th>
+            <th>Transfer Fee</th>
+            <th>Extra Charges</th>
+            <th>Total Price</th>
+        </thead>
+        <tbody>
+            <td th:text="${#temporals.format(agreement.startDate, 'dd-MM-yyyy')}"></td>
+            <td th:text="${#temporals.format(agreement.endDate, 'dd-MM-yyyy')}"></td>
+            <td th:text="${agreement.vehicle.plates}"></td>
+            <td th:text="${agreement.calculateVehicleCost()}"></td>
+            <td th:text="${agreement.calculateTransferCost()}"></td>
+            <td th:text="${agreement.calculateItemsCost()}"></td>
+            <td th:text="${agreement.calculateTotalCost()}"></td>
+        </tbody>
+    </table>
 
 </div>
 </body>

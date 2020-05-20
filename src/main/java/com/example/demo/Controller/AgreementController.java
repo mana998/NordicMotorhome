@@ -136,6 +136,7 @@ public class AgreementController {
         agreement.setEndDate(endDateConverted);
         agreementService.addAgreement(agreement);
         theModel.addAttribute(agreement);
+        System.out.println(agreement.calculateItemsCost());
         return "showAgreementCharges";
     }
 
