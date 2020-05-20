@@ -3,8 +3,12 @@ package com.example.demo.Model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import static java.lang.String.valueOf;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Agreement {
@@ -22,6 +26,8 @@ public class Agreement {
     final double percentageMinimumDays = 0.50;
     final double percentageLessThanMinimumDays = 0.80;
     final double percentageSameDay = 0.95;
+    final List<String> highSeason = Arrays.asList("JUNE", "JULY", "AUGUST");
+    final List<String> shoulderSeason = Arrays.asList("SEPTEMBER", "OCTOBER", "APRIL", "MAY");
 
     private int id;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -230,7 +236,14 @@ public class Agreement {
 
     public double calculateVehicleCost() {
         int daysBetween = findDifferenceInDays(startDate, endDate);
-        return daysBetween * vehicle.getPrice();
+        double price = vehicle.getPrice();
+        String month = valueOf(startDate.getMonth());
+        if (highSeason.contains(month)) {
+            price *= 0.5;
+        } else if (shoulderSeason.contains(month)) {
+            price *= 0.2;
+        }
+        return daysBetween * price;
     }
 
     public double calculateItemsCost() {

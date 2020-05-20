@@ -139,9 +139,4 @@ public class AgreementController {
         System.out.println(agreement.calculateItemsCost());
         return "showAgreementCharges";
     }
-
-
-
-
-
 }
