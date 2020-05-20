@@ -34,7 +34,7 @@ public class AgreementRepository {
     }
 
     public List<Item> getAllLineItems(int agreementId) {
-        return template.query("SELECT extras_name AS name, quantity AS quantity, extras_price * quantity AS price \n" +
+        return template.query("SELECT extras_name AS name, extras_price AS price \n" +
                         "FROM agreement_has_extras INNER JOIN extras USING (extrasID) \n" +
                         "WHERE agreementId = ? ",
                         new Object[] { agreementId },itemRowMapper);
@@ -56,6 +56,14 @@ public class AgreementRepository {
         return template.queryForObject(sql, itemRowMapper, id);
     }
 
+    public void addItems(int agreementId, int itemId) {
+        String sql = "INSERT INTO agreement_has_extras (agreementID, extrasID) VALUES (?,?)";
+        template.update(sql, agreementId, itemId);
+    }
+
+    public int findMaxAgreementId() {
+        return template.queryForObject("SELECT MAX(agreementID) FROM agreement", Integer.class);
+    }
 }
 
 class AgreementRowMapper implements RowMapper<Agreement> {

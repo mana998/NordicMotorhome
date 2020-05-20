@@ -35,7 +35,6 @@ public class AgreementService {
             List<Item> itemList=agreementRepository.getAllLineItems(agreement.getId());
             agreement.setItems(itemList);
         }
-        System.out.println(agreementList);
         return agreementList;
     }
 
@@ -46,5 +45,12 @@ public class AgreementService {
 
     public void addAgreement(Agreement agreement) {
         agreementRepository.addAgreement(agreement);
+    }
+
+    public void addItems(Agreement agreement) {
+        int agreementId = agreementRepository.findMaxAgreementId();
+        for (Item item : agreement.getItems()) {
+            agreementRepository.addItems(agreementId, item.getId());
+        }
     }
 }

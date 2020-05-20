@@ -15,10 +15,8 @@ public class ItemConverter implements Converter<String, Item> {
 
     @Override
     public Item convert(String id) {
-        System.out.println("Trying to convert " + id + " into to item.");
         int parseId = Integer.parseInt(id);
         Item item = agreementRepository.findItemById(parseId);
-        System.out.println(item);
         return item;
     }
 }

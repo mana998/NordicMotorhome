@@ -11,14 +11,10 @@ import com.example.demo.Service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -104,11 +100,9 @@ public class AgreementController {
         theModel.addAttribute("vehicleId", vehicleId);
         theModel.addAttribute("agreement", agreement);
         List<Item> itemsList = agreementService.findAllItems();
-        System.out.println(itemsList);
         theModel.addAttribute("itemsList", itemsList);
 
         List<String> countries = countryService.showCountriesList();
-        System.out.println(countries);
         theModel.addAttribute("countries", countries);
 
         // in case we want to add a list of countries for the dropdown?
@@ -135,8 +129,8 @@ public class AgreementController {
         agreement.setStartDate(startDateConverted);
         agreement.setEndDate(endDateConverted);
         agreementService.addAgreement(agreement);
+        agreementService.addItems(agreement);
         theModel.addAttribute(agreement);
-        System.out.println(agreement.calculateItemsCost());
         return "showAgreementCharges";
     }
 }
