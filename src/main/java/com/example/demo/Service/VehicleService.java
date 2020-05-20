@@ -22,5 +22,8 @@ public class VehicleService { //Karolina
     public Vehicle addVehicle(Vehicle vehicle){
         return vehicleRepository.addVehicle(vehicle);
     }
+    public List<Vehicle> showAvailableVehicles(){ return vehicleRepository.showAvailableVehicles(); }
+    public List<Vehicle> findAvailableVehiclesWBeds(int beds){ return vehicleRepository.findAvailableVehiclesWBeds(beds); }
+    public List<Vehicle> findAvailableVehiclesWPrice(double price){ return vehicleRepository.findAvailableVehiclesWPrice(price); }
 
 }
