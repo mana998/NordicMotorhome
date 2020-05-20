@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Available Vehicles</title>
+</head>
+
+<body>
+
+<div>
+    <p>Available vehicles between <span th:text="${#temporals.format(startDate, 'dd-MM-yyyy')} + ' and ' + ${#temporals.format(endDate, 'dd-MM-yyyy')}"></span>:</p>
+    <hr>
+    <a th:href="@{/agreements/create/selectDates}">Back</a>
+    <hr>
+    <table>
+        <thead>
+        <tr>
+            <th>Vehicle ID</th>
+            <th>Plates</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Beds</th>
+            <th>Price</th>
+            <th>Availability</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="vehicle : ${availableVehicles}">
+            <td th:text="${vehicle.vehicleID}"></td>
+            <td th:text="${vehicle.plates}"></td>
+            <td th:text="${vehicle.brand}"></td>
+            <td th:text="${vehicle.model}"></td>
+            <td th:text="${vehicle.beds}"></td>
+            <td th:text="${vehicle.price}"></td>
+            <td>
+                <!-- Add select button -->
+                <a th:href="@{/agreements/create/{startDate}/{endDate}/selectVehicle/{vehicleId}(startDate = ${agreement.getStartDate()},
+                endDate = ${agreement.getEndDate()}, vehicleId=${vehicle.vehicleID})}">Select</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+
+</div>
+</body>
+</html>

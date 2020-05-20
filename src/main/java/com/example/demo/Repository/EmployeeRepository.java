@@ -19,16 +19,16 @@ public class EmployeeRepository {
 
     public List<Employee> fetchAll(){
         String sql = "SELECT employeeID AS id, first_name AS firstName, last_name AS lastName, " +
-                            "CPR AS cpr, email, phone, salary, IFNULL(username, 'N/A') AS username, " +
-                            "IF(password IS NOT NULL, '*******', 'N/A') AS password, role, enabled, j.name AS type, " +
-                            "street, door, floor, building, c.name, co.name  " +
-                     "FROM employee " +
-                     "JOIN users USING (userID) " +
-                     "JOIN job j USING (jobID) "+
-                     "JOIN address USING (addressID) " +
-                     "JOIN zip USING (zipID) " +
-                     "JOIN city c USING (cityID) " +
-                     "JOIN country co USING (countryID)";
+                "CPR AS cpr, email, phone, salary, IFNULL(username, 'N/A') AS username, " +
+                "IF(password IS NOT NULL, '*******', 'N/A') AS password, role, enabled, j.name AS type, " +
+                "street, door, floor, building, c.name, co.name  " +
+                "FROM employee " +
+                "JOIN users USING (userID) " +
+                "JOIN job j USING (jobID) "+
+                "JOIN address USING (addressID) " +
+                "JOIN zip USING (zipID) " +
+                "JOIN city c USING (cityID) " +
+                "JOIN country co USING (countryID)";
 
         RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<>(Employee.class);
         return template.query(sql, rowMapper);

@@ -13,6 +13,7 @@ public class Renter extends Person { //Marianna
     public Renter() {
     }
 
+
     public Renter(int id, String firstName, String lastName, String cpr, String email,
                   int phone, String street, int building, int floor, String door,
                   int zip, String city, String country, String licenseNumber) {

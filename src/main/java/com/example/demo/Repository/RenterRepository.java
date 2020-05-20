@@ -81,4 +81,9 @@ public class RenterRepository {
                 renter.getPhone(), renter.getLicenseNumber(), address);
     }
 
+    public int findMaxRenterId() {
+        String sql = "SELECT MAX(renterId) FROM renter";
+        return template.queryForObject("SELECT MAX(renterID) FROM renter", Integer.class);
+    }
+
 }

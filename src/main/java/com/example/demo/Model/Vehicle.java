@@ -93,4 +93,17 @@ public class Vehicle { //Karolina
     public void setIsAvailable(boolean isAvailable) {
         this.isAvailable = isAvailable;
     }
+
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "vehicleID=" + vehicleID +
+                ", plates='" + plates + '\'' +
+                ", brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", beds=" + beds +
+                ", price=" + price +
+                ", isAvailable=" + isAvailable +
+                '}';
+    }
 }

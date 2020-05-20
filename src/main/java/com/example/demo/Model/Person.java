@@ -111,7 +111,8 @@ public class Person {
         this.street = street;
     }
 
-    public Person(String firstName, String lastName, String cpr, String email, int phone, String street, int building, int floor, String door, int zip, String city, String country) {
+    public Person(String firstName, String lastName, String cpr, String email, int phone, String street, int building,
+                  int floor, String door, int zip, String city, String country) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.cpr = cpr;
