@@ -48,9 +48,21 @@ public class AgreementService {
     }
 
     public void addItems(Agreement agreement) {
-        int agreementId = agreementRepository.findMaxAgreementId();
+        int agreementId = findMaxAgreementId();
         for (Item item : agreement.getItems()) {
             agreementRepository.addItems(agreementId, item.getId());
         }
+    }
+
+    public int findMaxAgreementId() {
+        return agreementRepository.findMaxAgreementId();
+    }
+
+    public Agreement findById(int agreementId) {
+        return agreementRepository.findById(agreementId);
+    }
+
+    public void updateAgreement(Agreement theAgreement) {
+        agreementRepository.updateAgreement(theAgreement);
     }
 }

@@ -64,6 +64,20 @@ public class AgreementRepository {
     public int findMaxAgreementId() {
         return template.queryForObject("SELECT MAX(agreementID) FROM agreement", Integer.class);
     }
+
+    public Agreement findById(int agreementId) {
+        String sql = "SELECT agreementID, renterID, vehicleID, start_date, end_date, pick_up_point, drop_off_point, " +
+                     "driven_km, level_of_gasoline, is_cancelled " +
+                     "FROM agreement WHERE agreementID = ? ";
+        return template.queryForObject(sql, new AgreementRowMapper(), agreementId);
+    }
+
+    public void updateAgreement(Agreement theAgreement) {
+        System.out.println("agreement before update = " + theAgreement);
+        String updateStatement = "UPDATE agreement " +
+                "SET drop_off_point = ?, pick_up_point = ? WHERE agreementID = ? ";
+        template.update(updateStatement, theAgreement.getPickUpPoint(), theAgreement.getDropOffPoint(), theAgreement.getId());
+    }
 }
 
 class AgreementRowMapper implements RowMapper<Agreement> {

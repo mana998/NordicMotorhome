@@ -86,4 +86,12 @@ public class RenterRepository {
         return template.queryForObject("SELECT MAX(renterID) FROM renter", Integer.class);
     }
 
+    public List<Renter> findByDriverLicenseNumber(String driverLicenseNumber) {
+        String str = "%" + driverLicenseNumber + "%";
+        return template.query
+                ("SELECT renterID AS id, first_name, last_name, email, driver_license_number AS licenseNumber, phone \n" +
+                                "FROM renter " +
+                                "WHERE driver_license_number LIKE ? ;",
+                        new Object[] { str }, rowMapper);
+    }
 }

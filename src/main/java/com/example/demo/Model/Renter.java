@@ -39,5 +39,11 @@ public class Renter extends Person { //Marianna
         this.id = id;
     }
 
-
+    @Override
+    public String toString() {
+        return "Renter{" +
+                "id=" + id +
+                ", licenseNumber='" + licenseNumber + '\'' +
+                "} " + super.toString();
+    }
 }

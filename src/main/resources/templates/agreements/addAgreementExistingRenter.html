@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Add Agreement</title>
+</head>
+
+<body>
+<p>Search by driver license number:</p>
+<!-- Search form -->
+<div>
+    <form action="#" th:action="@{/agreements/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}" method="get" class="form-inline">
+        <div>
+            <label>
+                <input type="text" name="driverLicenseNumber" placeholder="Search Renter" />
+            </label>
+            <input type="submit" value="Search" />
+        </div>
+    </form>
+    <div>
+        <div>
+            <table>
+                <thead>
+                <tr>
+                    <th role="columnheader">First Name</th>
+                    <th role="columnheader">Last Name</th>
+                    <th role="columnheader">Driver License Number</th>
+                    <th role="columnheader">Phone</th>
+                    <th>Select</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="renter:${renters}">
+                    <td th:text="${renter.firstName}"></td>
+                    <td th:text="${renter.lastName}"></td>
+                    <td th:text="${renter.licenseNumber}"></td>
+                    <td th:text="${renter.phone}"></td>
+                    <!-- Add select button -->
+                    <td>
+                        <a th:href="@{/agreements/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter/{renterId}(startDate = ${startDate},
+                                                endDate = ${endDate}, vehicleId=${vehicleId}, renterId=${renter.id})}">Select</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

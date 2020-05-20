@@ -13,8 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -40,7 +42,7 @@ public class AgreementController {
     public String listAgreements(Model model) {
         List<Agreement> theAgreements = agreementService.findAll();
         model.addAttribute("agreements", theAgreements);
-        return "viewAgreements";
+        return "agreements/viewAgreements";
     }
 
     @GetMapping("/view/{id}")
@@ -53,7 +55,7 @@ public class AgreementController {
         Agreement agreement = new Agreement();
         theModel.addAttribute("agreement", agreement);
         theModel.addAttribute("now", java.time.LocalDate.now());
-        return "selectDates";
+        return "agreements/addAgreementSelectDates";
     }
 
     @PostMapping("/create/selectDates")
@@ -73,7 +75,7 @@ public class AgreementController {
 
         theModel.addAttribute("agreement", agreement);
         theModel.addAttribute("availableVehicles", availableVehicles);
-        return "showAvailableVehicles";
+        return "agreements/addAgreementShowAvailableVehicles";
     }
 
     @GetMapping("/create/{startDate}/{endDate}/selectVehicle/{vehicleId}")
@@ -84,7 +86,7 @@ public class AgreementController {
         theModel.addAttribute("startDate", startDate);
         theModel.addAttribute("endDate", endDate);
         theModel.addAttribute("carId", vehicleId);
-        return "addNewOrExistingRenter";
+        return "agreements/addAgreementNewOrExistingRenter";
     }
 
     @GetMapping("/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/new-renter")
@@ -107,7 +109,7 @@ public class AgreementController {
 
         // in case we want to add a list of countries for the dropdown?
         //theModel.addAttribute("countryList", countryList.getCountries());
-        return "addNewAgreementDetails";
+        return "agreements/addAgreementNewRenter";
     }
 
     @PostMapping("/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/new-renter")
@@ -131,6 +133,59 @@ public class AgreementController {
         agreementService.addAgreement(agreement);
         agreementService.addItems(agreement);
         theModel.addAttribute(agreement);
-        return "showAgreementCharges";
+        return "agreements/addAgreementShowCharges";
+    }
+
+    @GetMapping("create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter")
+    public String listRenters(@PathVariable ("startDate") String startDate,
+                              @PathVariable ("endDate") String endDate,
+                              @PathVariable ("vehicleId") int vehicleId,
+                              Model theModel, @RequestParam (defaultValue = "") String driverLicenseNumber) {
+        theModel.addAttribute("startDate", startDate);
+        theModel.addAttribute("endDate", endDate);
+        theModel.addAttribute("vehicleId", vehicleId);
+        List<Renter> renters = renterService.findByDriverLicenseNumber(driverLicenseNumber);
+        System.out.println(renters);
+        theModel.addAttribute("renters", renters);
+        return "agreements/addAgreementExistingRenter";
+    }
+
+    @GetMapping("/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter/{renterId}")
+    public String showAgreementDetails(@PathVariable ("startDate") String startDate,
+                                     @PathVariable ("endDate") String endDate,
+                                     @PathVariable ("vehicleId") int vehicleId,
+                                     @PathVariable ("renterId") int renterId,
+                                     Model model) {
+        Agreement agreement = new Agreement();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate startDateConverted = LocalDate.parse(startDate, formatter);
+        LocalDate endDateConverted = LocalDate.parse(endDate, formatter);
+        agreement.setStartDate(startDateConverted);
+        agreement.setEndDate(endDateConverted);
+        agreement.setRenter(renterService.findRenterById(renterId));
+        agreement.setVehicle(vehicleService.findVehicleById(vehicleId));
+        model.addAttribute("agreement", agreement);
+        agreementService.addAgreement(agreement);
+        System.out.println(agreement);
+        int agreementId = agreementService.findMaxAgreementId();
+        model.addAttribute("agreementId", agreementId);
+        List<Item> itemList = agreementService.findAllItems();
+        model.addAttribute("itemList", itemList);
+        return "agreements/addAgreementAddDetails";
+    }
+
+    @PostMapping("/create/addAgreementDetails/{agreementId}")
+    public String saveContractInfo(@PathVariable ("agreementId") int agreementId, @ModelAttribute Agreement agreement,
+                                   @ModelAttribute ArrayList<Item> itemList) {
+        System.out.println("inside post method!");
+        Agreement theAgreement = agreementService.findById(agreementId);
+        theAgreement.setPickUpPoint(agreement.getPickUpPoint());
+        theAgreement.setDropOffPoint(agreement.getDropOffPoint());
+        theAgreement.setItems(agreement.getItems());
+        theAgreement.setId(agreementId);
+        System.out.println(theAgreement);
+        agreementService.addItems(theAgreement);
+        agreementService.updateAgreement(theAgreement);
+        return "redirect:/agreements/viewAgreements";
     }
 }

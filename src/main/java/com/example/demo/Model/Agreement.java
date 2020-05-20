@@ -295,18 +295,7 @@ public class Agreement {
     @Override
     public String toString() {
         return "Agreement{" +
-                "freeKmPerDay=" + freeKmPerDay +
-                ", transferCostPerKm=" + transferCostPerKm +
-                ", tankCharge=" + tankCharge +
-                ", pricePerExtraKm=" + pricePerExtraKm +
-                ", maxDaysPriorToRental=" + maxDaysPriorToRental +
-                ", minDaysPriorToRental=" + minDaysPriorToRental +
-                ", percentageMaximumDays=" + percentageMaximumDays +
-                ", minimumCancellationCost=" + minimumCancellationCost +
-                ", percentageMinimumDays=" + percentageMinimumDays +
-                ", percentageLessThanMinimumDays=" + percentageLessThanMinimumDays +
-                ", percentageSameDay=" + percentageSameDay +
-                ", id=" + id +
+                " id=" + id +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", vehicle=" + vehicle +
