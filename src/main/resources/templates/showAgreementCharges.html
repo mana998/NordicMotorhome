@@ -24,7 +24,7 @@
             <td th:text="${agreement.calculateVehicleCost()}"></td>
             <td th:text="${agreement.calculateTransferCost()}"></td>
             <td th:text="${agreement.calculateItemsCost()}"></td>
-            <td th:text="${agreement.calculateTotalCost()}"></td>
+            <td th:text="${agreement.calculateTotalCost() + ' ' + 'EUR'}"></td>
         </tbody>
     </table>
 

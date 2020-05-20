@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 
+import org.decimal4j.util.DoubleRounder;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -256,16 +257,17 @@ public class Agreement {
 
     public double calculateTransferCost() {
         if (pickUpPoint != 0 || dropOffPoint != 0) {
-            return pickUpPoint * transferCostPerKm + dropOffPoint * transferCostPerKm;
+            double result = (pickUpPoint * transferCostPerKm) + (dropOffPoint * transferCostPerKm);
+            return DoubleRounder.round(result, 2);
         }
         return 0;
     }
 
     public double calculateTankCost() {
         if (!levelGasoline) {
-            return tankCharge;
+            return 0;
         }
-        return 0;
+        return tankCost;
     }
 
     public double calculateCancellationCost() {
