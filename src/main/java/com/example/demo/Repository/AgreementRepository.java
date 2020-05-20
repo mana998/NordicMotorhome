@@ -26,10 +26,10 @@ public class AgreementRepository {
     private static RowMapper<Item> itemRowMapper = new BeanPropertyRowMapper<>(Item.class);
 
     public List<Agreement> findAll(){
-        String sql = "SELECT agreementID, renterID, vehicleID, start_date, end_date, pick_up_point, drop_off_point, " +
-                "driven_km, level_of_gasoline, is_cancelled " +
-                "FROM agreement ORDER BY agreementID ";
-        RowMapper<Agreement> rowMapper = new BeanPropertyRowMapper<>(Agreement.class);
+        String sql = "SELECT agreementID, renterID, vehicleID, plates, start_date, end_date, pick_up_point, drop_off_point, " +
+                "driven_km, level_of_gasoline, is_cancelled, total_cost " +
+                "FROM agreement INNER JOIN vehicle USING (vehicleID) ORDER BY agreementID ";
+        new AgreementRowMapper();
         return template.query(sql, new AgreementRowMapper());
     }
 
@@ -67,8 +67,8 @@ public class AgreementRepository {
 
     public Agreement findById(int agreementId) {
         String sql = "SELECT agreementID, renterID, vehicleID, start_date, end_date, pick_up_point, drop_off_point, " +
-                     "driven_km, level_of_gasoline, is_cancelled " +
-                     "FROM agreement WHERE agreementID = ? ";
+                     "driven_km, level_of_gasoline, plates, is_cancelled " +
+                     "FROM agreement INNER JOIN vehicle USING (vehicleID) WHERE agreementID = ? ";
         return template.queryForObject(sql, new AgreementRowMapper(), agreementId);
     }
 
@@ -91,6 +91,7 @@ class AgreementRowMapper implements RowMapper<Agreement> {
 
         Vehicle vehicle = new Vehicle();
         vehicle.setVehicleID(rs.getInt("vehicleID"));
+        vehicle.setPlates(rs.getString("plates"));
         agreement.setVehicle(vehicle);
 
         Date sqlDate = rs.getDate("start_date");

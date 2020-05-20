@@ -176,7 +176,7 @@ public class AgreementController {
 
     @PostMapping("/create/addAgreementDetails/{agreementId}")
     public String saveContractInfo(@PathVariable ("agreementId") int agreementId, @ModelAttribute Agreement agreement,
-                                   @ModelAttribute ArrayList<Item> itemList) {
+                                   @ModelAttribute ArrayList<Item> itemList, Model model) {
         System.out.println("inside post method!");
         Agreement theAgreement = agreementService.findById(agreementId);
         theAgreement.setPickUpPoint(agreement.getPickUpPoint());
@@ -184,8 +184,14 @@ public class AgreementController {
         theAgreement.setItems(agreement.getItems());
         theAgreement.setId(agreementId);
         System.out.println(theAgreement);
+        double transferCost = theAgreement.calculateTransferCost();
+        double vehicleCost = theAgreement.calculateVehicleCost();
+        double itemsCost = theAgreement.calculateItemsCost();
+        double totalCost = transferCost + vehicleCost + itemsCost;
+        theAgreement.setTotalCost(totalCost);
         agreementService.addItems(theAgreement);
         agreementService.updateAgreement(theAgreement);
-        return "redirect:/agreements/viewAgreements";
+        model.addAttribute("agreement", theAgreement);
+        return "agreements/addAgreementShowCharges";
     }
 }

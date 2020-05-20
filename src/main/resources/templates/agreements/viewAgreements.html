@@ -33,7 +33,7 @@
                 <td th:text="${#temporals.format(agreement.endDate, 'dd-MM-yyyy')}"></td>
                 <td th:text="${agreement.renter.firstName + ' ' + agreement.renter.lastName}"></td>
                 <!-- add license plate here!!! -->
-                <td th:text="${agreement.totalCost}"></td>
+                <td th:text="${agreement.vehicle.plates}"></td>
                 <td th:text="${agreement.totalCost}"></td>
                 <td>
                     <!-- Add view function -->
