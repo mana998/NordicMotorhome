@@ -60,10 +60,10 @@ public class Employee extends Person{
 
     public Employee(String firstName, String lastName, String cpr, String email,
         int phone, String street, int building, int floor, String door,
-        int zip, String city, String country, int countryID, int id, String type,
+        int zip, String city, String country, int id, String type,
         int salary, String username, String password, String role){
 
-        super(firstName, lastName, cpr, email, phone, street, building, floor, door, zip, city, countryID, country);
+        super(firstName, lastName, cpr, email, phone, street, building, floor, door, zip, city, country);
         this.id = id;
         this.type = type;
         this.salary = salary;
