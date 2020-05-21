@@ -7,6 +7,7 @@ import javax.persistence.Id;
 public class Renter extends Person { //Marianna
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String licenseNumber;
 
