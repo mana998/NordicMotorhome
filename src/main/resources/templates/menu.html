@@ -1,23 +1,23 @@
 <div th:fragment="menu_template">
     <div class="navigation">
         <nav class="flex-container" id="menu">
-            <a href="/" class="menu_link" id="home"><img src="../SVG/home-solid.svg" class="svg menu_icons" height="20" width="20"><br><button class="menu_item"><strong>Home</strong></button></a>
-            <a href="/viewVehicles" class="menu_link" id="vehicle"><img src="../SVG/bus-solid.svg" class="svg menu_icons" height="20" width="20"><br><button class="menu_item"><strong>Vehicles</strong></button></a>
-            <a href="/viewRenters" class="menu_link" id="renters"><img src="../SVG/user-friends-solid.svg" class="svg menu_icons" height="20" width="20"><br><button class="menu_item"><strong>Renters</strong></button></a>
-            <a href="/viewAgreements" class="menu_link" id="agreements"><img src="../SVG/window-restore-solid.svg" class="svg menu_icons" height="20" width="20"><br><button class="menu_item"><strong>Agreements</strong></button></a>
-            <a th:if="${#authorization.expression('hasAuthority(''admin'')')}" th:href="@{/viewEmployees}" class="menu_link" id="about"><img src="../SVG/user-edit-solid.svg" class="svg menu_icons" height="20" width="20"><br><button class="menu_item"><strong>Employees</strong></button></a>
+            <a href="/" class="menu_link" id="home"><img src="http://localhost:8080/SVG/home-solid.svg" class="svg menu_icons" height="20" width="20"><br><button class="menu_item"><strong>Home</strong></button></a>
+            <a href="/viewVehicles" class="menu_link" id="vehicle"><img src="http://localhost:8080/SVG/bus-solid.svg" class="svg menu_icons" height="20" width="20"><br><button class="menu_item"><strong>Vehicles</strong></button></a>
+            <a href="/viewRenters" class="menu_link" id="renters"><img src="http://localhost:8080/SVG/user-friends-solid.svg" class="svg menu_icons" height="20" width="20"><br><button class="menu_item"><strong>Renters</strong></button></a>
+            <a href="/viewAgreements" class="menu_link" id="agreements"><img src="http://localhost:8080/SVG/window-restore-solid.svg" class="svg menu_icons" height="20" width="20"><br><button class="menu_item"><strong>Agreements</strong></button></a>
+            <a th:if="${#authorization.expression('hasAuthority(''admin'')')}" th:href="@{/viewEmployees}" class="menu_link" id="about"><img src="http://localhost:8080/SVG/user-edit-solid.svg" class="svg menu_icons" height="20" width="20"><br><button class="menu_item"><strong>Employees</strong></button></a>
             <!--<a th:href="@{/logout}" class="menu_link" id="logout"><button class="menu_item" class="menu_item">Log Out</button></a>-->
         </nav>
     </div>
 
     <div>
-        <a href="/" class="menu_link" id="banner"><img src="../image/logo.png" height="50" width="50"></a>
+        <a href="/" class="menu_link" id="banner"><img src="http://localhost:8080/image/logo.png" height="100" width="100"></a>
     </div>
 
     <div id="logout">
         <form th:action="@{/logout}" method="post">
             <button class="logout"><strong>LOG OUT</strong></button>
-            <img src="../SVG/sign-out-alt-solid.svg" class="svg logout_button" height="30" width="30">
+            <img src="http://localhost:8080/SVG/sign-out-alt-solid.svg" class="svg logout_button" height="30" width="30">
         </form>
     </div>
 </div>

@@ -1,21 +1,44 @@
-<!DOCTYPE html> <!--Dimitrios-->
+<!DOCTYPE html> <!--Dimitrios--><!--Karolina-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:insert="header :: header_template">
     <title>Add new agreement</title>
     <!-- import header part-->
 </head>
 <body>
-<!-- import menu-->
-<div th:insert="menu :: menu_template"></div>
-<main class="main_body">
-    <p>Create agreement</p>
-    <hr>
-    <a th:href="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/new-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}">New Renter</a>
-    <a th:href="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}">Existing Renter</a>
-    <hr>
-    <a th:href="@{/create/selectDates}">Back</a>
+    <!-- import menu-->
+    <div th:insert="menu :: menu_template"></div>
 
-</main>
-<div th:insert="footer :: footer_template"></div>
+    <!-- back button-->
+    <div class="btn-undermenu">
+        <a th:href="@{/create/selectDates}">
+            <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
+        </a>
+    </div>
+
+    <h1 class="heading">Add New Agreement</h1><br>
+
+    <h2 class="heading">Please select:</h2><br>
+
+    <main class="main_body">
+        <div class="main table-wrapper" id="main" style="margin: 0% 40% 5%;">
+            <table class="fl-table">
+                <thead>
+                <tr>
+                    <th>Renter:</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <a th:href="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/new-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}"><button class="btn-action" style="font-size: 14px">New Renter</button></a>
+                        <a th:href="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}"><button class="btn-action" style="font-size: 14px">Existing Renter</button></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <!-- import footer-->
+    <div th:insert="footer :: footer_template"></div>
 </body>
 </html>

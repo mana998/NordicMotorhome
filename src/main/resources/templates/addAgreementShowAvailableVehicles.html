@@ -1,47 +1,58 @@
-<!DOCTYPE html> <!--Dimitrios-->
+<!DOCTYPE html> <!--Dimitrios--><!--Karolina-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:insert="header :: header_template">
     <title>Add new agreement</title>
     <!-- import header part-->
 </head>
 <body>
-<!-- import menu-->
-<div th:insert="menu :: menu_template"></div>
-<main class="main_body">
-    <a th:href="@{/agreements/create/selectDates}">Back</a>
-    <hr>
-    <table>
-        <thead>
-        <tr>
-            <th>Vehicle ID</th>
-            <th>Plates</th>
-            <th>Brand</th>
-            <th>Model</th>
-            <th>Beds</th>
-            <th>Price</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="vehicle : ${availableVehicles}">
-            <td th:text="${vehicle.vehicleID}"></td>
-            <td th:text="${vehicle.plates}"></td>
-            <td th:text="${vehicle.brand}"></td>
-            <td th:text="${vehicle.model}"></td>
-            <td th:text="${vehicle.beds}"></td>
-            <td th:text="${vehicle.price}"></td>
-            <td>
-                <!-- Add select button -->
-                <a th:href="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}(startDate = ${startDate},
-                endDate = ${endDate}, vehicleId=${vehicle.vehicleID})}">Select</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <hr>
+    <!-- import menu-->
+    <div th:insert="menu :: menu_template"></div>
 
+    <!-- back button-->
+    <div class="btn-undermenu">
+        <a th:href="@{/create/selectDates}">
+            <img src="../SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
+        </a>
+    </div>
 
-</main>
-<div th:insert="footer :: footer_template"></div>
+    <h1 class="heading">Add New Agreement</h1><br>
+
+    <h2 class="heading">Available vehicles within the time period</h2><br>
+
+    <main class="main_body">
+
+        <div class="main table-wrapper" id="main">
+            <table class="fl-table">
+                <thead>
+                <tr>
+                    <th>Vehicle ID</th>
+                    <th>Plates</th>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Beds</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="vehicle : ${availableVehicles}">
+                    <td th:text="${vehicle.vehicleID}"></td>
+                    <td th:text="${vehicle.plates}"></td>
+                    <td th:text="${vehicle.brand}"></td>
+                    <td th:text="${vehicle.model}"></td>
+                    <td th:text="${vehicle.beds}"></td>
+                    <td th:text="${vehicle.price}"></td>
+                    <td>
+                        <!-- Add select button -->
+                        <a th:href="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}(startDate = ${startDate},
+                        endDate = ${endDate}, vehicleId=${vehicle.vehicleID})}"><button class="btn-action">SELECT</button></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <!-- import footer-->
+    <div th:insert="footer :: footer_template"></div>
 </body>
 </html>

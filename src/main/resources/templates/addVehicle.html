@@ -1,7 +1,7 @@
 <!DOCTYPE html> <!--Karolina-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:insert="header :: header_template">
-    <title>View Vehicles</title>
+    <title>Add new vehicle</title>
     <!-- import header part-->
 </head>
 <body>
@@ -18,8 +18,8 @@
     <h1 class="heading">Add New Vehicle</h1>
 
     <main class="main_body">
-        <fieldset>
-            <form th:action="@{/addVehicle}" method="post">
+        <form th:action="@{/addVehicle}" method="post">
+            <fieldset>
                 <p>Vehicle Information</p>
                 <label>Enter Plates:</label>
                 <input type="text" name="plates" placeholder="ex. XM23640" required><br><br>
@@ -47,9 +47,9 @@
                 <label for="available">available</label>
                 <input type="radio" id="unavailable" name="isAvailable" value="0">
                 <label for="unavailable">unavailable</label><br><br>
-                <input class="btn-submit-add" type="submit" value="Submit Entry">
-            </form>
-        </fieldset>
+            </fieldset><br>
+            <input class="btn-submit-add" type="submit" value="Submit Entry">
+        </form>
     </main>
     <!-- import footer-->
     <div th:insert="footer :: footer_template"></div>
