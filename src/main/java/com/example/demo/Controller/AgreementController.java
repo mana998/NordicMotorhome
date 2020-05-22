@@ -70,9 +70,8 @@ public class AgreementController {
         }
         model.addAttribute("startDate", agreement.getStartDate());
         model.addAttribute("endDate", agreement.getEndDate());
-        //List<Vehicle> availableVehicles = vehicleService.showAvailableVehicles(agreement.getStartDate(),
-        // agreement.getEndDate(), vehicle.getBeds(), vehicle.getPrice());
-        List<Vehicle> availableVehicles = vehicleService.showAvailableVehicles();
+        List<Vehicle> availableVehicles = vehicleService.findVehiclesAvailableForAgreement(agreement.getStartDate(),
+            agreement.getEndDate(), vehicle.getBeds(), vehicle.getPrice());
         // if there are no available vehicles based on search criteria, show noresults page
         if (availableVehicles.isEmpty()) {
             return "noresults";
