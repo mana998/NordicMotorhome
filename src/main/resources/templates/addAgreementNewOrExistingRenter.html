@@ -1,0 +1,21 @@
+<!DOCTYPE html> <!--Dimitrios-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="header :: header_template">
+    <title>Add new agreement</title>
+    <!-- import header part-->
+</head>
+<body>
+<!-- import menu-->
+<div th:insert="menu :: menu_template"></div>
+<main class="main_body">
+    <p>Create agreement</p>
+    <hr>
+    <a th:href="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/new-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}">New Renter</a>
+    <a th:href="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}">Existing Renter</a>
+    <hr>
+    <a th:href="@{/create/selectDates}">Back</a>
+
+</main>
+<div th:insert="footer :: footer_template"></div>
+</body>
+</html>

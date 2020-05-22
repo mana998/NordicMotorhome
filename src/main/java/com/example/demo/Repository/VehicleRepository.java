@@ -108,7 +108,7 @@ public class VehicleRepository { //Karolina
                 "AND model.price = ?;";
         return template.query(sql, rowMapper, price);
     }
-
+  
     //find vehicles available in a specific time period, with X number of beds and below X price // Dimitrios
     public List<Vehicle> findVehiclesAvailableForAgreement(LocalDate startDate, LocalDate endDate, int beds, double price) {
         Date sqlFromDate = Date.valueOf(startDate);
