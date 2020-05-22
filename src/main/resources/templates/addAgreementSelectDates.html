@@ -1,0 +1,45 @@
+<!DOCTYPE html> <!--Dimitrios-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="header :: header_template">
+    <title>Add new agreement</title>
+    <!-- import header part-->
+</head>
+<body>
+    <!-- import menu-->
+    <div th:insert="menu :: menu_template"></div>
+    <main class="main_body">
+        <h1 class="heading">Add New Agreement</h1>
+            <form action="#" th:action="@{/create/selectDates}" method="post">
+                <div class="form-group">
+                    <label for="startDate">*From:</label>
+                    <input type="date" th:attr="min=${now}" placeholder="Enter date" id="startDate" th:field="${agreement.startDate}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="endDate">*To:</label>
+                    <input type="date" class="form-control" th:attr="min=${now}" placeholder="Enter date" id="endDate" th:field="${agreement.endDate}" required>
+                </div>
+
+                <label for="beds">Choose maximum number of beds:</label>
+                <select th:field="${vehicle.beds}" id="beds">
+                    <option th:each="i : ${#numbers.sequence(2, 6)}" th:value="${i}" th:text="${i}">
+                    </option>
+                </select><br>
+
+                <label for="price">Choose maximum price:</label>
+                <select th:field="*{vehicle.price}" id="price">
+                    <option th:value="200" th:text="200"></option>
+                    <option th:value="300" th:text="300"></option>
+                    <option th:value="500" th:text="500"></option>
+                    <option th:value="1000" th:text="1000"></option>
+                </select><br>
+
+                <button type="submit" class="btn btn-primary">Find Vehicle</button>
+            </form>
+            <hr>
+            <a th:href="@{/viewAgreements}">Back to Agreements List</a>
+    </main>
+    <div th:insert="footer :: footer_template"></div>
+</body>
+</html>
+

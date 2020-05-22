@@ -21,4 +21,13 @@ public class RenterService { //Marianna
 
     public Renter findRenterById(int id) { return renterRepository.findRenterById(id);}
 
+    // Dimitrios
+    public List<Renter> findByDriverLicenseNumber(String driverLicenseNumber) {
+        return renterRepository.findByDriverLicenseNumber(driverLicenseNumber);
+    }
+
+    // Dimitrios
+    public int findMaxRenterId() {
+        return renterRepository.findMaxRenterId();
+    }
 }

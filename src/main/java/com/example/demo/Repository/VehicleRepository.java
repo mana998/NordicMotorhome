@@ -8,6 +8,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -106,5 +108,4 @@ public class VehicleRepository { //Karolina
                 "AND model.price = ?;";
         return template.query(sql, rowMapper, price);
     }
-
 }
