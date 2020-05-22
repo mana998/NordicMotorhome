@@ -27,7 +27,7 @@ a.menu_link{
 a.menu_link:hover{
     flex-grow: 1;
     margin-top: 15px;
-    filter: invert(72%) sepia(37%) saturate(6284%) hue-rotate(194deg) brightness(96%) contrast(93%);
+    filter: invert(55%) sepia(39%) saturate(689%) hue-rotate(181deg) brightness(96%) contrast(94%);
 }
 
 .menu_item{
@@ -51,7 +51,7 @@ a.menu_link:hover{
 }
 
 #logout:hover{
-    filter: invert(72%) sepia(37%) saturate(6284%) hue-rotate(194deg) brightness(96%) contrast(93%);
+    filter: invert(55%) sepia(39%) saturate(689%) hue-rotate(181deg) brightness(96%) contrast(94%);
 }
 
 button.logout{
@@ -101,7 +101,7 @@ input:hover{
 }
 
 .table-wrapper{
-    margin: 0% 15%;
+    margin: 0% 15% 5%;
     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
 }
 
@@ -236,10 +236,6 @@ input.btn-submit-add{
     bottom: 8px;
 }
 
-.btn-add:hover{
-    color: cornflowerblue;
-}
-
 .btn-back{
     width:10px;
     border: none;
@@ -249,8 +245,31 @@ input.btn-submit-add{
     bottom: 8px;
 }
 
-.btn-back:hover{
-    color: cornflowerblue;
+.btn-undermenu:hover{
+    filter: invert(55%) sepia(39%) saturate(689%) hue-rotate(181deg) brightness(96%) contrast(94%);
+}
+
+.btn-action{
+    border: none;
+    color: white;
+    background-color: #324960;
+}
+
+.btn-action:hover{
+    color: #324960;
+    background-color: white;
+}
+
+.fl-table tr:nth-child(even) .btn-action:hover {
+    background: #f8f8f8;
+}
+
+td a{
+    text-decoration: none;
+}
+
+button:focus {
+    outline: 0;
 }
 
 /* Responsive */
