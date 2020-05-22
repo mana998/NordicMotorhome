@@ -108,4 +108,29 @@ public class VehicleRepository { //Karolina
                 "AND model.price = ?;";
         return template.query(sql, rowMapper, price);
     }
+  
+    //find vehicles available in a specific time period, with X number of beds and below X price // Dimitrios
+    public List<Vehicle> findVehiclesAvailableForAgreement(LocalDate startDate, LocalDate endDate, int beds, double price) {
+        Date sqlFromDate = Date.valueOf(startDate);
+        Date sqlToDate = Date.valueOf(endDate);
+        String sql= "SELECT DISTINCT vehicleID, plates, brand_name AS brand, model_name AS model, " +
+                        "model.beds, model.price " +
+                        "FROM vehicle LEFT JOIN agreement USING (vehicleID)" +
+                        "INNER JOIN brand USING (brandID)" +
+                        "INNER JOIN model USING (modelID)" +
+                        "WHERE is_available = '1' AND vehicleID NOT IN" +
+                        "(" +
+                        "SELECT vehicle.vehicleID " +
+                        "FROM vehicle LEFT JOIN agreement USING (vehicleID)" +
+                        "WHERE (start_date <= ? AND end_date >= ?) " +
+                        "OR (start_date >= ? AND end_date <= ?)" +
+                        "OR (start_date >= ? AND end_date >= ? AND start_date <= ?)" +
+                        "OR (start_date <= ? AND end_date <= ? AND end_date >= ?)" +
+                        ")" +
+                        "AND beds = ? AND price < ? ";
+        List<Vehicle> result = template.query(sql, new Object[] {sqlFromDate, sqlToDate, sqlFromDate, sqlToDate, sqlFromDate,
+                sqlToDate, sqlFromDate, sqlFromDate, sqlToDate, sqlToDate, beds, price}, rowMapper);
+        return result;
+    }
+
 }
