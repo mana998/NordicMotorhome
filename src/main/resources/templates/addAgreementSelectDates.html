@@ -20,23 +20,13 @@
                     <input type="date" class="form-control" th:attr="min=${now}" placeholder="Enter date" id="endDate" th:field="${agreement.endDate}" required>
                 </div>
 
-                <label for="beds">Choose maximum number of beds:</label>
-                <select th:field="${vehicle.beds}" id="beds">
-                    <option th:each="i : ${#numbers.sequence(2, 6)}" th:value="${i}" th:text="${i}">
-                    </option>
-                </select><br>
+                <label for="price">Number of beds:</label>
+                <input type="number" min="2" max="6" th:field="${vehicle.beds}" id="beds" required value="2"></input><br>
+                <small>Must be a number between 2 and 6.</small><br>
 
-                <label for="price">Choose maximum price:</label>
-                <select th:field="*{vehicle.price}" id="price">
-                    <option th:value="200" th:text="200"></option>
-                    <option th:value="300" th:text="300"></option>
-                    <option th:value="300" th:text="400"></option>
-                    <option th:value="500" th:text="500"></option>
-                    <option th:value="500" th:text="600"></option>
-                    <option th:value="500" th:text="700"></option>
-                    <option th:value="1000" th:text="800"></option>
-                </select><br>
-
+                <label for="price">Maximum price:</label>
+                <input type="number" min="200" max="1000" th:field="${vehicle.price}" id="price" required value="200"></input><br>
+                <small>Must be a number between 200 and 1000.</small><br>
                 <button type="submit" class="btn btn-primary">Find Vehicle</button>
             </form>
             <hr>
