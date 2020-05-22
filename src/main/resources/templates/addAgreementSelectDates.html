@@ -1,4 +1,4 @@
-<!DOCTYPE html> <!--Dimitrios-->
+<!DOCTYPE html> <!--Dimitrios--><!--Karolina-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:insert="header :: header_template">
     <title>Add new agreement</title>
@@ -7,24 +7,35 @@
 <body>
     <!-- import menu-->
     <div th:insert="menu :: menu_template"></div>
+
+    <!-- back button-->
+    <div class="btn-undermenu">
+        <a th:href="@{/viewAgreements}">
+            <img src="../SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
+        </a>
+    </div>
+
+    <h1 class="heading">Add New Agreement</h1>
+
     <main class="main_body">
-        <h1 class="heading">Add New Agreement</h1>
-            <form action="#" th:action="@{/create/selectDates}" method="post">
+        <form action="#" th:action="@{/create/selectDates}" method="post">
+            <fieldset>
+                <p>Time period, number of beds and price</p>
                 <div class="form-group">
                     <label for="startDate">*From:</label>
                     <input type="date" th:attr="min=${now}" placeholder="Enter date" id="startDate" th:field="${agreement.startDate}" required>
                 </div>
-
+                <br>
                 <div class="form-group">
                     <label for="endDate">*To:</label>
                     <input type="date" class="form-control" th:attr="min=${now}" placeholder="Enter date" id="endDate" th:field="${agreement.endDate}" required>
                 </div>
-
+                <br>
                 <label for="beds">Choose maximum number of beds:</label>
                 <select th:field="${vehicle.beds}" id="beds">
                     <option th:each="i : ${#numbers.sequence(2, 6)}" th:value="${i}" th:text="${i}">
                     </option>
-                </select><br>
+                </select><br><br>
 
                 <label for="price">Choose maximum price:</label>
                 <select th:field="*{vehicle.price}" id="price">
@@ -32,13 +43,13 @@
                     <option th:value="300" th:text="300"></option>
                     <option th:value="500" th:text="500"></option>
                     <option th:value="1000" th:text="1000"></option>
-                </select><br>
-
-                <button type="submit" class="btn btn-primary">Find Vehicle</button>
-            </form>
-            <hr>
-            <a th:href="@{/viewAgreements}">Back to Agreements List</a>
+                </select><br><br>
+                <!--<button type="submit" class="btn btn-primary">Find Available Vehicles</button>-->
+            </fieldset><br>
+            <input class="btn-submit-add" type="submit" value="Find Available Vehicles">
+        </form>
     </main>
+    <!-- import footer-->
     <div th:insert="footer :: footer_template"></div>
 </body>
 </html>

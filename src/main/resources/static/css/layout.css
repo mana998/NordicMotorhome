@@ -98,6 +98,7 @@ input:hover{
 
 .main_body{
     min-height: 650px;
+    margin-bottom: 5%;
 }
 
 .table-wrapper{
@@ -143,6 +144,10 @@ input:hover{
 
 h1, h2 {
     text-align: center;
+}
+
+h2{
+    font-size: 14px;
 }
 
 li {

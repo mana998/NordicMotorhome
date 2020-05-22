@@ -1,93 +1,103 @@
-<!DOCTYPE html> <!--Dimitrios-->
+<!DOCTYPE html> <!--Dimitrios--><!--Karolina-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:insert="header :: header_template">
     <title>Add new agreement</title>
     <!-- import header part-->
 </head>
 <body>
-<!-- import menu-->
-<div th:insert="menu :: menu_template"></div>
-<main class="main_body">
+    <!-- import menu-->
+    <div th:insert="menu :: menu_template"></div>
 
-    <form th:action="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/new-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}" method="post">
+    <!-- back button-->
+    <div class="btn-undermenu">
+        <a th:href="@{/create/selectDates}">
+            <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
+        </a>
+    </div>
 
-        <!-- Add hidden form field to handle the update -->
-        <input type="hidden" th:field="${agreement.id}" />
-        <fieldset>
-            <p>Personal Information</p>
-            <label for="firstName">First name:</label><br>
-            <input type="text" pattern="[A-Z][a-z]+" id="firstName" name="firstName" required="required" placeholder="ex. John"><br>
-            <small>Must start with capital letter</small><br>
-            <label for="lastName">Last name:</label><br>
-            <input type="text" pattern="[A-Z][a-z]+" id="lastName" name="lastName" required="required" placeholder="ex. Smith"><br>
-            <small>Must start with capital letter</small><br>
-            <label for="cpr">CPR:</label><br>
-            <input type="text" pattern="(\d){6}-(\d){4}" id="cpr" name="cpr" required="required" placeholder="ex. 251278-4568"><br>
-            <small>Must be in this format: DDMMYY-SSSS</small><br>
-            <label for="phone">Phone:</label><br>
-            <input type="text" id="phone" name="phone" required="required" placeholder="ex. 52189658"><br>
-            <small>Must include country code: 004552189658</small><br>
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" required="required" placeholder="ex. smith@gmail.com"><br>
-            <small>Must be in this format: username@domain.com</small><br>
-            <label for="licenseNumber">License Number:</label><br>
-            <input type="text" pattern="[a-zA-Z0-9]+" id="licenseNumber" name="licenseNumber" required="required" placeholder="License Number"></br>
-            <small>Must contain only alphanumeric characters</small><br>
-        </fieldset></br>
+    <h1 class="heading">Add New Agreement</h1><br>
 
-        <fieldset>
-            <p>Address</p>
-            <label for="street">Street:</label><br>
-            <input type="text" pattern="([A-Z][a-z]+ ?)+" id="street" name="street" required="required" placeholder="ex. Falkoner Alle"><br>
-            <small>Each word must start with capital letter.</small><br>
-            <label for="building">Building:</label><br>
-            <input type="text" pattern="\d+" id="building" name="building" required="required" placeholder="ex. 45"><br>
-            <small>Only numeric characters.</small><br>
-            <label for="floor">Floor:</label><br>
-            <input type="text" pattern="\d+" id="floor" name="floor" required="required" placeholder="ex. 3"><br>
-            <small>Only numeric characters.</small><br>
-            <!--doesn't need to be required in case of customers outside of Denmark-->
-            <label for="door">Door:</label><br>
-            <input type="text" pattern="tv|th|mf" id="door" name="door" placeholder="ex. th"><br>
-            <small>Must contain only tv, th, mf.</small><br>
-            <label for="zip">Zip:</label><br>
-            <input type="text" pattern="\d+" id="zip" name="zip" required="required" placeholder="ex. 1050"><br>
-            <small>Only numeric characters.</small><br>
-            <label for="city">City:</label><br>
-            <input type="text" pattern="([A-Z][a-z]+ ?)([A-Z]?[a-z]+ ?)*" id="city" name="city" required="required" placeholder="ex. Copenhagen"><br>
-            <small>Must start with capital letter.</small><br>
-            <label for="country">Country:</label><br>
-            <select id="country" name="country">
-                <option th:each="country: ${countries}" th:value="${country}"><span th:text="${country}"></span></option>
-            </select> <br>
-        </fieldset><br>
+    <h2 class="heading">Agreement Information</h2><br>
 
-        <fieldset>
-            <p>Agreement Information</p>
-            <p>Pick-up and drop-off</p>
-            <label>Pick-up point:</label>
-            <input type="number" min="0" th:field="${agreement.pickUpPoint}" placeholder="distance in km" required><br><br>
-            <small>Must be non negative decimal number.</small><br>
-            <label>Drop-off point:</label>
-            <input type="number" min="0" th:field="${agreement.dropOffPoint}" placeholder="distance in km" required><br><br>
-            <small>Must be non negative decimal number.</small><br>
-        </fieldset> <br>
+    <main class="main_body">
+        <form th:action="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/new-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}" method="post">
+            <!-- Add hidden form field to handle the update -->
+            <input type="hidden" th:field="${agreement.id}" />
+            <fieldset>
+                <p>Personal Information</p>
+                <label for="firstName">First name:</label><br>
+                <input type="text" pattern="[A-Z][a-z]+" id="firstName" name="firstName" required="required" placeholder="ex. John"><br>
+                <small>Must start with capital letter</small><br>
+                <label for="lastName">Last name:</label><br>
+                <input type="text" pattern="[A-Z][a-z]+" id="lastName" name="lastName" required="required" placeholder="ex. Smith"><br>
+                <small>Must start with capital letter</small><br>
+                <label for="cpr">CPR:</label><br>
+                <input type="text" pattern="(\d){6}-(\d){4}" id="cpr" name="cpr" required="required" placeholder="ex. 251278-4568"><br>
+                <small>Must be in this format: DDMMYY-SSSS</small><br>
+                <label for="phone">Phone:</label><br>
+                <input type="text" id="phone" name="phone" required="required" placeholder="ex. 52189658"><br>
+                <small>Must include country code: 004552189658</small><br>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required="required" placeholder="ex. smith@gmail.com"><br>
+                <small>Must be in this format: username@domain.com</small><br>
+                <label for="licenseNumber">License Number:</label><br>
+                <input type="text" pattern="[a-zA-Z0-9]+" id="licenseNumber" name="licenseNumber" required="required" placeholder="License Number"></br>
+                <small>Must contain only alphanumeric characters</small><br>
+            </fieldset></br>
 
-        <fieldset>
-            <p>Extra charges</p>
-            <table>
-                <tr th:each="item :${itemsList}">
-                    <td>
-                        <input type="checkbox" th:field="${agreement.items}" th:value="${item.id}">
-                        <label th:text="${item.name}"></label>
-                    </td>
-                </tr>
-            </table>
-        </fieldset> <br>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+            <fieldset>
+                <p>Address</p>
+                <label for="street">Street:</label><br>
+                <input type="text" pattern="([A-Z][a-z]+ ?)+" id="street" name="street" required="required" placeholder="ex. Falkoner Alle"><br>
+                <small>Each word must start with capital letter.</small><br>
+                <label for="building">Building:</label><br>
+                <input type="text" pattern="\d+" id="building" name="building" required="required" placeholder="ex. 45"><br>
+                <small>Only numeric characters.</small><br>
+                <label for="floor">Floor:</label><br>
+                <input type="text" pattern="\d+" id="floor" name="floor" required="required" placeholder="ex. 3"><br>
+                <small>Only numeric characters.</small><br>
+                <!--doesn't need to be required in case of customers outside of Denmark-->
+                <label for="door">Door:</label><br>
+                <input type="text" pattern="tv|th|mf" id="door" name="door" placeholder="ex. th"><br>
+                <small>Must contain only tv, th, mf.</small><br>
+                <label for="zip">Zip:</label><br>
+                <input type="text" pattern="\d+" id="zip" name="zip" required="required" placeholder="ex. 1050"><br>
+                <small>Only numeric characters.</small><br>
+                <label for="city">City:</label><br>
+                <input type="text" pattern="([A-Z][a-z]+ ?)([A-Z]?[a-z]+ ?)*" id="city" name="city" required="required" placeholder="ex. Copenhagen"><br>
+                <small>Must start with capital letter.</small><br>
+                <label for="country">Country:</label><br>
+                <select id="country" name="country">
+                    <option th:each="country: ${countries}" th:value="${country}"><span th:text="${country}"></span></option>
+                </select> <br>
+            </fieldset><br>
 
-</main>
-<div th:insert="footer :: footer_template"></div>
+            <fieldset>
+                <p>Agreement Information</p>
+                <p>Pick-up and drop-off</p>
+                <label>Pick-up point:</label>
+                <input type="number" min="0" th:field="${agreement.pickUpPoint}" placeholder="distance in km" required><br><br>
+                <small>Must be non negative decimal number.</small><br>
+                <label>Drop-off point:</label>
+                <input type="number" min="0" th:field="${agreement.dropOffPoint}" placeholder="distance in km" required><br><br>
+                <small>Must be non negative decimal number.</small><br>
+            </fieldset> <br>
+
+            <fieldset>
+                <p>Extra charges</p>
+                <table>
+                    <tr th:each="item :${itemsList}">
+                        <td>
+                            <input type="checkbox" th:field="${agreement.items}" th:value="${item.id}">
+                            <label th:text="${item.name}"></label>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset> <br>
+            <input class="btn-submit-add" type="submit" value="Submit">
+        </form>
+    </main>
+    <!-- import footer-->
+    <div th:insert="footer :: footer_template"></div>
 </body>
 </html>
