@@ -7,6 +7,14 @@
 <body>
     <!-- import menu-->
     <div th:insert="menu :: menu_template"></div>
+
+    <!-- back button-->
+    <div class="btn-undermenu">
+        <a th:href="@{/viewVehicles}">
+            <img src="SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
+        </a>
+    </div>
+
     <main class="main_body">
         <h1 class="heading">Add New Renter</h1>
         <form th:action="@{/addRenter}" method="post">
