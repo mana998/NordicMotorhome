@@ -85,7 +85,7 @@ input:hover{
 #banner{
     position: fixed;
     left:10px;
-    top:10px;
+    top:0px;
     width:100px;
     margin-top: 0;
 }
