@@ -94,6 +94,14 @@ public class AgreementRepository {
         return agreementIds.isEmpty();
     }
 
+    //Used mostly for show Vehicle/Renter
+    //get basic information about agreement depending on condition passed as parameter
+    public List<Agreement> getSpecificAgreements(String addition) { //Marianna
+        String sql = "SELECT a.agreementID, a.vehicleID, brand_name, model_name, a.renterID, r.first_name, r.last_name, a.start_date, a.end_date, a.is_cancelled " +
+                "FROM agreement a INNER JOIN vehicle v USING (vehicleID) JOIN brand USING (brandID) JOIN model USING (modelID) JOIN renter r ON a.renterID = r.renterID " + addition;
+        return template.query(sql, new AgreementRowMapperShort());
+    }
+
 }
 
 class AgreementRowMapper implements RowMapper<Agreement> {
@@ -122,7 +130,45 @@ class AgreementRowMapper implements RowMapper<Agreement> {
         agreement.setDropOffPoint(rs.getInt("drop_off_point"));
         agreement.setDrivenKm(rs.getInt("driven_km"));
         agreement.setLevelGasoline(rs.getBoolean("level_of_gasoline"));
+        agreement.setCancelled(rs.getBoolean("is_cancelled"));
         return agreement;
     }
+}
+
+class AgreementRowMapperShort implements RowMapper<Agreement> {
+    @Override
+    public Agreement mapRow(ResultSet rs, int rowNum) throws SQLException {
+        Agreement agreement = new Agreement();
+        agreement.setId(rs.getInt("agreementID"));
+
+        //create new renter object with parameters from the query
+        Renter renter = new Renter();
+        renter.setId(rs.getInt("renterID"));
+        renter.setFirstName(rs.getString("first_name"));
+        renter.setLastName(rs.getString("last_name"));
+        //add renter object to renter object
+        agreement.setRenter(renter);
+
+        //create new vehicle object with parameters from the query
+        Vehicle vehicle = new Vehicle();
+        vehicle.setVehicleID(rs.getInt("vehicleID"));
+        vehicle.setBrand(rs.getString("brand_name"));
+        vehicle.setModel(rs.getString("model_name"));
+        //add vehicle object to renter object
+        agreement.setVehicle(vehicle);
+
+        Date sqlDate = rs.getDate("start_date");
+        LocalDate localDate = Date.valueOf(String.valueOf(sqlDate)).toLocalDate();
+        agreement.setStartDate(localDate);
+
+        Date sqlDate2 = rs.getDate("end_date");
+        LocalDate localDate2 = Date.valueOf(String.valueOf(sqlDate2)).toLocalDate();
+        agreement.setEndDate(localDate2);
+
+        agreement.setCancelled(rs.getBoolean("is_cancelled"));
+
+        return agreement;
+    }
+
 }
 

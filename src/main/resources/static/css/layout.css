@@ -277,6 +277,15 @@ button:focus {
     outline: 0;
 }
 
+/* For displaying collumns in SHOW pages*/
+.grid-container{
+    display: grid;
+    margin : 0;
+    padding: 1em 10em;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content;
+}
+
 /* Responsive */
 
 @media (max-width: 767px) {

@@ -66,4 +66,8 @@ public class AgreementService {
     public void updateAgreement(Agreement theAgreement) {
         agreementRepository.updateAgreement(theAgreement);
     }
+
+    public List<Agreement> getSpecificAgreements(String addition) {
+        return agreementRepository.getSpecificAgreements(addition);
+    }
 }
