@@ -125,7 +125,7 @@ class AgreementRowMapper implements RowMapper<Agreement> {
         agreement.setDropOffPoint(rs.getInt("drop_off_point"));
         agreement.setDrivenKm(rs.getInt("driven_km"));
         agreement.setLevelGasoline(rs.getBoolean("level_of_gasoline"));
-        agreement.setIsCancelled(rs.getBoolean("is_cancelled"));
+        agreement.setCancelled(rs.getBoolean("is_cancelled"));
         return agreement;
     }
 }
