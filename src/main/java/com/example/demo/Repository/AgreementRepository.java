@@ -25,9 +25,9 @@ public class AgreementRepository {
     private static RowMapper<Item> itemRowMapper = new BeanPropertyRowMapper<>(Item.class);
 
     public List<Agreement> findAll(){
-        String sql = "SELECT agreementID, renterID, vehicleID, plates, start_date, end_date, pick_up_point, drop_off_point, " +
+        String sql = "SELECT agreementID, renterID, first_name, last_name, vehicleID, plates, start_date, end_date, pick_up_point, drop_off_point, " +
                 "driven_km, level_of_gasoline, is_cancelled " +
-                "FROM agreement INNER JOIN vehicle USING (vehicleID) ORDER BY agreementID ";
+                "FROM agreement INNER JOIN vehicle USING (vehicleID) INNER JOIN renter USING (renterID) ORDER BY agreementID ";
         new AgreementRowMapper();
         return template.query(sql, new AgreementRowMapper());
     }
@@ -96,6 +96,7 @@ public class AgreementRepository {
 
 }
 
+// maps a row to a new Agreement object and handles OneToOne relationship with Renter and Vehicle
 class AgreementRowMapper implements RowMapper<Agreement> {
     @Override
     public Agreement mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -103,25 +104,28 @@ class AgreementRowMapper implements RowMapper<Agreement> {
         agreement.setId(rs.getInt("agreementID"));
         Renter renter = new Renter();
         renter.setId(rs.getInt("renterID"));
+        // retrieves renter first and last name in order to display them in the agreements table
+        renter.setFirstName(rs.getString("first_name"));
+        renter.setLastName(rs.getString("last_name"));
         agreement.setRenter(renter);
-
         Vehicle vehicle = new Vehicle();
+        // retrieves vehicle id and vehicle license plates in order to display them in the agreements table
         vehicle.setVehicleID(rs.getInt("vehicleID"));
         vehicle.setPlates(rs.getString("plates"));
         agreement.setVehicle(vehicle);
-
+        // retrieves agreement information (start date, end date etc.)
         Date sqlDate = rs.getDate("start_date");
+        // converts sql date to LocalDate Java object
         LocalDate localDate = Date.valueOf(String.valueOf(sqlDate)).toLocalDate();
         agreement.setStartDate(localDate);
-
         Date sqlDate2 = rs.getDate("end_date");
         LocalDate localDate2 = Date.valueOf(String.valueOf(sqlDate2)).toLocalDate();
         agreement.setEndDate(localDate2);
-
         agreement.setPickUpPoint(rs.getInt("pick_up_point"));
         agreement.setDropOffPoint(rs.getInt("drop_off_point"));
         agreement.setDrivenKm(rs.getInt("driven_km"));
         agreement.setLevelGasoline(rs.getBoolean("level_of_gasoline"));
+        agreement.setCancelled(rs.getBoolean("is_cancelled"));
         return agreement;
     }
 }
