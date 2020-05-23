@@ -187,7 +187,7 @@ public class Agreement {
         this.levelGasoline = levelGasoline;
     }
 
-    public void setIsCancelled(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         isCancelled = cancelled;
     }
 
