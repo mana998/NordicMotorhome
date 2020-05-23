@@ -29,19 +29,17 @@
                 <div class="form-group">
                     <label for="endDate">*To:</label>
                     <input type="date" class="form-control" th:attr="min=${now}" placeholder="Enter date" id="endDate" th:field="${agreement.endDate}" required>
-                </div>
+                </div><br>
                 <label for="price">Number of beds:</label>
-                <input type="number" min="2" max="6" th:field="${vehicle.beds}" id="beds" required value="2"></input><br>
-                <small>Must be a number between 2 and 6.</small><br>
+                <input type="number" min="2" max="6" th:field="${vehicle.beds}" id="beds" required value="2"><br>
+                <small>Must be a number between 2 and 6.</small><br><br>
 
                 <label for="price">Maximum price:</label>
-                <input type="number" min="200" max="1000" th:field="${vehicle.price}" id="price" required value="200"></input><br>
+                <input type="number" min="200" max="1000" th:field="${vehicle.price}" id="price" required value="200"><br>
                 <small>Must be a number between 200 and 1000.</small><br>
             </fieldset><br>
             <input class="btn-submit-add" type="submit" value="Find Available Vehicles">
         </form>
-        <hr>
-        <a th:href="@{/viewAgreements}">Back to Agreements List</a>
     </main>
     <!-- import footer-->
     <div th:insert="footer :: footer_template"></div>
