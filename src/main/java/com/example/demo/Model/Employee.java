@@ -59,7 +59,7 @@ public class Employee extends Person{
     }
 
     public Employee(String firstName, String lastName, String cpr, String email,
-        int phone, String street, int building, int floor, String door,
+        String phone, String street, int building, int floor, String door,
         int zip, String city, String country, int id, String type,
         int salary, String username, String password, String role){
 
