@@ -96,11 +96,6 @@ input:hover{
     background-color: #c9ccf0;
 }
 
-.main_body{
-    min-height: 650px;
-    margin-bottom: 5%;
-}
-
 .table-wrapper{
     margin: 0% 15% 5%;
     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
@@ -232,6 +227,24 @@ input.btn-submit-add{
     padding: 0;
 }
 
+.btn-body{
+    align-content: center;
+    margin: 0% 45% 2%;
+}
+
+.search_button{
+    padding: 0;
+}
+
+.btn-search{
+    width:10px;
+    border: none;
+    font-size: 15px;
+    background: none;
+    position:relative;
+    bottom: 18px;
+}
+
 .btn-add{
     width:100px;
     border: none;
@@ -251,6 +264,10 @@ input.btn-submit-add{
 }
 
 .btn-undermenu:hover{
+    filter: invert(55%) sepia(39%) saturate(689%) hue-rotate(181deg) brightness(96%) contrast(94%);
+}
+
+.btn-body:hover{
     filter: invert(55%) sepia(39%) saturate(689%) hue-rotate(181deg) brightness(96%) contrast(94%);
 }
 
@@ -277,6 +294,7 @@ button:focus {
     outline: 0;
 }
 
+
 /* For displaying collumns in SHOW pages*/
 .grid-container{
     display: grid;
@@ -285,6 +303,23 @@ button:focus {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: min-content;
 }
+
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+.main_body {
+    flex: 1 0 auto;
+    margin-bottom: 5%;
+}
+.footer {
+    flex-shrink: 0;
+}
+
+
 
 /* Responsive */
 

@@ -17,7 +17,7 @@
 
     <h1 class="heading">Add New Agreement</h1><br>
 
-    <h2 class="heading">Available vehicles within the time period</h2><br>
+    <h2 class="heading">Available vehicles between <span th:text="${#temporals.format(startDate, 'dd-MM-yyyy')} + ' and ' + ${#temporals.format(endDate, 'dd-MM-yyyy')}"></span>:</h2><br>
 
     <main class="main_body">
 

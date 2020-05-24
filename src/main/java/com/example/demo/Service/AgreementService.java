@@ -27,22 +27,12 @@ public class AgreementService {
     }
 
     public List<Agreement> findAll() {
-        List<Agreement> agreementList=agreementRepository.findAll();
-        for (Agreement agreement:agreementList) {
-            Renter renter = renterRepository.findRenterById(agreement.getRenter().getId());
-            agreement.setRenter(renter);
-            Vehicle vehicle = vehicleRepository.findVehicleById(agreement.getVehicle().getVehicleID());
-            agreement.setVehicle(vehicle);
-            List<Item> itemList=agreementRepository.getAllLineItems(agreement.getId());
-            agreement.setItems(itemList);
-        }
-        return agreementList;
+        return agreementRepository.findAll();
     }
 
     public List<Item> findAllItems() {
         return agreementRepository.findAllItems();
     }
-
 
     public void addAgreement(Agreement agreement) {
         agreementRepository.addAgreement(agreement);
