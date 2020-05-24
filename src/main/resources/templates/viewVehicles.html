@@ -1,0 +1,57 @@
+<!DOCTYPE html> <!--Karolina-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="header :: header_template">
+    <title>Vehicles</title>
+    <!-- import header part-->
+</head>
+<body>
+    <!-- import menu-->
+    <div th:insert="menu :: menu_template"></div>
+
+    <main class="main_body">
+        <h1 class="heading" style="margin: 70px 0 0 0;">Vehicles</h1>
+
+        <!-- add button-->
+        <div class="btn-undermenu">
+             <a th:href="@{/addVehicle}">
+                <img src="SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>ADD NEW</strong></button>
+             </a>
+        </div>
+
+        <div class="main table-wrapper" id="main">
+                <table class="fl-table">
+                    <thead>
+                    <tr>
+                        <th>Vehicle ID</th>
+                        <th>Plates</th>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Beds</th>
+                        <th>Price</th>
+                        <th>Availability</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="vehicle: ${vehicles}">
+                        <td th:text="${vehicle.vehicleID}" />
+                        <td th:text="${vehicle.plates}" />
+                        <td th:text="${vehicle.brand}" />
+                        <td th:text="${vehicle.model}" />
+                        <td th:text="${vehicle.beds}" />
+                        <td th:text="${vehicle.price}" />
+                        <td th:text="${vehicle.isAvailable}" />
+                        <td>
+                            <a ><button class="btn-action">VIEW</button></a>
+                            <a ><button class="btn-action">UPDATE</button></a>
+                            <a ><button class="btn-action">DELETE</button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+        </div>
+    </main>
+    <!-- import footer-->
+    <div th:insert="footer :: footer_template"></div>
+</body>
+</html>

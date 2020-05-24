@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="header :: header_template">
+    <title>Employees</title>
+    <!-- import header part-->
+</head>
+<body>
+    <!-- import menu-->
+    <div th:insert="menu :: menu_template"></div>
+
+    <!-- add button-->
+    <div class="btn-undermenu">
+        <a th:href="@{/addEmployee}">
+            <img src="SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>ADD NEW</strong></button>
+        </a>
+    </div>
+        <main class="main_body">
+            <div class="main table-wrapper" id="main">
+                <table class="fl-table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>CPR</th>
+                <th>Job</th>
+                <th>Telephone</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+                <!-- print each employee in a new row-->
+                <tr th:each="employee : ${employees}">
+                    <td th:text="${employee.id}"/>
+                    <td th:text="${employee.firstName}"/>
+                    <td th:text="${employee.lastName}"/>
+                    <td th:text="${employee.cpr}"/>
+                    <td th:text="${employee.type}"/>
+                    <td th:text="${employee.phone}"/>
+                    <td th:text="${employee.username}"/>
+                    <td th:text="${employee.password}"/>
+                    <td th:text="${employee.role}"/>
+                    <td>
+                        <a th:href="@{'/viewEmployee/'+${employee.id}}">
+                            <button class="btn-action">View</button>
+                        </a>
+                        <a th:href="@{'/deleteEmployee/'+${employee.id}}">
+                            <button class="btn-action">Delete</button>
+                        </a>
+                        <a th:href="@{'/updateEmployee/'+${employee.id}}">
+                            <button class="btn-action">Update</button>
+                        </a>
+                    </td>
+                </tr>
+        </tbody>
+
+    </table>
+    </div>
+        </main>
+    <div th:insert="footer :: footer_template"></div>
+</body>
+</html>
+

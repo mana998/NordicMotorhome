@@ -1,0 +1,73 @@
+<!DOCTYPE html> <!--Dimitrios--><!--Karolina-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="header :: header_template">
+    <title>Add new agreement</title>
+    <!-- import header part-->
+</head>
+<body>
+    <!-- import menu-->
+    <div th:insert="menu :: menu_template"></div>
+
+    <!-- back button-->
+    <div class="btn-undermenu">
+        <a th:href="@{/create/selectDates}">
+            <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
+        </a>
+    </div>
+
+    <h1 class="heading">Add New Agreement</h1><br>
+
+    <h2 class="heading">List of Renters</h2><br>
+
+    <main class="main_body">
+
+        <div class="main table-wrapper" id="main" style="margin: 0% 40% 5%; padding: 5px 5px 0 5px; box-shadow: 0px 5px 5px rgba( 0, 0, 0, 0.1 ); font-size: 12px;">
+            <table class="fl-table">
+                <tbody>
+                <tr>
+                    <td>
+                    <form action="#" th:action="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}" method="get" class="form-inline">
+                        <div>
+                            <label>
+                                <input type="text" name="driverLicenseNumber" placeholder="Search Renter" />
+                            </label>
+                            <input class="btn-action" type="submit" value="SEARCH" style="font-size: 11px; margin-bottom: 2px">
+                        </div>
+                    </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="main table-wrapper" id="main">
+            <table class="fl-table">
+                <thead>
+                <tr>
+                    <th role="columnheader">First Name</th>
+                    <th role="columnheader">Last Name</th>
+                    <th role="columnheader">Driver License Number</th>
+                    <th role="columnheader">Phone</th>
+                    <th>Select</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="renter:${renters}">
+                    <td th:text="${renter.firstName}"></td>
+                    <td th:text="${renter.lastName}"></td>
+                    <td th:text="${renter.licenseNumber}"></td>
+                    <td th:text="${renter.phone}"></td>
+                    <!-- Add select button -->
+                    <td>
+                        <a th:href="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter/{renterId}(startDate = ${startDate},
+                                                endDate = ${endDate}, vehicleId=${vehicleId}, renterId=${renter.id})}"><button class="btn-action">SELECT</button></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <!-- import footer-->
+    <div th:insert="footer :: footer_template"></div>
+</body>
+</html>
