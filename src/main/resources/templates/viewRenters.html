@@ -8,16 +8,16 @@
         <!-- import menu-->
         <div th:insert="menu :: menu_template"></div>
 
-        <!-- add button-->
-        <div class="btn-undermenu">
-            <a th:href="@{/addRenter}">
-                <img src="SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>ADD NEW</strong></button>
-            </a>
-        </div>
-
         <main class="main_body">
 
             <h1 class="heading" style="margin: 70px 0 0 0;">Renters</h1>
+
+            <!-- add button-->
+            <div class="btn-undermenu">
+                <a th:href="@{/addRenter}">
+                    <img src="SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>ADD NEW</strong></button>
+                </a>
+            </div>
 
             <div class="main table-wrapper" id="main">
                 <table class="fl-table">
