@@ -21,7 +21,7 @@ function cprOrPass(country){
         document.getElementById("cpr").placeholder="ex. M0993353";
     } else {
         document.getElementById("cprLabel").innerHTML="CPR:";
-        document.getElementById("cpr").pattern='(\d){6}-(/\d){4}';
+        document.getElementById("cpr").pattern='(\d){6}-(\d){4}';
         document.getElementById("cpr").title="Must be in this format: DDMMYY-SSSS";
         document.getElementById("cpr").placeholder="ex. 251278-4568";
     }
