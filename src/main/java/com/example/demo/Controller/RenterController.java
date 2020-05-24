@@ -51,8 +51,11 @@ public class RenterController {
         model.addAttribute("renter",renterService.findRenterById(id));
         //pass the WHERE clause of query
         //for active agreements
-        String sql=" WHERE a.renterID = " + id + " AND a.is_cancelled = 0 AND a.end_date >=  CURRENT_DATE() ";
+        String sql=" WHERE a.renterID = " + id + " AND a.is_cancelled = 0 AND a.start_date <=  CURRENT_DATE() AND a.end_date >=  CURRENT_DATE() ";
         model.addAttribute("activeAgreements",agreementService.getSpecificAgreements(sql));
+        //for future agreements
+        sql=" WHERE a.renterID = " + id + " AND (a.is_cancelled IS NULL OR a.is_cancelled = 0) AND a.start_date >  CURRENT_DATE() ";
+        model.addAttribute("futureAgreements",agreementService.getSpecificAgreements(sql));
         //for inactive agreements
         sql=" WHERE a.renterID = " + id + "  AND (a.is_cancelled = 1 OR a.end_date < CURRENT_DATE()) ";
         model.addAttribute("inactiveAgreements",agreementService.getSpecificAgreements(sql));
