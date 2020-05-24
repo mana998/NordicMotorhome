@@ -13,6 +13,19 @@ public class Employee extends Person{
     private String username;
     private String password;
     private String role;
+    public Integer isEnabled;
+
+    public Integer getIsEnabled() {
+        return isEnabled;
+    }
+
+    public void setIsEnabled(Integer isEnabled) {
+        this.isEnabled = isEnabled;
+    }
+
+    //    public Integer getRights() { return rights; }
+//
+//    public void setRights(Integer rights) { this.rights = rights; }
 
     public int getId() {
         return id;
@@ -58,31 +71,20 @@ public class Employee extends Person{
         this.password = password;
     }
 
-    public Employee(String firstName, String lastName, String cpr, String email,
-        int phone, String street, int building, int floor, String door,
-        int zip, String city, String country, int countryID, int id, String type,
-        int salary, String username, String password, String role){
-
-        super(firstName, lastName, cpr, email, phone, street, building, floor, door, zip, city, countryID, country);
+    public Employee(String firstName, String lastName, String cpr, String email, String phone,
+                    String street, int building, int floor, String door, int zip, String city, String country,
+                    int id, String type, int salary, String username, String password, String role, Integer isEnabled) {
+        super(firstName, lastName, cpr, email, phone, street, building, floor, door, zip, city, country);
         this.id = id;
         this.type = type;
         this.salary = salary;
         this.username = username;
         this.password = password;
         this.role = role;
+        this.isEnabled = isEnabled;
     }
 
     public Employee() {}
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", type='" + type + '\'' +
-                ", salary=" + salary +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
-                "} " + super.toString();
-    }
+
 }

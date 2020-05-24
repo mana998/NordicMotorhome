@@ -14,7 +14,7 @@ public class Renter extends Person { //Marianna
     }
 
     public Renter(int id, String firstName, String lastName, String cpr, String email,
-                  int phone, String street, int building, int floor, String door,
+                  String phone, String street, int building, int floor, String door,
                   int zip, String city, String country, String licenseNumber) {
 
         super(firstName, lastName, cpr, email, phone, street, building, floor, door, zip, city, country);

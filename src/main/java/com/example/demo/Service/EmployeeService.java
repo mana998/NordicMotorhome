@@ -1,4 +1,4 @@
-package com.example.demo.Service;
+package com.example.demo.Service; //Ilias
 
 import com.example.demo.Model.Employee;
 import com.example.demo.Repository.EmployeeRepository;
@@ -19,6 +19,10 @@ public class EmployeeService {
 
     public Employee addEmployee(Employee emp){
         return empRepo.addEmployee(emp);
+    }
+
+    public Employee findEmployeeById(int id){
+        return empRepo.findEmployeeById(id);
     }
 
 }

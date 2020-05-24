@@ -1,0 +1,51 @@
+<!DOCTYPE html> <!--Dimitrios--><!--Karolina-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="header :: header_template">
+    <title>Add new agreement</title>
+    <!-- import header part-->
+</head>
+<body>
+    <!-- import menu-->
+    <div th:insert="menu :: menu_template"></div>
+
+    <!-- back button-->
+    <div class="btn-undermenu">
+        <a th:href="@{/create/selectDates}">
+            <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
+        </a>
+    </div>
+
+    <h1 class="heading">Add New Agreement</h1><br>
+
+    <h2 class="heading">Agreement Information</h2><br>
+
+    <main class="main_body">
+        <form action="#" th:action="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter/{renterId}(startDate = ${startDate}, endDate=${endDate}, vehicleId=${vehicleId}, renterId=${renterId})}" method="post">
+            <fieldset>
+                <p>Pick-up and drop-off</p>
+                <label>Pick-up point:</label>
+                <input type="number" min="0" th:field="${agreement.pickUpPoint}" placeholder="distance in km" required><br>
+                <small>Must be non negative decimal number.</small><br><br>
+                <label>Drop-off point:</label>
+                <input type="number" min="0" th:field="${agreement.dropOffPoint}" placeholder="distance in km" required><br>
+                <small>Must be non negative decimal number.</small><br><br>
+            </fieldset> <br>
+
+            <fieldset>
+                <p>Extra charges</p>
+                <table>
+                    <tr th:each="item:${itemList}">
+                        <td>
+                            <input type="checkbox" th:field="${agreement.items}" th:value="${item.id}">
+                            <label th:text="${item.name}"></label>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset> <br>
+            <input class="btn-submit-add" type="submit" value="Submit">
+        </form>
+    </main>
+    <!-- import footer-->
+    <div th:insert="footer :: footer_template"></div>
+</body>
+</html>

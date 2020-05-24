@@ -1,0 +1,54 @@
+<!DOCTYPE html> <!--Dimitrios-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="header :: header_template">
+    <title>Agreements</title>
+    <!-- import header part-->
+</head>
+<body>
+<!-- import menu-->
+    <div th:insert="menu :: menu_template"></div>
+    <main class="main_body">
+        <h1 class="heading" style="margin: 70px 0 0 0;">Agreements</h1>
+
+        <!-- add button-->
+        <div class="btn-undermenu">
+            <a th:href="@{/create/selectDates}">
+                <img src="SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>ADD NEW</strong></button>
+            </a>
+        </div>
+        <div class="main table-wrapper" id="main">
+            <table class="fl-table">
+                <thead>
+                <tr>
+                    <th>Agreement ID</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Renter Name</th>
+                    <th>Vehicle License Plate</th>
+                    <th>Action</th>
+                    <!--<th></th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="agreement:${agreements}">
+                    <td th:text="${agreement.id}"></td>
+                    <td th:text="${#temporals.format(agreement.startDate, 'dd-MM-yyyy')}"></td>
+                    <td th:text="${#temporals.format(agreement.endDate, 'dd-MM-yyyy')}"></td>
+                    <td th:text="${agreement.renter.firstName + ' ' + agreement.renter.lastName}"></td>
+                    <!-- add license plate here!!! -->
+                    <td th:text="${agreement.vehicle.plates}"></td>
+                    <td>
+                        <!-- Add view function -->
+                        <a th:href="@{/agreements/view/{id}(id=${agreement.id})}" ><button class="btn-action">VIEW</button></a>
+                        <a th:href="@{/agreements/update/{id}(id=${agreement.id})}" ><button class="btn-action">UPDATE</button></a>
+                        <a th:href="@{/agreements/delete/{id}(id=${agreement.id})}" ><button class="btn-action">DELETE</button></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        <!--<a href=""><button>ADD NEW VEHICLE</button></a>-->
+    </div>
+</main>
+<div th:insert="footer :: footer_template"></div>
+</body>
+</html>
