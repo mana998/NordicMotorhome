@@ -12,3 +12,17 @@ function showFields(select) {
         document.getElementById('passwd2').value = '';
     }
 }
+
+function cprOrPass(country){
+    if (country.value != 'Denmark'){
+        document.getElementById("cprLabel").innerHTML="Passport:";
+        document.getElementById("cpr").pattern="[A-Z0-9]+";
+        document.getElementById("cpr").title="Must contain only capital letters and/or numbers.";
+        document.getElementById("cpr").placeholder="ex. M0993353";
+    } else {
+        document.getElementById("cprLabel").innerHTML="CPR:";
+        document.getElementById("cpr").pattern='(\d){6}-(/\d){4}';
+        document.getElementById("cpr").title="Must be in this format: DDMMYY-SSSS";
+        document.getElementById("cpr").placeholder="ex. 251278-4568";
+    }
+}
