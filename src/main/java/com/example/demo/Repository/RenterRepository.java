@@ -28,7 +28,7 @@ public class RenterRepository {
     }
 
     //get specific renter according to ID
-    public Renter getRenter(int id){
+    public Renter findRenterById(int id){
         String sql = "SELECT renterID AS id, first_name AS firstName, last_name AS lastName, CPR AS cpr, email, phone," +
                 " driver_license_number AS licenseNumber, a.street, a.building, a.floor, a.door, z.zip, city.name AS city," +
                 " c.name AS country FROM renter r JOIN address a ON r.addressID=a.addressID JOIN zip z ON a.zipID=z.zipID " +
@@ -81,4 +81,19 @@ public class RenterRepository {
                 renter.getPhone(), renter.getLicenseNumber(), address);
     }
 
+    // Dimitrios
+    public int findMaxRenterId() {
+        String sql = "SELECT MAX(renterId) FROM renter";
+        return template.queryForObject("SELECT MAX(renterID) FROM renter", Integer.class);
+    }
+
+    // Dimitrios
+    public List<Renter> findByDriverLicenseNumber(String driverLicenseNumber) {
+        String str = "%" + driverLicenseNumber + "%";
+        return template.query
+                ("SELECT renterID AS id, first_name, last_name, email, driver_license_number AS licenseNumber, phone \n" +
+                                "FROM renter " +
+                                "WHERE driver_license_number LIKE ? ;",
+                        new Object[] { str }, rowMapper);
+    }
 }

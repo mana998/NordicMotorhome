@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="header :: header_template">
+    <title>View Employee</title>
+    <!-- import header part-->
+</head>
+<body>
+    <!-- import menu-->
+    <div th:insert="menu :: menu_template"></div>
+
+    <!-- back button-->
+    <div class="btn-undermenu">
+        <a th:href="@{/viewEmployees}">
+            <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
+        </a>
+    </div>
+
+    <div class="main" id="main">
+
+        <h1 th:text="${employee.firstName} + ' ' + ${employee.lastName}"></h1>
+        <section class="grid-container">
+            <section>
+                <h2>Personal Information</h2>
+                <ul>
+                    <li><strong>CPR:</strong> <span th:text="${employee.cpr}"></span></li>
+                    <li><strong>Email:</strong> <span th:text="${employee.email}"></span></li>
+                    <li><strong>Phone:</strong> <span th:text="${employee.phone}"></span></li>
+                </ul>
+            </section>
+            <section>
+                <h2>Address</h2>
+                <ul>
+                    <li th:text="${employee.street + ' ' + employee.building + ', ' + employee.floor + ' ' + employee.door}"></li>
+                    <li th:text="${employee.zip + ' ' + employee.city}"></li>
+                    <li th:text="${employee.country}"></li>
+                </ul>
+            </section>
+            <section>
+                <h2>Occupation</h2>
+                <ul>
+                    <li><strong>Job:</strong> <span th:text="${employee.type}"></span></li>
+                    <li><strong>Monthly Salary:</strong> <span th:text="${employee.salary} + ' kr.'"></span></li>
+                    <li><strong>System role:</strong> <span th:text="${employee.role}"></span></li>
+                    <li><strong>Username:</strong> <span th:text="${employee.username} eq null ? 'NO' : ${employee.username}"></span></li>
+                    <li><strong>Password:</strong> <span th:text="${employee.password} eq '*******' ? 'YES' : 'NO'"></span></li>
+                    <li><strong>System use rights:</strong> <span th:text="${employee.isEnabled} eq '0' or ${employee.isEnabled} eq null ? 'NO' : 'YES'"></span></li>
+                </ul>
+            </section>
+        </section>
+    </div>
+</body>
+</html>

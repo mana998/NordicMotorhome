@@ -5,43 +5,53 @@
     <!-- import header part-->
 </head>
 <body>
-<!-- import menu-->
-<div th:insert="menu :: menu_template"></div>
-<main class="main_body">
-    <div class="main table-wrapper" id="main">
-            <table class="fl-table">
-                <thead>
-                <tr>
-                    <th>Vehicle ID</th>
-                    <th>Plates</th>
-                    <th>Brand</th>
-                    <th>Model</th>
-                    <th>Beds</th>
-                    <th>Price</th>
-                    <th>Availability</th>
-                    <!--<th></th>-->
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="vehicle: ${vehicles}">
-                    <td th:text="${vehicle.vehicleID}" />
-                    <td th:text="${vehicle.plates}" />
-                    <td th:text="${vehicle.brand}" />
-                    <td th:text="${vehicle.model}" />
-                    <td th:text="${vehicle.beds}" />
-                    <td th:text="${vehicle.price}" />
-                    <td th:text="${vehicle.isAvailable}" />
-                    <!--<td>
-                        <a th:href=""><button>ADD</button></a>
-                        <a th:href=""><button>DELETE</button></a>
-                        <a th:href=""><button>UPDATE</button></a>
-                    </td>-->
-                </tr>
-                </tbody>
-            </table>
-            <!--<a href=""><button>ADD NEW VEHICLE</button></a>-->
-    </div>
-</main>
-<div th:insert="footer :: footer_template"></div>
+    <!-- import menu-->
+    <div th:insert="menu :: menu_template"></div>
+
+    <main class="main_body">
+        <h1 class="heading" style="margin: 70px 0 0 0;">Vehicles</h1>
+
+        <!-- add button-->
+        <div class="btn-undermenu">
+             <a th:href="@{/addVehicle}">
+                <img src="SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>ADD NEW</strong></button>
+             </a>
+        </div>
+
+        <div class="main table-wrapper" id="main">
+                <table class="fl-table">
+                    <thead>
+                    <tr>
+                        <th>Vehicle ID</th>
+                        <th>Plates</th>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Beds</th>
+                        <th>Price</th>
+                        <th>Availability</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="vehicle: ${vehicles}">
+                        <td th:text="${vehicle.vehicleID}" />
+                        <td th:text="${vehicle.plates}" />
+                        <td th:text="${vehicle.brand}" />
+                        <td th:text="${vehicle.model}" />
+                        <td th:text="${vehicle.beds}" />
+                        <td th:text="${vehicle.price}" />
+                        <td th:text="${vehicle.isAvailable}" />
+                        <td>
+                            <a th:href="@{'/showVehicle/'+${vehicle.vehicleID}}"><button class="btn-action">VIEW</button></a>
+                            <a ><button class="btn-action">UPDATE</button></a>
+                            <a ><button class="btn-action">DELETE</button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+        </div>
+    </main>
+    <!-- import footer-->
+    <div th:insert="footer :: footer_template"></div>
 </body>
 </html>

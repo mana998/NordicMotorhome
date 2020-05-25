@@ -6,7 +6,7 @@ public class Person {
     private String lastName;
     private String cpr;
     private String email;
-    private int phone;
+    private String phone;
     private String street;
     private int building;
     private int floor;
@@ -95,11 +95,11 @@ public class Person {
         this.email = email;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -111,7 +111,7 @@ public class Person {
         this.street = street;
     }
 
-    public Person(String firstName, String lastName, String cpr, String email, int phone, String street, int building, int floor, String door, int zip, String city, String country) {
+    public Person(String firstName, String lastName, String cpr, String email, String phone, String street, int building, int floor, String door, int zip, String city, String country) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.cpr = cpr;

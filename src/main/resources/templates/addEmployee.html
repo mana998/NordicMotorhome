@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!-- Ilias-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:insert="header :: header_template">
     <title>Add Employee</title>
@@ -8,7 +8,12 @@
     <!-- import menu-->
     <div th:insert="menu :: menu_template"></div>
 
-    <h1 class="emp">Add New Employee</h1>
+    <!-- back button-->
+    <div class="btn-undermenu">
+        <a th:href="@{/viewEmployees}">
+            <img src="SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
+        </a>
+    </div>
 
     <main class="main_body">
         <form th:action="@{/addEmployee}" method="post">
@@ -16,29 +21,31 @@
                <!-- <legend>Personal Information</legend>-->
                 <p>Personal Information</p>
                 <label>First name:</label>
-                <input type="text" name="firstName" placeholder="ex. John" required><br><br>
+                <input type="text" name="firstName" pattern="[A-Z][a-z]+" title="Must start with a capital letter." placeholder="ex. John" required><br><br>
                 <label>Last name:</label>
-                <input type="text" name="lastName" placeholder="ex. Smith" required><br><br>
+                <input type="text" name="lastName" pattern="[A-Z][a-z]+" title="Must start with a capital letter." placeholder="ex. Smith" required><br><br>
                 <label>CPR:</label>
-                <input type="text" name="cpr" placeholder="ex. 251278-4568" required><br><br>
+                <input type="text" name="cpr" pattern="(\d){6}-(\d){4}" title="Must be in this format: DDMMYY-SSSS" placeholder="ex. 251278-4568" required><br><br>
                 <label>Telephone:</label>
-                <input type="text" name="phone" placeholder="ex. 52189658" required><br><br>
+                <input type="text" name="phone" pattern="00\d+" title="Must include country code: 004552189658" placeholder="ex. 52189658" required><br><br>
                 <label>Email:</label>
-                <input type="text" name="email" placeholder="ex. smith@gmail.com"><br><br>
+                <input type="email" name="email" placeholder="ex. smith@gmail.com" required><br><br>
             </fieldset> <br>
 
             <fieldset>
                 <p>Address</p>
                 <label>Street:</label>
-                <input type="text" name="street" placeholder="ex. Falkoner Alle" required><br><br>
+                <input type="text" name="street" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter." placeholder="ex. Falkoner Alle" required><br><br>
                 <label>Building number:</label>
-                <input type="text" name="building" placeholder="ex. 45" required><br><br>
+                <input type="text" name="building" pattern="\d+" title="Only numeric characters." placeholder="ex. 45" required><br><br>
                 <label>Floor:</label>
-                <input type="text" name="floor" placeholder="ex. 3" required><br><br>
+                <input type="text" name="floor" pattern="\d+" title="Only numeric characters." placeholder="ex. 3" required><br><br>
                 <label>Door:</label>
-                <input type="text" name="door" placeholder="ex. th" required><br><br>
+                <input type="text" name="door" pattern="tv|th|mf" title="Must contain only tv, th, mf." placeholder="ex. th" required><br><br>
                 <label>City:</label>
-                <input type="text" name="city" placeholder="ex. Copenhagen" required><br><br>
+                <input type="text" name="city" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Must start with a capital letter." placeholder="ex. Copenhagen" required><br>
+                <label>Zip:</label>
+                <input type="text" name="zip" pattern="\d+" title="Only numeric characters." placeholder="ex. 2545" required><br><br>
                 <label>Country:</label>
                 <select id="country" name="country">
                     <option th:each="country: ${countries}" th:value="${country}"><span th:text="${country}"></span></option>
@@ -48,9 +55,9 @@
             <fieldset>
                 <p>Job Specifics</p>
                 <label>Job title:</label>
-                <input type="text" name="type" placeholder="ex. Sales Assistant" required><br><br>
+                <input type="text" name="type" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter." placeholder="ex. Sales Assistant" required><br><br>
                 <label>Salary:</label>
-                <input type="text" name="type" placeholder="ex. 25000" required><br><br>
+                <input type="text" name="salary" pattern="\d+" title="Only numeric characters." placeholder="ex. 25000" required><br><br>
                 <label>System role:</label>
                 <select id="role" name="role" onchange="showFields(this)" required>
                     <option th:value="restricted"><span th:text="restricted"></span></option>
@@ -62,7 +69,7 @@
                     <label>Enter username:</label>
                     <input id="usern" type="text" name="username"><br><br>
                     <label>Enter password:</label>
-                    <input id="passwd" type="text" name="password"><br><br>
+                    <input id="passwd" type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"><br><br>
                 </div>
             </fieldset> <br>
 
@@ -74,20 +81,6 @@
     <!--Footer insertion-->
     <div th:insert="footer :: footer_template"></div>
 
-    <!--    JS function to hide username and password entry from other employees-->
-    <script>
-        function showFields(select) {
-            if (select.value == 'admin' || select.value == 'user') {
-                document.getElementById('pass').style.display = 'block';
-                document.getElementById('usern').value = '';
-                document.getElementById('passwd').value = '';
-            } else {
-                document.getElementById('pass').style.display = 'none';
-                document.getElementById('usern').value = '';
-                document.getElementById('passwd').value = '';
-            }
-        }
-    </script>
 </body>
 </html>
 

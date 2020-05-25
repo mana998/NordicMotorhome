@@ -7,7 +7,18 @@
     <body>
         <!-- import menu-->
         <div th:insert="menu :: menu_template"></div>
+
         <main class="main_body">
+
+            <h1 class="heading" style="margin: 70px 0 0 0;">Renters</h1>
+
+            <!-- add button-->
+            <div class="btn-undermenu">
+                <a th:href="@{/addRenter}">
+                    <img src="SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>ADD NEW</strong></button>
+                </a>
+            </div>
+
             <div class="main table-wrapper" id="main">
                 <table class="fl-table">
                     <thead>
@@ -15,10 +26,10 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Surname</th>
-                        <th>CPR</th>
+                        <th>CPR/Passport</th>
                         <th>Phone</th>
                         <th>Driver License</th>
-                        <th></th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -31,9 +42,9 @@
                         <td th:text="${renter.phone}"></td>
                         <td th:text="${renter.licenseNumber}"></td>
                         <td>
-                            <a th:href=""><button>VIEW</button></a>
-                            <a th:href=""><button>UPDATE</button></a>
-                            <a th:href=""><button>DELETE</button></a> <!-- cant delete members with active contract-->
+                            <a  th:href="@{'/showRenter/'+${renter.id}}"><button class="btn-action">VIEW</button></a>
+                            <a><button class="btn-action">UPDATE</button></a>
+                            <a><button class="btn-action">DELETE</button></a><!-- cant delete members with active contract-->
                         </td>
                     </tr>
                     </tbody>

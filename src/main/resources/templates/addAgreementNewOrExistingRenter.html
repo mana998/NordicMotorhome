@@ -1,0 +1,37 @@
+<!DOCTYPE html> <!--Dimitrios--><!--Karolina-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="header :: header_template">
+    <title>Add new agreement</title>
+    <!-- import header part-->
+</head>
+<body>
+    <!-- import menu-->
+    <div th:insert="menu :: menu_template"></div>
+
+    <h1 class="heading">Add New Agreement</h1><br>
+
+    <h2 class="heading">Please select:</h2><br>
+
+    <main class="main_body">
+        <div class="main table-wrapper" id="main" style="margin: 0% 40% 5%;">
+            <table class="fl-table">
+                <thead>
+                <tr>
+                    <th>Renter:</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <a th:href="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/new-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}"><button class="btn-action" style="font-size: 14px">New Renter</button></a>
+                        <a th:href="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}"><button class="btn-action" style="font-size: 14px">Existing Renter</button></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <!-- import footer-->
+    <div th:insert="footer :: footer_template"></div>
+</body>
+</html>

@@ -8,10 +8,12 @@
     <!-- import menu-->
     <div th:insert="menu :: menu_template"></div>
 
-    <h1>Employees [[${#httpServletRequest.remoteUser}]]</h1>
-    <a th:href="@{/addEmployee}">
-        <button class="btn-add" id="btn">Add New Employee</button>
-    </a>
+    <!-- add button-->
+    <div class="btn-undermenu">
+        <a th:href="@{/addEmployee}">
+            <img src="SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>ADD NEW</strong></button>
+        </a>
+    </div>
         <main class="main_body">
             <div class="main table-wrapper" id="main">
                 <table class="fl-table">
@@ -29,6 +31,7 @@
             </tr>
         </thead>
         <tbody>
+                <!-- print each employee in a new row-->
                 <tr th:each="employee : ${employees}">
                     <td th:text="${employee.id}"/>
                     <td th:text="${employee.firstName}"/>
@@ -41,13 +44,13 @@
                     <td th:text="${employee.role}"/>
                     <td>
                         <a th:href="@{'/viewEmployee/'+${employee.id}}">
-                            <button class="btn-view">View</button>
+                            <button class="btn-action">View</button>
                         </a>
                         <a th:href="@{'/deleteEmployee/'+${employee.id}}">
-                            <button class="btn-delete">Delete</button>
+                            <button class="btn-action">Delete</button>
                         </a>
                         <a th:href="@{'/updateEmployee/'+${employee.id}}">
-                            <button class="btn-update">Update</button>
+                            <button class="btn-action">Update</button>
                         </a>
                     </td>
                 </tr>
