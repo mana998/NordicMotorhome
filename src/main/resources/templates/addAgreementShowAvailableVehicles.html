@@ -8,13 +8,6 @@
     <!-- import menu-->
     <div th:insert="menu :: menu_template"></div>
 
-    <!-- back button-->
-    <div class="btn-undermenu">
-        <a th:href="@{/create/selectDates}">
-            <img src="../SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
-        </a>
-    </div>
-
     <h1 class="heading">Add New Agreement</h1><br>
 
     <h2 class="heading">Available vehicles between <span th:text="${#temporals.format(startDate, 'dd-MM-yyyy')} + ' and ' + ${#temporals.format(endDate, 'dd-MM-yyyy')}"></span>:</h2><br>

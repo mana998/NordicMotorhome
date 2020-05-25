@@ -8,13 +8,6 @@
     <!-- import menu-->
     <div th:insert="menu :: menu_template"></div>
 
-    <!-- back button-->
-    <div class="btn-undermenu">
-        <a th:href="@{/create/selectDates}">
-            <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
-        </a>
-    </div>
-
     <h1 class="heading">Add New Agreement</h1><br>
 
     <h2 class="heading">Agreement Information</h2><br>
@@ -24,10 +17,10 @@
             <fieldset>
                 <p>Pick-up and drop-off</p>
                 <label>Pick-up point:</label>
-                <input type="number" min="0" th:field="${agreement.pickUpPoint}" placeholder="distance in km" required><br>
+                <input type="number" min="0" max="999999" th:field="${agreement.pickUpPoint}" placeholder="distance in km" required><br>
                 <small>Must be non negative decimal number.</small><br><br>
                 <label>Drop-off point:</label>
-                <input type="number" min="0" th:field="${agreement.dropOffPoint}" placeholder="distance in km" required><br>
+                <input type="number" min="0" max="999999" th:field="${agreement.dropOffPoint}" placeholder="distance in km" required><br>
                 <small>Must be non negative decimal number.</small><br><br>
             </fieldset> <br>
 

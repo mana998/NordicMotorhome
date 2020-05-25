@@ -50,7 +50,13 @@ public class AgreementService {
     }
 
     public Agreement findById(int agreementId) {
-        return agreementRepository.findById(agreementId);
+        Agreement agreement = agreementRepository.findById(agreementId);
+        int vehicleId = agreement.getVehicle().getVehicleID();
+        Vehicle vehicle = vehicleRepository.findVehicleById(vehicleId);
+        agreement.setVehicle(vehicle);
+        List<Item> itemList = agreementRepository.getAllLineItems(agreementId);
+        agreement.setItems(itemList);
+        return agreement;
     }
 
     public void updateAgreement(Agreement theAgreement) {
