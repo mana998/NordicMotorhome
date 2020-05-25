@@ -24,7 +24,7 @@
                 <input type="text" pattern="[A-Z][a-z]+" title="Must start with a capital letter." id="firstName" name="firstName" required="required" placeholder="ex. John"><br>
                 <label for="lastName">Last name:</label><br>
                 <input type="text" pattern="[A-Z][a-z]+" title="Must start with a capital letter." id="lastName" name="lastName" required="required" placeholder="ex. Smith"><br>
-                <label for="cpr">CPR:</label><br>
+                <label for="cpr" id="cprLabel">CPR:</label><br>
                 <input type="text" pattern="(\d){6}-(\d){4}" title="Must be in this format: DDMMYY-SSSS" id="cpr" name="cpr" required="required" placeholder="ex. 251278-4568"><br>
                 <label for="phone">Phone:</label><br>
                 <input type="text" pattern="00\d+" title="Must include country code: 004552189658" id="phone" name="phone" required="required" placeholder="ex. 52189658"><br>
@@ -50,7 +50,8 @@
                 <label for="city">City:</label><br>
                 <input type="text" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter." id="city" name="city" required="required" placeholder="ex. Copenhagen"><br>
                 <label for="country">Country:</label><br>
-                <select id="country" name="country">
+                <select id="country" name="country" onchange="cprOrPass(this)" required>
+                    <option value="" selected disabled hidden>Choose here</option>
                     <option th:each="country: ${countries}" th:value="${country}"><span th:text="${country}"></span></option>
                 </select> <br>
             </fieldset><br>

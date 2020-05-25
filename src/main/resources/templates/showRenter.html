@@ -10,7 +10,7 @@
 
 <!-- back button-->
 <div class="btn-undermenu">
-    <a th:href="@{/viewVehicles}">
+    <a th:href="@{/viewRenters}">
         <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
     </a>
 </div>
@@ -22,7 +22,7 @@
         <section>
             <h2>Contact Information</h2>
             <ul>
-                <li><strong>CPR:</strong> <span th:text="${renter.cpr}"></span></li>
+                <li><strong th:text="${renter.country == 'Denmark'} ? 'CPR:' : 'Passport:'" >CPR:</strong> <span th:text="${renter.cpr}"></span></li>
                 <li><strong>Email:</strong> <span th:text="${renter.email}"></span></li>
                 <li><strong>Phone:</strong> <span th:text="${renter.phone}"></span></li>
                 <li><strong>License Number:</strong> <span th:text="${renter.licenseNumber}"></span></li>
