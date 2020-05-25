@@ -201,4 +201,15 @@ public class AgreementController {
         model.addAttribute("agreement", agreement);
         return "addAgreementShowCharges";
     }
+
+    // mapping for showing a selected agreement
+    @GetMapping("/viewSingleAgreement/{agreementId}")
+    public String showSingleAgreement(@PathVariable ("agreementId") int agreementId, Model model){
+        System.out.println("Inside get mapping for view single agreement method!");
+        Agreement agreement = agreementService.findById(agreementId);
+        System.out.println(agreement);
+        model.addAttribute("agreement", agreement);
+        return "/viewSingleAgreement";
+    }
+
 }

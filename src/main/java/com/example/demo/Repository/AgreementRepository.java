@@ -65,9 +65,9 @@ public class AgreementRepository {
     }
 
     public Agreement findById(int agreementId) {
-        String sql = "SELECT agreementID, renterID, vehicleID, start_date, end_date, pick_up_point, drop_off_point, " +
+        String sql = "SELECT agreementID, renterID, first_name, last_name, vehicleID, start_date, end_date, pick_up_point, drop_off_point, " +
                      "driven_km, level_of_gasoline, plates, is_cancelled " +
-                     "FROM agreement INNER JOIN vehicle USING (vehicleID) WHERE agreementID = ? ";
+                     "FROM agreement INNER JOIN vehicle USING (vehicleID) INNER JOIN renter USING (renterID) WHERE agreementID = ? ";
         return template.queryForObject(sql, new AgreementRowMapper(), agreementId);
     }
 

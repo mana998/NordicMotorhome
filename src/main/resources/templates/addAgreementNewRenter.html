@@ -11,7 +11,7 @@
     <!-- back button-->
     <div class="btn-undermenu">
         <a th:href="@{/create/selectDates}">
-            <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
+            <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>Back to agreement list</strong></button>
         </a>
     </div>
 
@@ -76,10 +76,10 @@
                 <p>Agreement Information</p>
                 <p>Pick-up and drop-off</p>
                 <label>Pick-up point:</label>
-                <input type="number" min="0" th:field="${agreement.pickUpPoint}" placeholder="distance in km" required><br><br>
+                <input type="number" min="0" max="999999" th:field="${agreement.pickUpPoint}" placeholder="distance in km" required><br><br>
                 <small>Must be non negative decimal number.</small><br>
                 <label>Drop-off point:</label>
-                <input type="number" min="0" th:field="${agreement.dropOffPoint}" placeholder="distance in km" required><br><br>
+                <input type="number" min="0" max="999999" th:field="${agreement.dropOffPoint}" placeholder="distance in km" required><br><br>
                 <small>Must be non negative decimal number.</small><br>
             </fieldset> <br>
 

@@ -1,0 +1,41 @@
+<!DOCTYPE html> <!--Dimitrios-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="header :: header_template">
+    <title>View agreement</title>
+    <!-- import header part-->
+</head>
+<body>
+<!-- import menu-->
+<div th:insert="menu :: menu_template"></div>
+<main class="main_body">
+    <br><br>
+    <h2>Agreement (id:<span th:text="${agreement.id}"></span>)</h2>
+    <br>
+
+    <div class="main table-wrapper" id="main">
+        <table class="fl-table">
+            <thead>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Vehicle License Plate</th>
+            <th>Basic Fee</th>
+            <th>Transfer Fee</th>
+            <th>Extra Charges</th>
+            <th>Total Price</th>
+            </thead>
+            <tbody>
+            <td th:text="${#temporals.format(agreement.startDate, 'dd-MM-yyyy')}"></td>
+            <td th:text="${#temporals.format(agreement.endDate, 'dd-MM-yyyy')}"></td>
+            <td th:text="${agreement.vehicle.plates}"></td>
+            <td th:text="${agreement.calculateVehicleCost()}"></td>
+            <td th:text="${agreement.calculateTransferCost()}"></td>
+            <td th:text="${agreement.calculateItemsCost()}"></td>
+            <td th:text="${agreement.calculateTotalCost() + ' ' + 'EUR'}"></td>
+            </tbody>
+        </table>
+    </div>
+</main>
+<!-- import footer-->
+<div th:insert="footer :: footer_template"></div>
+</body>
+</html>

@@ -8,8 +8,6 @@
 <!-- import menu-->
     <div th:insert="menu :: menu_template"></div>
     <main class="main_body">
-        <h1 class="heading" style="margin: 70px 0 0 0;">Agreements</h1>
-
         <!-- add button-->
         <div class="btn-undermenu">
             <a th:href="@{/create/selectDates}">
@@ -39,7 +37,7 @@
                     <td th:text="${agreement.vehicle.plates}"></td>
                     <td>
                         <!-- Add view function -->
-                        <a th:href="@{/agreements/view/{id}(id=${agreement.id})}" ><button class="btn-action">VIEW</button></a>
+                        <a th:href="@{/viewSingleAgreement/{agreementId}(agreementId=${agreement.id})}" ><button class="btn-action">VIEW</button></a>
                         <a th:href="@{/agreements/update/{id}(id=${agreement.id})}" ><button class="btn-action">UPDATE</button></a>
                         <a th:href="@{/agreements/delete/{id}(id=${agreement.id})}" ><button class="btn-action">DELETE</button></a>
                     </td>
