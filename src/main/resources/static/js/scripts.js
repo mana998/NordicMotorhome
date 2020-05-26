@@ -1,4 +1,4 @@
-<!--    JS function to hide username and password entry for other employees (Ilias)-->
+<!--    JS function to hide username and password entry for other employees (addEmployee.html) Ilias-->
 function showFields(select) {
     if (select.value == 'admin' || select.value == 'user') {
         document.getElementById('pass').style.display = 'block';
@@ -10,6 +10,18 @@ function showFields(select) {
         document.getElementById('usern').value = '';
         document.getElementById('passwd').value = '';
         document.getElementById('passwd2').value = '';
+    }
+}
+
+<!--    JS function to hide role entry (updateEmployee.html) Ilias-->
+function showPriv(input){
+    if (input.checked == true){
+        document.getElementById("rolepass").style.display = "block";
+        alert("A new username/ password will have to be selected for admin or user!");
+        document.getElementById('role').disabled = false;
+    } else {
+        document.getElementById("rolepass").style.display = "none";
+        document.getElementById('role').value = '';
     }
 }
 
