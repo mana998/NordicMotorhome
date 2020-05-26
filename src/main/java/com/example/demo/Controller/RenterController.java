@@ -62,4 +62,20 @@ public class RenterController {
         return "showRenter";
     }
 
+    //show update renter form
+    @GetMapping("/updateRenter/{id}")
+    public String updateRenter(@PathVariable("id") int id, Model model){
+        model.addAttribute("renter",renterService.findRenterById(id));
+        model.addAttribute("countries",countryService.showCountriesList());
+        return "updateRenter";
+    }
+
+    //update renter information
+    @PostMapping("/updateRenter/{id}")
+    public String updateRenter(@ModelAttribute Renter renter,@PathVariable("id") int id){
+        renter.setId(id);
+        renterService.updateRenter(renter);
+        return "redirect:/viewRenters";
+    }
+
 }

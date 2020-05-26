@@ -42,8 +42,8 @@
                         <td th:text="${renter.phone}"></td>
                         <td th:text="${renter.licenseNumber}"></td>
                         <td>
-                            <a  th:href="@{'/showRenter/'+${renter.id}}"><button class="btn-action">VIEW</button></a>
-                            <a><button class="btn-action">UPDATE</button></a>
+                            <a th:href="@{'/showRenter/'+${renter.id}}"><button class="btn-action">VIEW</button></a>
+                            <a th:href="@{'/updateRenter/'+${renter.id}}"><button class="btn-action">UPDATE</button></a>
                             <a><button class="btn-action">DELETE</button></a><!-- cant delete members with active contract-->
                         </td>
                     </tr>
