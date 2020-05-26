@@ -76,4 +76,38 @@ public class EmployeeRepository {
         return template.queryForObject(sql, rowMapper, id);
     }
 
+    public Employee updateEmployee(int id, Employee emp){
+
+        String sql = "UPDATE employee " +
+                "JOIN users USING (userID) " +
+                "JOIN job j USING (jobID) "+
+                "JOIN address USING (addressID) " +
+                "JOIN zip USING (zipID) " +
+                "JOIN city c USING (cityID) " +
+                "SET first_name = ?, last_name = ?, cpr = ?, phone = ?, email = ?," +
+                " salary = ?, j.name = ?, street = ?, door = ?, floor = ?, building = ?, zip = ?, c.name = ? " +
+                "WHERE employeeID = ?";
+
+        template.update(sql, emp.getFirstName(), emp.getLastName(), emp.getCpr(), emp.getPhone(),
+                emp.getEmail(), emp.getSalary(), emp.getType(), emp.getStreet(), emp.getDoor(),
+                emp.getFloor(), emp.getBuilding(), emp.getZip(), emp.getCity(), emp.getId());
+
+        if(emp.getRole() != null) {
+            if (emp.getPassword().length() > 0 && emp.getUsername().length() > 0) {
+                sql = "UPDATE users " +
+                        "JOIN employee USING(userID) " +
+                        "SET username = ?, password = ?, role = ?, enabled = '1'" +
+                        "WHERE employeeID = ?";
+                String hashPass = PasswordGenerator.passGenerator(emp.getPassword());
+                template.update(sql, emp.getUsername(), hashPass, emp.getRole(), id);
+            } else {
+                sql = "UPDATE users " +
+                        "JOIN employee USING(userID) " +
+                        "SET role = ? " +
+                        "WHERE employeeID = ?";
+                template.update(sql, emp.getRole(), id);
+            }
+        }
+        return null;
+    }
 }

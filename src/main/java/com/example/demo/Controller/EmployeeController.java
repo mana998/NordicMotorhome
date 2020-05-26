@@ -42,4 +42,16 @@ public class EmployeeController {
         return "/viewEmployee";
     }
 
+    @GetMapping("/updateEmployee/{id}")
+    public String updateEmployee(@PathVariable("id") int id, Model model){
+        model.addAttribute("employee", employeeService.findEmployeeById(id));
+        model.addAttribute("countries", countryService.showCountriesList());
+        return "/updateEmployee";
+    }
+    @PostMapping("/updateEmployee")
+    public String updateEmployee(@ModelAttribute Employee employee){
+        employeeService.updateEmployee(employee.getId(), employee);
+        return "redirect:/viewEmployees";
+    }
+
 }

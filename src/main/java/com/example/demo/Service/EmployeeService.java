@@ -25,4 +25,6 @@ public class EmployeeService {
         return empRepo.findEmployeeById(id);
     }
 
+    public Employee updateEmployee(int id, Employee emp){ return empRepo.updateEmployee(id, emp); }
+
 }
