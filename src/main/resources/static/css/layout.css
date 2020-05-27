@@ -45,6 +45,44 @@ a.menu_link:hover{
     filter: invert(24%) sepia(50%) saturate(395%) hue-rotate(169deg) brightness(95%) contrast(92%);
 }
 
+.motorimg{
+    display: flex;
+
+}
+
+.motorimg img{
+    margin: auto;
+}
+
+.quote{
+    margin: auto;
+    font-family: "Brush Script MT";
+    font-size: 40px;
+}
+
+/*.leftmenu{*/
+/*    position: fixed;*/
+/*    left:0;*/
+/*    top:120px;*/
+/*    margin-top: 0;*/
+/*}*/
+
+.myuser{
+    text-align: left;
+    margin-left: 10px;
+    font-size: 15px;
+}
+
+.myuser span{
+    color: cornflowerblue;
+    font-weight: bold;
+}
+
+/*.leftmenu input{*/
+/*    border-radius: 10px;*/
+/*    border: 1px solid cornflowerblue;*/
+/*}*/
+
 #logout{
     position: fixed;
     right:0px;
