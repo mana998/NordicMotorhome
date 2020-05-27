@@ -1,21 +1,24 @@
 <!DOCTYPE html> <!--Marianna-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
     <head th:insert="header :: header_template">
-        <title>Renteres</title>
+        <title>Renters</title>
         <!-- import header part-->
     </head>
     <body>
         <!-- import menu-->
         <div th:insert="menu :: menu_template"></div>
 
-        <!-- add button-->
-        <div class="btn-undermenu">
-            <a th:href="@{/addRenter}">
-                <img src="SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>ADD NEW</strong></button>
-            </a>
-        </div>
-
         <main class="main_body">
+
+            <h1 class="heading" style="margin: 70px 0 0 0;">Renters</h1>
+
+            <!-- add button-->
+            <div class="btn-undermenu">
+                <a th:href="@{/addRenter}">
+                    <img src="http://localhost:8080/SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>ADD NEW</strong></button>
+                </a>
+            </div>
+
             <div class="main table-wrapper" id="main">
                 <table class="fl-table">
                     <thead>
@@ -23,7 +26,7 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Surname</th>
-                        <th>CPR</th>
+                        <th>CPR/Passport</th>
                         <th>Phone</th>
                         <th>Driver License</th>
                         <th>Actions</th>
@@ -39,8 +42,8 @@
                         <td th:text="${renter.phone}"></td>
                         <td th:text="${renter.licenseNumber}"></td>
                         <td>
-                            <a  th:href="@{'/showRenter/'+${renter.id}}"><button class="btn-action">VIEW</button></a>
-                            <a><button class="btn-action">UPDATE</button></a>
+                            <a th:href="@{'/showRenter/'+${renter.id}}"><button class="btn-action">VIEW</button></a>
+                            <a th:href="@{'/updateRenter/'+${renter.id}}"><button class="btn-action">UPDATE</button></a>
                             <a><button class="btn-action">DELETE</button></a><!-- cant delete members with active contract-->
                         </td>
                     </tr>

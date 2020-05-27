@@ -38,10 +38,10 @@
                 </datalist>-->
                 <label>Type model:</label>
                 <input type="text" name="model" placeholder="ex. V 66" required><br><br>
-                <label>Enter Number of Beds:</label>
-                <input type="number" name="beds" placeholder="ex. 4" required><br><br>
-                <label>Enter Price per Day:</label>
-                <input type="number" name="price" placeholder="ex. 400" required><br><br>
+                <label>Enter Number of Beds*:</label>
+                <input type="number" name="beds" placeholder="ex. 4"><br><br>
+                <label>Enter Price per Day*:</label>
+                <input type="number" name="price" placeholder="ex. 400"><br><br>
                 <label >Select availability:</label>
                 <input type="radio" id="available" name="isAvailable" value="1" checked="checked">
                 <label for="available">available</label>
@@ -49,7 +49,10 @@
                 <label for="unavailable">unavailable</label><br><br>
             </fieldset><br>
             <input class="btn-submit-add" type="submit" value="Submit Entry">
-        </form>
+        </form><br>
+        <p style="text-align: center; font-size: 14px;">*Please note that if entered brand and model already exist in our fleet,<br>the price and number of beds will be set automatically.<br>
+        For a new model those information are required.</p>
+
     </main>
     <!-- import footer-->
     <div th:insert="footer :: footer_template"></div>

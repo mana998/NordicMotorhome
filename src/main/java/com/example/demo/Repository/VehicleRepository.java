@@ -127,10 +127,19 @@ public class VehicleRepository { //Karolina
                         "OR (start_date >= ? AND end_date >= ? AND start_date <= ?)" +
                         "OR (start_date <= ? AND end_date <= ? AND end_date >= ?)" +
                         ")" +
-                        "AND beds = ? AND price < ? ";
+                        "AND beds = ? AND price <= ? ";
+
         List<Vehicle> result = template.query(sql, new Object[] {sqlFromDate, sqlToDate, sqlFromDate, sqlToDate, sqlFromDate,
                 sqlToDate, sqlFromDate, sqlFromDate, sqlToDate, sqlToDate, beds, price}, rowMapper);
         return result;
     }
 
+    // update vehicle information - allows to update plates, price and availability
+    public void updateVehicle(Vehicle vehicle){
+        String sql = "UPDATE vehicle " +
+                "JOIN model USING (modelID) " +
+                "SET plates = ?, is_available = ?, price = ? " +
+                "WHERE vehicleID = ?";
+        template.update(sql, vehicle.getPlates(), vehicle.isIsAvailable(), vehicle.getPrice(), vehicle.getVehicleID());
+    }
 }

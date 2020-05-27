@@ -33,6 +33,7 @@ a.menu_link:hover{
 .menu_item{
     /* align-content: flex-star;*/
     font-size: 1em;
+    cursor: pointer;
 }
 
 .svg{
@@ -48,6 +49,7 @@ a.menu_link:hover{
     border: none;
     font-size: 15px;
     background: none;
+    cursor: pointer;
 }
 
 #logout:hover{
@@ -63,6 +65,7 @@ button.logout{
     top: 26px;
     right: 90px;
     font-size: 15px;
+    cursor: pointer;
 }
 
 #menu {
@@ -256,6 +259,7 @@ input.btn-submit-add{
     background: none;
     position:relative;
     bottom: 8px;
+    cursor: pointer;
 }
 
 .btn-back{

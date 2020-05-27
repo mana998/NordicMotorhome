@@ -1,0 +1,50 @@
+<!DOCTYPE html> <!--Karolina-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="header :: header_template">
+    <title>Update vehicle</title>
+    <!-- import header part-->
+</head>
+<body>
+<!-- import menu-->
+<div th:insert="menu :: menu_template"></div>
+
+<!-- back button-->
+<div class="btn-undermenu">
+    <a th:href="@{/viewVehicles}">
+        <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
+    </a>
+</div>
+
+<h1 class="heading">Update Vehicle Information</h1>
+
+<main class="main_body">
+    <form th:action="@{/updateVehicle}" method="post">
+        <fieldset>
+            <p>You are able to change plates, price and availability.</p>
+            <label>Vehicle ID:</label>
+            <input type="text" name="vehicleID" th:value="${vehicle.vehicleID}" readonly="readonly" style="pointer-events: none; background-color: #EBEBE4;"><br><br>
+            <label>Brand:</label>
+            <input type="text" name="brand" th:value="${vehicle.brand}" readonly="readonly" style="pointer-events: none; background-color: #EBEBE4;"><br><br>
+            <label>Model:</label>
+            <input type="text" name="model" th:value="${vehicle.model}" readonly="readonly" style="pointer-events: none; background-color: #EBEBE4;"><br><br>
+            <label>Number of beds:</label>
+            <input type="text" name="beds" th:value="${vehicle.beds}" readonly="readonly" style="pointer-events: none; background-color: #EBEBE4;"><br><br>
+            <label>Plates:</label>
+            <input type="text" pattern="[a-zA-Z0-9]+" title="Must contain only alphanumeric characters" name="plates" required="required" th:value="${vehicle.plates}"><br><br>
+            <label>Price per Day:</label>
+            <input type="number" name="price" th:value="${vehicle.price}" required><br><br>
+            <label for="available">Availability:</label>
+            <select id="available" name="isAvailable" required>
+                <option th:value="${vehicle.isAvailable}" selected hidden><span th:text="${vehicle.isAvailable}"></span></option>
+                <option value="1" >true</option>
+                <option value="0">false</option>
+            </select>
+        </fieldset><br>
+        <input class="btn-submit-add" type="submit" value="Submit Entry">
+    </form>
+    <p style="text-align: center; font-size: 14px;">*Please note that by entering new price,<br>the price will be updated to all vehicles of this brand and model.<br></p>
+</main>
+<!-- import footer-->
+<div th:insert="footer :: footer_template"></div>
+</body>
+</html>

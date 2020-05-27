@@ -1,0 +1,82 @@
+<!DOCTYPE html><!-- Ilias-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="header :: header_template">
+    <title>Update Employee</title>
+    <!--    Import JS file-->
+    <script src="http://localhost:8080/js/scripts.js"></script>
+</head>
+<body>
+<!-- import menu-->
+<div th:insert="menu :: menu_template"></div>
+
+<h1 class="emp">Update Employee</h1>
+
+<main class="main_body">
+    <form th:action="@{/updateEmployee}" method="post">
+        <fieldset>
+            <p>Personal Information</p>
+            <label>Employee ID:</label>
+            <input type="text" name="id" th:value="${employee.id}" readonly="readonly" style="pointer-events: none; background-color: #EBEBE4;"><br><br>
+            <label>First name:</label>
+            <input type="text" name="firstName" pattern="[A-Z][a-z]+" title="Must start with a capital letter." th:value="${employee.firstName}" required><br><br>
+            <label>Last name:</label>
+            <input type="text" name="lastName" pattern="[A-Z][a-z]+" title="Must start with a capital letter." th:value="${employee.lastName}" required><br><br>
+            <label>CPR:</label>
+            <input type="text" name="cpr" pattern="(\d){6}-(\d){4}" title="Must be in this format: DDMMYY-SSSS" th:value="${employee.cpr}" required><br><br>
+            <label>Telephone:</label>
+            <input type="text" name="phone" pattern="00\d+" title="Must include country code: 004552189658" th:value="${employee.phone}" required><br><br>
+            <label>Email:</label>
+            <input type="email" name="email" th:value="${employee.email}" required><br><br>
+        </fieldset> <br>
+
+        <fieldset>
+            <p>Address</p>
+            <label>Street:</label>
+            <input type="text" name="street" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter." th:value="${employee.street}" required><br><br>
+            <label>Building number:</label>
+            <input type="text" name="building" pattern="\d+" title="Only numeric characters." th:value="${employee.building}" required><br><br>
+            <label>Floor:</label>
+            <input type="text" name="floor" pattern="\d+" title="Only numeric characters." th:value="${employee.floor}" required><br><br>
+            <label>Door:</label>
+            <input type="text" name="door" pattern="tv|th|mf" title="Must contain only tv, th, mf." th:value="${employee.door}" required><br><br>
+            <label>City:</label>
+            <input type="text" name="city" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Must start with a capital letter." th:value="${employee.city}" required><br><br>
+            <label>Zip:</label>
+            <input type="text" name="zip" pattern="\d+" title="Only numeric characters." th:value="${employee.zip}" required><br><br>
+            <label>Country:</label>
+            <input type="text" name="country" style="pointer-events: none;" th:value="${employee.country}" disabled><br><br>
+        </fieldset> <br>
+
+        <fieldset>
+            <p>Job Specifics</p>
+            <label>Job title:</label>
+            <input type="text" name="type" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter." th:value="${employee.type}" required><br><br>
+            <label>Salary:</label>
+            <input type="text" name="salary" pattern="\d+" title="Only numeric characters." th:value="${employee.salary}" required><br><br>
+
+            <input type="checkbox" id="chk1" name="chk1" onclick="showPriv(this)">
+            <label for="chk1">Would you like to change system privileges?</label>
+            <div id="rolepass" style="display: none">
+                <label>System role:</label>
+                <select id="role" name="role" onchange="showFields(this)" disabled>
+                    <option th:value="restricted"><span th:text="restricted"></span></option>
+                    <option th:value="admin"><span th:text="admin"></span></option>
+                    <option th:value="user"><span th:text="user"></span></option>
+                </select><br>
+                <br>
+                <div id="pass" style="display:none;">
+                    <label>Enter username:</label>
+                    <input id="usern" type="text" name="username" placeholder="Enter new username"><br><br>
+                    <label>Enter password:</label>
+                    <input id="passwd" type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder="Enter new password"><br><br>
+                </div>
+            </div>
+        </fieldset> <br>
+
+        <input class="btn-submit-add" type="submit" value="Save">
+
+    </form><br>
+</main>
+<div th:insert="footer :: footer_template"></div>
+</body>
+</html>

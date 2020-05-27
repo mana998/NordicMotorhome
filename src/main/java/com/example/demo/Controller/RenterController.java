@@ -51,12 +51,31 @@ public class RenterController {
         model.addAttribute("renter",renterService.findRenterById(id));
         //pass the WHERE clause of query
         //for active agreements
-        String sql=" WHERE a.renterID = " + id + " AND a.is_cancelled = 0 AND a.end_date >=  CURRENT_DATE() ";
+        String sql=" WHERE a.renterID = " + id + " AND a.is_cancelled = 0 AND a.start_date <=  CURRENT_DATE() AND a.end_date >=  CURRENT_DATE() ";
         model.addAttribute("activeAgreements",agreementService.getSpecificAgreements(sql));
+        //for future agreements
+        sql=" WHERE a.renterID = " + id + " AND (a.is_cancelled IS NULL OR a.is_cancelled = 0) AND a.start_date >  CURRENT_DATE() ";
+        model.addAttribute("futureAgreements",agreementService.getSpecificAgreements(sql));
         //for inactive agreements
         sql=" WHERE a.renterID = " + id + "  AND (a.is_cancelled = 1 OR a.end_date < CURRENT_DATE()) ";
         model.addAttribute("inactiveAgreements",agreementService.getSpecificAgreements(sql));
         return "showRenter";
+    }
+
+    //show update renter form
+    @GetMapping("/updateRenter/{id}")
+    public String updateRenter(@PathVariable("id") int id, Model model){
+        model.addAttribute("renter",renterService.findRenterById(id));
+        model.addAttribute("countries",countryService.showCountriesList());
+        return "updateRenter";
+    }
+
+    //update renter information
+    @PostMapping("/updateRenter/{id}")
+    public String updateRenter(@ModelAttribute Renter renter,@PathVariable("id") int id){
+        renter.setId(id);
+        renterService.updateRenter(renter);
+        return "redirect:/viewRenters";
     }
 
 }

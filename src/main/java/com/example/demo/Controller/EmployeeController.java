@@ -1,4 +1,4 @@
-package com.example.demo.Controller;
+package com.example.demo.Controller; //Ilias
 
 import com.example.demo.Model.Employee;
 import com.example.demo.Service.CountryService;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -34,4 +35,23 @@ public class EmployeeController {
         employeeService.addEmployee(employee);
         return "redirect:/viewEmployees";
     }
+
+    @GetMapping("/viewEmployee/{id}")
+    public String viewEmployee(@PathVariable("id") int id, Model model){
+        model.addAttribute("employee", employeeService.findEmployeeById(id));
+        return "/viewEmployee";
+    }
+
+    @GetMapping("/updateEmployee/{id}")
+    public String updateEmployee(@PathVariable("id") int id, Model model){
+        model.addAttribute("employee", employeeService.findEmployeeById(id));
+        model.addAttribute("countries", countryService.showCountriesList());
+        return "/updateEmployee";
+    }
+    @PostMapping("/updateEmployee")
+    public String updateEmployee(@ModelAttribute Employee employee){
+        employeeService.updateEmployee(employee.getId(), employee);
+        return "redirect:/viewEmployees";
+    }
+
 }
