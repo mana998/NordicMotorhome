@@ -32,7 +32,7 @@
             <label>Plates:</label>
             <input type="text" pattern="[a-zA-Z0-9]+" title="Must contain only alphanumeric characters" name="plates" required="required" th:value="${vehicle.plates}"><br><br>
             <label>Price per Day:</label>
-            <input type="number" name="price" th:value="${vehicle.price}" required><br><br>
+            <input type="number" min ="100" name="price" th:value="${vehicle.price}" required><br><br>
             <label for="available">Availability:</label>
             <select id="available" name="isAvailable" required>
                 <option th:value="${vehicle.isAvailable}" selected hidden><span th:text="${vehicle.isAvailable}"></span></option>
