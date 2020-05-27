@@ -10,6 +10,7 @@ import com.example.demo.Repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -50,13 +51,24 @@ public class AgreementService {
     }
 
     public Agreement findById(int agreementId) {
+        // find agreement by the agreement id
         Agreement agreement = agreementRepository.findById(agreementId);
+        // find and set the vehicle for this agreement
         int vehicleId = agreement.getVehicle().getVehicleID();
         Vehicle vehicle = vehicleRepository.findVehicleById(vehicleId);
         agreement.setVehicle(vehicle);
-        List<Item> itemList = agreementRepository.getAllLineItems(agreementId);
-        agreement.setItems(itemList);
+        // find and set the renter for this agreement
+        int renterId = agreement.getRenter().getId();
+        Renter renter = renterRepository.findRenterById(renterId);
+        agreement.setRenter(renter);
+        // find and set the extra items for this agreement
+        agreement.setItems(findItemsForAgreement(agreementId));
+        //agreement.setItems(itemList);
         return agreement;
+    }
+
+    public List<Item> findItemsForAgreement(int agreementId) {
+        return agreementRepository.getAllLineItems(agreementId);
     }
 
     public void updateAgreement(Agreement theAgreement) {
@@ -65,5 +77,9 @@ public class AgreementService {
 
     public List<Agreement> getSpecificAgreements(String addition) {
         return agreementRepository.getSpecificAgreements(addition);
+    }
+
+    public List<Agreement> findByEndDate(LocalDate endDate) {
+        return agreementRepository.findByEndDate(endDate);
     }
 }

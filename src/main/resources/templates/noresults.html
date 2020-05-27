@@ -8,20 +8,11 @@
     <!-- import menu-->
     <div th:insert="menu :: menu_template"></div>
 
-    <!-- back button-->
-    <div class="btn-undermenu">
-        <a th:href="@{/create/selectDates}">
-            <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
-        </a>
-    </div>
-
     <main class="main_body">
         <br><br>
         <h1 class="heading">Sorry, there are no results</h1><br>
-        <div class="btn-body">
-            <a th:href="@{/create/selectDates}">
-                <img src="http://localhost:8080/SVG/redo-solid.svg" class="svg search_button" height="30" width="30"><button class="btn-search"><strong>SEARCH AGAIN</strong></button>
-            </a>
+        <div class="wrapper">
+            <a th:href="@{/create/selectDates}"><button class="btn-action" style="font-size: 14px">New search</button></a>
         </div>
     </main>
     <!-- import footer-->
