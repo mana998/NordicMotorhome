@@ -234,6 +234,10 @@ input.btn-submit-add{
     padding: 0;
 }
 
+.wrapper-undermenu {
+    margin: 5% 15% 2%;
+}
+
 .btn-body{
     align-content: center;
     margin: 0% 45% 2%;
@@ -300,6 +304,10 @@ td a{
 
 button:focus {
     outline: 0;
+}
+
+.wrapper {
+    text-align: center;
 }
 
 

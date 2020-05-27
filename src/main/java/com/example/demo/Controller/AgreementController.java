@@ -9,11 +9,14 @@ import com.example.demo.Service.CountryService;
 import com.example.demo.Service.RenterService;
 import com.example.demo.Service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -39,9 +42,9 @@ public class AgreementController {
     @GetMapping("/viewAgreements")
     public String listAgreements(Model model) {
         // find all agreements
-        List<Agreement> theAgreements = agreementService.findAll();
+        List<Agreement> agreements = agreementService.findAll();
         // and pass it in the model
-        model.addAttribute("agreements", theAgreements);
+        model.addAttribute("agreements", agreements);
         return "viewAgreements";
     }
 
@@ -71,7 +74,7 @@ public class AgreementController {
         model.addAttribute("startDate", agreement.getStartDate());
         model.addAttribute("endDate", agreement.getEndDate());
         List<Vehicle> availableVehicles = vehicleService.findVehiclesAvailableForAgreement(agreement.getStartDate(),
-            agreement.getEndDate(), vehicle.getBeds(), vehicle.getPrice());
+                agreement.getEndDate(), vehicle.getBeds(), vehicle.getPrice());
         // if there are no available vehicles based on search criteria, show noresults page
         if (availableVehicles.isEmpty()) {
             return "noresults";
@@ -84,10 +87,10 @@ public class AgreementController {
 
     // mapping for showing page where the user chooses between new or existing renter
     @GetMapping("/create/{startDate}/{endDate}/selectVehicle/{vehicleId}")
-    public String showPageNewOrExistingRenter(@PathVariable ("startDate") String startDate,
-                                 @PathVariable ("endDate") String endDate,
-                                 @PathVariable ("vehicleId") int vehicleId,
-                                 Model theModel) {
+    public String showPageNewOrExistingRenter(@PathVariable("startDate") String startDate,
+                                              @PathVariable("endDate") String endDate,
+                                              @PathVariable("vehicleId") int vehicleId,
+                                              Model theModel) {
         theModel.addAttribute("startDate", startDate);
         theModel.addAttribute("endDate", endDate);
         theModel.addAttribute("carId", vehicleId);
@@ -96,9 +99,9 @@ public class AgreementController {
 
     // mapping for showing form for adding info about both the new renter and the agreement itself
     @GetMapping("/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/new-renter")
-    public String showRenterForm(@PathVariable ("startDate") String startDate,
-                                 @PathVariable ("endDate") String endDate,
-                                 @PathVariable ("vehicleId") int vehicleId,
+    public String showRenterForm(@PathVariable("startDate") String startDate,
+                                 @PathVariable("endDate") String endDate,
+                                 @PathVariable("vehicleId") int vehicleId,
                                  Model theModel) {
         Agreement agreement = new Agreement();
         Renter theRenter = new Renter();
@@ -118,9 +121,9 @@ public class AgreementController {
 
     // mapping for posting information about the new renter and the new agreement
     @PostMapping("/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/new-renter")
-    public String saveNewRenter(@PathVariable ("startDate") String startDate,
-                                @PathVariable ("endDate") String endDate,
-                                @PathVariable ("vehicleId") int vehicleId,
+    public String saveNewRenter(@PathVariable("startDate") String startDate,
+                                @PathVariable("endDate") String endDate,
+                                @PathVariable("vehicleId") int vehicleId,
                                 Model theModel,
                                 @ModelAttribute Renter renter, @ModelAttribute Agreement agreement) {
         // adds renter to the database
@@ -151,10 +154,10 @@ public class AgreementController {
 
     // mapping for showing renters to select, in case the user selects the existing renter option
     @GetMapping("create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter")
-    public String listRenters(@PathVariable ("startDate") String startDate,
-                              @PathVariable ("endDate") String endDate,
-                              @PathVariable ("vehicleId") int vehicleId,
-                              Model theModel, @RequestParam (defaultValue = "") String driverLicenseNumber) {
+    public String listRenters(@PathVariable("startDate") String startDate,
+                              @PathVariable("endDate") String endDate,
+                              @PathVariable("vehicleId") int vehicleId,
+                              Model theModel, @RequestParam(defaultValue = "") String driverLicenseNumber) {
         theModel.addAttribute("startDate", startDate);
         theModel.addAttribute("endDate", endDate);
         theModel.addAttribute("vehicleId", vehicleId);
@@ -165,11 +168,11 @@ public class AgreementController {
 
     // mapping for showing form for adding agreement info if the user selects existing renter
     @GetMapping("/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter/{renterId}")
-    public String showAgreementDetails(@PathVariable ("startDate") String startDate,
-                                     @PathVariable ("endDate") String endDate,
-                                     @PathVariable ("vehicleId") int vehicleId,
-                                     @PathVariable ("renterId") int renterId,
-                                     Model model) {
+    public String showAgreementDetails(@PathVariable("startDate") String startDate,
+                                       @PathVariable("endDate") String endDate,
+                                       @PathVariable("vehicleId") int vehicleId,
+                                       @PathVariable("renterId") int renterId,
+                                       Model model) {
         Agreement agreement = new Agreement();
         model.addAttribute("agreement", agreement);
         // finding all items from the database
@@ -181,10 +184,10 @@ public class AgreementController {
 
     // mapping for posting info about the new agreement if the user selects existing renter
     @PostMapping("/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter/{renterId}")
-    public String saveContractInfo(@PathVariable ("startDate") String startDate,
-                                   @PathVariable ("endDate") String endDate,
-                                   @PathVariable ("vehicleId") int vehicleId,
-                                   @PathVariable ("renterId") int renterId, @ModelAttribute Agreement agreement,
+    public String saveContractInfo(@PathVariable("startDate") String startDate,
+                                   @PathVariable("endDate") String endDate,
+                                   @PathVariable("vehicleId") int vehicleId,
+                                   @PathVariable("renterId") int renterId, @ModelAttribute Agreement agreement,
                                    Model model) {
         // converts the dates from string to LocaDate and sets the new agreement dates
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -203,13 +206,44 @@ public class AgreementController {
     }
 
     // mapping for showing a selected agreement
-    @GetMapping("/viewSingleAgreement/{agreementId}")
-    public String showSingleAgreement(@PathVariable ("agreementId") int agreementId, Model model){
-        System.out.println("Inside get mapping for view single agreement method!");
+    @GetMapping("/viewAgreement")
+    public String showSingleAgreement(@RequestParam("agreementId") int agreementId, Model model) {
         Agreement agreement = agreementService.findById(agreementId);
-        System.out.println(agreement);
+        // set the item list associated with this agreement
+        List<Item> itemList = agreementService.findItemsForAgreement(agreement.getId());
+        agreement.setItems(itemList);
         model.addAttribute("agreement", agreement);
-        return "/viewSingleAgreement";
+        return "/viewAgreement";
     }
 
+    // mapping for showing agreements to select which one to end
+    @GetMapping("/showAgreementListForEnd")
+    public String showAgreementsForEnding(Model model, @RequestParam(defaultValue = "")
+                                            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+        List<Agreement> agreements = agreementService.findByEndDate(endDate);
+        model.addAttribute("agreements", agreements);
+        model.addAttribute("now", LocalDate.now());
+        return "endAgreement";
+    }
+
+    // mapping for showing agreements to select which one to end
+    @GetMapping("/showFormForUpdate")
+    public String showFormForEndingAgreement(@RequestParam ("agreementId") int agreementId, Model model) {
+        // get the agreement from the db
+        Agreement agreement = agreementService.findById(agreementId);
+        // set agreement as a model attribute to pre-populate the form
+        model.addAttribute("agreement", agreement);
+        // send over to the form
+        return "endAgreementAddDetails";
+    }
+
+    @PostMapping("/save")
+    public String saveAgreement(@ModelAttribute("agreement") Agreement agreement) {
+        // set the item list associated with this agreement
+        List<Item> itemList = agreementService.findItemsForAgreement(agreement.getId());
+        agreement.setItems(itemList);
+        // and save the agreement
+        agreementService.updateAgreement(agreement);
+        return "endAgreementShowCharges";
+    }
 }

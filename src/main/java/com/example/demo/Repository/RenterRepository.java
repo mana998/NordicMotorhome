@@ -36,8 +36,10 @@ public class RenterRepository {
         return template.queryForObject(sql, rowMapper, id);
     }
 
-    //add new renter
-    public void addRenter(Renter renter){
+    //this part is necessary for both update and add renter functionality
+    //as it looks whether given value is already in the table to retrieve only id
+    //or whether it should be added
+    public int compareInformation(Renter renter){
         int zip ;
         int city;
         //checks database, whether the entered city already exists
@@ -69,8 +71,14 @@ public class RenterRepository {
             //get id of the new zip
             zip = template.queryForObject("SELECT MAX(zipID) FROM zip", Integer.class);
         }
+        return zip;
+    }
+
+    //add new renter
+    public void addRenter(Renter renter){
+        int zip = compareInformation(renter);
         //insert new address to the database
-        sql = "INSERT INTO address (street, building, floor, door, zipID) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO address (street, building, floor, door, zipID) VALUES (?,?,?,?,?)";
         template.update(sql, renter.getStreet(), renter.getBuilding(), renter.getFloor(), renter.getDoor(), zip);
         //get id of the new address
         Integer address = template.queryForObject("SELECT MAX(addressID) FROM address", Integer.class);
@@ -80,6 +88,18 @@ public class RenterRepository {
         template.update(sql, renter.getFirstName(), renter.getLastName(), renter.getCpr(), renter.getEmail(),
                 renter.getPhone(), renter.getLicenseNumber(), address);
     }
+
+    public void updateRenter(Renter renter){
+        int zip = compareInformation(renter);
+        //update current address in the database
+        String sql = "UPDATE address SET street = ?, building = ?, floor = ?, door = ?, zipID = ? WHERE addressID = " +
+                "(SELECT addressID FROM renter WHERE renterID = ?)";
+        template.update(sql, renter.getStreet(), renter.getBuilding(), renter.getFloor(), renter.getDoor(), zip, renter.getId());
+        //update current renter in the database
+        sql= "UPDATE renter SET first_name = ?, last_name = ?, CPR = ?, email = ?, phone = ?, driver_license_number = ? WHERE renterID = ?";
+        template.update(sql, renter.getFirstName(), renter.getLastName(), renter.getCpr(), renter.getEmail(), renter.getPhone(), renter.getLicenseNumber(), renter.getId());
+    }
+
 
     // Dimitrios
     public int findMaxRenterId() {

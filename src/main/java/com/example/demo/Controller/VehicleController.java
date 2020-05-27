@@ -66,4 +66,18 @@ public class VehicleController { //Karolina
         return "showVehicle";
     }
 
+    //display update form
+    @GetMapping("/updateVehicle/{vehicleID}")
+    public String updateVehicle(@PathVariable("vehicleID") int vehicleID, Model model) {
+        model.addAttribute("vehicle", vehicleService.findVehicleById(vehicleID));
+        return "updateVehicle";
+    }
+
+    //update vehicle information
+    @PostMapping("/updateVehicle")
+    public String updateVehicle(@ModelAttribute Vehicle vehicle) {
+        vehicleService.updateVehicle(vehicle);
+        return "redirect:/viewVehicles";
+    }
+
 }

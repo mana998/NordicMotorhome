@@ -16,7 +16,7 @@ public class Agreement {
     // prices are in euros
     final double freeKmPerDay = 400.00;
     final double transferCostPerKm = 0.70;
-    final double tankCharge = 70.00;
+    final double tankCost = 70.00;
     final double pricePerExtraKm = 1.00;
     // cancellation costs
     final int maxDaysPriorToRental = 50;
@@ -42,19 +42,11 @@ public class Agreement {
     private List<Item> items;
     private boolean levelGasoline;
     private boolean isCancelled;
-    // prices
-    private double totalCost; // also important!!!
-    private double extraKmCost; // the number of km that exceed the free km per day
-    private double vehicleCost; // days * price per day for the given vehicle
-    private double itemsCost; // total cost of items included
-    private double transferCost; // cost for transferring the vehicle to wished location
-    private double tankCost; // cost added if the tank is less than half full at drop-off
-    // cancellation
-    private double cancellationCost;
 
     public Agreement() {}
 
-    public Agreement(int id, LocalDate startDate, LocalDate endDate, Vehicle vehicle, Renter renter, double drivenKm, double pickUpPoint, double dropOffPoint, List<Item> items, boolean levelGasoline, boolean isCancelled, double totalCost, double extraKmCost, double vehicleCost, double itemsCost, double transferCost, double tankCost, double cancellationCost) {
+    public Agreement(int id, LocalDate startDate, LocalDate endDate, Vehicle vehicle, Renter renter, double drivenKm,
+                     double pickUpPoint, double dropOffPoint, List<Item> items, boolean levelGasoline, boolean isCancelled) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -66,13 +58,6 @@ public class Agreement {
         this.items = items;
         this.levelGasoline = levelGasoline;
         this.isCancelled = isCancelled;
-        this.totalCost = totalCost;
-        this.extraKmCost = extraKmCost;
-        this.vehicleCost = vehicleCost;
-        this.itemsCost = itemsCost;
-        this.transferCost = transferCost;
-        this.tankCost = tankCost;
-        this.cancellationCost = cancellationCost;
     }
 
     public int getId() {
@@ -119,34 +104,6 @@ public class Agreement {
         return isCancelled;
     }
 
-    public double getTotalCost() {
-        return totalCost;
-    }
-
-    public double getExtraKmCost() {
-        return extraKmCost;
-    }
-
-    public double getVehicleCost() {
-        return vehicleCost;
-    }
-
-    public double getItemsCost() {
-        return itemsCost;
-    }
-
-    public double getTransferCost() {
-        return transferCost;
-    }
-
-    public double getTankCost() {
-        return tankCost;
-    }
-
-    public double getCancellationCost() {
-        return cancellationCost;
-    }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -172,11 +129,11 @@ public class Agreement {
     }
 
     public void setPickUpPoint(double pickUpPoint) {
-        this.pickUpPoint = ceil(pickUpPoint);
+        this.pickUpPoint = pickUpPoint;
     }
 
     public void setDropOffPoint(double dropOffPoint) {
-        this.dropOffPoint = ceil(dropOffPoint);
+        this.dropOffPoint = dropOffPoint;
     }
 
     public void setItems(List<Item> items) {
@@ -191,41 +148,15 @@ public class Agreement {
         isCancelled = cancelled;
     }
 
-    public void setTotalCost(double totalCost) {
-        this.totalCost = totalCost;
-    }
-
-    public void setExtraKmCost(double extraKmCost) {
-        this.extraKmCost = extraKmCost;
-    }
-
-    public void setVehicleCost(double vehicleCost) {
-        this.vehicleCost = vehicleCost;
-    }
-
-    public void setItemsCost(double itemsCost) {
-        this.itemsCost = itemsCost;
-    }
-
-    public void setTransferCost(double transferCost) {
-        this.transferCost = transferCost;
-    }
-
-    public void setTankCost(double tankCost) {
-        this.tankCost = tankCost;
-    }
-
-    public void setCancellationCost(double cancellationCost) {
-        this.cancellationCost = cancellationCost;
-    }
-
     public double calculateTotalCost() {
-        return calculateExtraKmCost() + calculateVehicleCost() + calculateItemsCost() + calculateTransferCost();
+        return calculateExtraKmCost() + calculateVehicleCost() + calculateItemsCost() + calculateTransferCost()
+                + calculateTankCost();
     }
 
     public double calculateExtraKmCost() {
         int days = findDifferenceInDays(startDate, endDate);
         double extraKm = drivenKm - (days * freeKmPerDay);
+        double extraKmCost;
         extraKmCost = extraKm * pricePerExtraKm;
         if (extraKmCost > 0) {
             return extraKmCost;
@@ -265,6 +196,16 @@ public class Agreement {
         return 0;
     }
 
+    public double calculateTankCost() {
+        // if level of gasoline in the tank is more than half full, then no charge
+        if (levelGasoline) {
+            return 0.0;
+            // else, charge the renter
+        } else {
+            return tankCost;
+        }
+    }
+
     public int findDifferenceInDays(LocalDate dateBefore, LocalDate dateAfter) {
         return  (int) DAYS.between(dateBefore, dateAfter);
     }
@@ -272,7 +213,7 @@ public class Agreement {
     @Override
     public String toString() {
         return "Agreement{" +
-                " id=" + id +
+                "id=" + id +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", vehicle=" + vehicle +
@@ -283,13 +224,6 @@ public class Agreement {
                 ", items=" + items +
                 ", levelGasoline=" + levelGasoline +
                 ", isCancelled=" + isCancelled +
-                ", totalCost=" + totalCost +
-                ", extraKmCost=" + extraKmCost +
-                ", vehicleCost=" + vehicleCost +
-                ", itemsCost=" + itemsCost +
-                ", transferCost=" + transferCost +
-                ", tankCost=" + tankCost +
-                ", cancellationCost=" + cancellationCost +
                 '}';
     }
 }

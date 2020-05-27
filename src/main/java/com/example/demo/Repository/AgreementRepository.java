@@ -5,6 +5,7 @@ import com.example.demo.Model.Item;
 import com.example.demo.Model.Renter;
 import com.example.demo.Model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -25,9 +26,9 @@ public class AgreementRepository {
     private static RowMapper<Item> itemRowMapper = new BeanPropertyRowMapper<>(Item.class);
 
     public List<Agreement> findAll(){
-        String sql = "SELECT agreementID, renterID, first_name, last_name, vehicleID, plates, start_date, end_date, pick_up_point, drop_off_point, " +
+        String sql = "SELECT agreementID, renterID, first_name, last_name, vehicleID, plates, price, start_date, end_date, pick_up_point, drop_off_point, " +
                 "driven_km, level_of_gasoline, is_cancelled " +
-                "FROM agreement INNER JOIN vehicle USING (vehicleID) INNER JOIN renter USING (renterID) ORDER BY agreementID ";
+                "FROM agreement INNER JOIN vehicle USING (vehicleID) INNER JOIN renter USING (renterID) INNER JOIN model USING (modelID) ORDER BY agreementID ";
         new AgreementRowMapper();
         return template.query(sql, new AgreementRowMapper());
     }
@@ -66,17 +67,21 @@ public class AgreementRepository {
 
     public Agreement findById(int agreementId) {
         String sql = "SELECT agreementID, renterID, first_name, last_name, vehicleID, start_date, end_date, pick_up_point, drop_off_point, " +
-                     "driven_km, level_of_gasoline, plates, is_cancelled " +
-                     "FROM agreement INNER JOIN vehicle USING (vehicleID) INNER JOIN renter USING (renterID) WHERE agreementID = ? ";
+                     "driven_km, level_of_gasoline, plates, price, is_cancelled " +
+                     "FROM agreement INNER JOIN vehicle USING (vehicleID) INNER JOIN renter USING (renterID) INNER JOIN model USING (modelID) WHERE agreementID = ? ";
         return template.queryForObject(sql, new AgreementRowMapper(), agreementId);
     }
 
     // not used for now
-    public void updateAgreement(Agreement theAgreement) {
-        System.out.println("agreement before update = " + theAgreement);
+    public void updateAgreement(Agreement agreement) {
         String updateStatement = "UPDATE agreement " +
-                "SET drop_off_point = ?, pick_up_point = ? WHERE agreementID = ? ";
-        template.update(updateStatement, theAgreement.getPickUpPoint(), theAgreement.getDropOffPoint(), theAgreement.getTotalCost(), theAgreement.getId());
+                "SET renterID = ?, vehicleID = ?, start_date = ?, end_date = ?, pick_up_point = ?," +
+                "drop_off_point = ?, driven_km = ?, level_of_gasoline = ?, is_cancelled = ? " +
+                "WHERE agreementID = ? ";
+        template.update(updateStatement, agreement.getRenter().getId(), agreement.getVehicle().getVehicleID(),
+                agreement.getStartDate(), agreement.getEndDate(), agreement.getPickUpPoint(),
+                agreement.getDropOffPoint(), agreement.getDrivenKm(), agreement.isLevelGasoline(),
+                agreement.isCancelled(), agreement.getId());
     }
 
     // method for deciding if we can delete a renter
@@ -102,6 +107,15 @@ public class AgreementRepository {
         return template.query(sql, new AgreementRowMapperShort());
     }
 
+    public List<Agreement> findByEndDate(LocalDate endDate) {
+        String str = "%" + endDate + "%";
+        return template.query
+                ("SELECT agreementID, renterID, first_name, last_name, vehicleID, plates, price, start_date, end_date, pick_up_point, drop_off_point," +
+                                "driven_km, level_of_gasoline, is_cancelled " +
+                                "FROM agreement INNER JOIN renter USING (renterID) INNER JOIN vehicle USING (vehicleID) INNER JOIN model USING (modelID)" +
+                                "WHERE end_date LIKE ? ;",
+                        new Object[] { str }, new AgreementRowMapper());
+    }
 }
 
 // maps a row to a new Agreement object and handles OneToOne relationship with Renter and Vehicle
@@ -120,6 +134,7 @@ class AgreementRowMapper implements RowMapper<Agreement> {
         // retrieves vehicle id and vehicle license plates in order to display them in the agreements table
         vehicle.setVehicleID(rs.getInt("vehicleID"));
         vehicle.setPlates(rs.getString("plates"));
+        vehicle.setPrice(rs.getDouble("price"));
         agreement.setVehicle(vehicle);
         // retrieves agreement information (start date, end date etc.)
         Date sqlDate = rs.getDate("start_date");

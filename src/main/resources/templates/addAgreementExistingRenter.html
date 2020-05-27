@@ -19,14 +19,14 @@
                 <tbody>
                 <tr>
                     <td>
-                    <form action="#" th:action="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}" method="get" class="form-inline">
-                        <div>
-                            <label>
-                                <input type="text" name="driverLicenseNumber" placeholder="Enter driver license" />
-                            </label>
-                            <input class="btn-action" type="submit" value="SEARCH" style="font-size: 11px; margin-bottom: 2px">
-                        </div>
-                    </form>
+                        <form action="#" th:action="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}" method="get" class="form-inline">
+                            <div>
+                                <label>
+                                    <input type="text" name="driverLicenseNumber" placeholder="Enter driver license" />
+                                </label>
+                                <input class="btn-action" type="submit" value="SEARCH" style="font-size: 11px; margin-bottom: 2px">
+                            </div>
+                        </form>
                     </td>
                 </tr>
                 </tbody>

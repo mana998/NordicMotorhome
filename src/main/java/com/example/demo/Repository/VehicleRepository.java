@@ -134,4 +134,12 @@ public class VehicleRepository { //Karolina
         return result;
     }
 
+    // update vehicle information - allows to update plates, price and availability
+    public void updateVehicle(Vehicle vehicle){
+        String sql = "UPDATE vehicle " +
+                "JOIN model USING (modelID) " +
+                "SET plates = ?, is_available = ?, price = ? " +
+                "WHERE vehicleID = ?";
+        template.update(sql, vehicle.getPlates(), vehicle.isIsAvailable(), vehicle.getPrice(), vehicle.getVehicleID());
+    }
 }

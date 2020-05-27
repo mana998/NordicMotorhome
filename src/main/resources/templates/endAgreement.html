@@ -1,0 +1,61 @@
+<!DOCTYPE html> <!--Dimitrios-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="header :: header_template">
+    <title>Agreements</title>
+    <!-- import header part-->
+</head>
+<body>
+    <!-- import menu-->
+    <div th:insert="menu :: menu_template"></div>
+    <main class="main_body">
+        <br><h2>End agreement</h2>
+        <div class="main table-wrapper" id="main">
+            <form action="#" th:action="@{/showAgreementListForEnd}" method="get" class="form-inline">
+                <div style="float:left;">
+                    <div>
+                        <p style="margin-right: 3px;">Search by the end date of the agreement: </p>
+                    </div>
+                </div>
+                <div style="float:left;">
+                    <div>
+                        <label>
+                            <input type="date" th:value="${now}" name="endDate" placeholder="Enter end date" style="margin-top: 13px"/>
+                        </label>
+                        <input class="btn-action" type="submit" value="SEARCH" >
+                    </div>
+                </div>
+            </form>
+            <table class="fl-table">
+                <thead>
+                <tr>
+                    <th>Agreement ID</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Renter Name</th>
+                    <th>Vehicle License Plate</th>
+                    <th>Action</th>
+                    <!--<th></th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="agreement:${agreements}">
+                    <td th:text="${agreement.id}"></td>
+                    <td th:text="${#temporals.format(agreement.startDate, 'dd-MM-yyyy')}"></td>
+                    <td th:text="${#temporals.format(agreement.endDate, 'dd-MM-yyyy')}"></td>
+                    <td th:text="${agreement.renter.firstName + ' ' + agreement.renter.lastName}"></td>
+                    <td th:text="${agreement.vehicle.plates}"></td>
+                    <td>
+                        <!-- Add end function -->
+                        <div th:with="condition=${agreement.drivenKm == 0}" th:remove="tag">
+                            <a th:if="${condition}" th:href="@{/showFormForUpdate(agreementId=${agreement.id})}"><button class="btn-action">END</button></a>
+                            <span th:unless="${condition}">ENDED</span>
+                        </div>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
