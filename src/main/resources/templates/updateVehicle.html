@@ -21,6 +21,8 @@
     <form th:action="@{/updateVehicle}" method="post">
         <fieldset>
             <p>You are able to change plates, price and availability.</p>
+            <label>Vehicle ID:</label>
+            <input type="text" name="vehicleID" th:value="${vehicle.vehicleID}" readonly="readonly" style="pointer-events: none; background-color: #EBEBE4;"><br><br>
             <label>Brand:</label>
             <input type="text" name="brand" th:value="${vehicle.brand}" readonly="readonly" style="pointer-events: none; background-color: #EBEBE4;"><br><br>
             <label>Model:</label>
