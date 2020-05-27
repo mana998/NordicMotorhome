@@ -28,5 +28,6 @@ public class VehicleService { //Karolina
     public List<Vehicle> findAvailableVehiclesWPrice(double price){ return vehicleRepository.findAvailableVehiclesWPrice(price); }
 
     public List<Vehicle> findVehiclesAvailableForAgreement(LocalDate startDate, LocalDate endDate, int beds, double price) { return vehicleRepository.findVehiclesAvailableForAgreement(startDate, endDate, beds, price); }
+    public void updateVehicle(Vehicle vehicle){ vehicleRepository.updateVehicle(vehicle); }
 
 }
