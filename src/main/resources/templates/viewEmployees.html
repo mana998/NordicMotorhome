@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!-- Ilias-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:insert="header :: header_template">
     <title>Employees</title>
@@ -47,7 +47,7 @@
                             <button class="btn-action">View</button>
                         </a>
                         <a th:href="@{'/deleteEmployee/'+${employee.id}}">
-                            <button class="btn-action">Delete</button>
+                            <button class="btn-action" onclick="return confirm('Are you sure you want to delete this employee?');">Delete</button>
                         </a>
                         <a th:href="@{'/updateEmployee/'+${employee.id}}">
                             <button class="btn-action">Update</button>
