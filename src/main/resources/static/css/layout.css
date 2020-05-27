@@ -25,9 +25,13 @@ a.menu_link{
 }
 
 a.menu_link:hover{
+    filter: invert(55%) sepia(39%) saturate(689%) hue-rotate(181deg) brightness(96%) contrast(94%);
+}
+
+.active{
     flex-grow: 1;
     margin-top: 15px;
-    filter: invert(55%) sepia(39%) saturate(689%) hue-rotate(181deg) brightness(96%) contrast(94%);
+    filter: invert(55%) sepia(39%) saturate(689%) hue-rotate(181deg) brightness(96%) contrast(94%) !important;
 }
 
 .menu_item{
