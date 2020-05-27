@@ -60,13 +60,6 @@ a.menu_link:hover{
     font-size: 40px;
 }
 
-/*.leftmenu{*/
-/*    position: fixed;*/
-/*    left:0;*/
-/*    top:120px;*/
-/*    margin-top: 0;*/
-/*}*/
-
 .myuser{
     text-align: left;
     margin-left: 10px;
@@ -77,11 +70,6 @@ a.menu_link:hover{
     color: cornflowerblue;
     font-weight: bold;
 }
-
-/*.leftmenu input{*/
-/*    border-radius: 10px;*/
-/*    border: 1px solid cornflowerblue;*/
-/*}*/
 
 #logout{
     position: fixed;

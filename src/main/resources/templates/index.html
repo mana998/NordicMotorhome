@@ -11,32 +11,6 @@
 <!--Greets the user with the username entered-->
 <h3 class="myuser">Welcome, <span>[[${#httpServletRequest.remoteUser}]]</span>!</h3>
 
-<!--<div class="leftmenu">-->
-<!--    <form th:action="@{/}" method="get">-->
-<!--        <input type="submit" value="Home"/>-->
-<!--    </form>-->
-<!--    <br>-->
-<!--    <form th:action="@{/viewVehicles}" method="get">-->
-<!--        <input type="submit" value="Vehicles"/>-->
-<!--    </form>-->
-<!--    <br>-->
-<!--    <form th:action="@{/viewRenters}" method="get">-->
-<!--        <input type="submit" value="Renters"/>-->
-<!--    </form>-->
-<!--    <br>-->
-<!--    <form th:action="@{/viewAgreements}" method="get">-->
-<!--        <input type="submit" value="Agreements"/>-->
-<!--    </form>-->
-<!--    <br>-->
-<!--    <form th:action="@{/viewEmployees}" th:if="${#authorization.expression('hasAuthority(''admin'')')}" method="get">-->
-<!--        <input type="submit" value="Employees"/>-->
-<!--    </form>-->
-<!--    <br>-->
-<!--    <form th:action="@{/logout}" method="get">-->
-<!--        <input type="submit" value="Logout"/>-->
-<!--    </form>-->
-<!--</div>-->
-
 <div class="motorimg">
     <img src="http://localhost:8080/image/motorhome.png" height="400">
 </div>
