@@ -20,7 +20,7 @@
     <main class="main_body">
         <form th:action="@{/addEmployee}" method="post">
             <fieldset>
-               <!-- <legend>Personal Information</legend>-->
+               <!-- Personal Information entry form-->
                 <p>Personal Information</p>
                 <label>First name:</label>
                 <input type="text" name="firstName" pattern="[A-Z][a-z]+" title="Must start with a capital letter." placeholder="ex. John" required><br><br>
@@ -35,6 +35,7 @@
             </fieldset> <br>
 
             <fieldset>
+                <!-- Address entry form-->
                 <p>Address</p>
                 <label>Street:</label>
                 <input type="text" name="street" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter." placeholder="ex. Falkoner Alle" required><br><br>
@@ -45,22 +46,25 @@
                 <label>Door:</label>
                 <input type="text" name="door" pattern="tv|th|mf" title="Must contain only tv, th, mf." placeholder="ex. th" required><br><br>
                 <label>City:</label>
-                <input type="text" name="city" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Must start with a capital letter." placeholder="ex. Copenhagen" required><br>
+                <input type="text" name="city" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Must start with a capital letter." placeholder="ex. Copenhagen" required><br><br>
                 <label>Zip:</label>
                 <input type="text" name="zip" pattern="\d+" title="Only numeric characters." placeholder="ex. 2545" required><br><br>
                 <label>Country:</label>
+                <!--    Country drop down list            -->
                 <select id="country" name="country">
                     <option th:each="country: ${countries}" th:value="${country}"><span th:text="${country}"></span></option>
                 </select><br><br>
             </fieldset> <br>
 
             <fieldset>
+                <!-- Job entry form-->
                 <p>Job Specifics</p>
                 <label>Job title:</label>
                 <input type="text" name="type" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter." placeholder="ex. Sales Assistant" required><br><br>
                 <label>Salary:</label>
                 <input type="text" name="salary" pattern="\d+" title="Only numeric characters." placeholder="ex. 25000" required><br><br>
                 <label>System role:</label>
+                <!-- if user selects role as user or admin, username and password entry fields are shown             -->
                 <select id="role" name="role" onchange="showFields(this)" required>
                     <option th:value="restricted"><span th:text="restricted"></span></option>
                     <option th:value="admin"><span th:text="admin"></span></option>

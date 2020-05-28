@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<!-- import header part-->
 <head th:insert="header :: header_template">
     <title>View Employee</title>
-    <!-- import header part-->
 </head>
 <body>
     <!-- import menu-->
@@ -17,9 +17,11 @@
 
     <div class="main" id="main">
 
+        <!--   Employee's full name      -->
         <h1 th:text="${employee.firstName} + ' ' + ${employee.lastName}"></h1>
         <section class="grid-container">
             <section>
+                <!--   Personal information tab (contains cpr, email, phone)      -->
                 <h2>Personal Information</h2>
                 <ul>
                     <li><strong>CPR:</strong> <span th:text="${employee.cpr}"></span></li>
@@ -28,6 +30,7 @@
                 </ul>
             </section>
             <section>
+                <!--   Address information tab (contains street, building, floor, door, zip, city and country)      -->
                 <h2>Address</h2>
                 <ul>
                     <li th:text="${employee.street + ' ' + employee.building + ', ' + employee.floor + ' ' + employee.door}"></li>
@@ -36,6 +39,7 @@
                 </ul>
             </section>
             <section>
+                <!--   Occupation information tab (contains job, salary, role, system rights, username and password)      -->
                 <h2>Occupation</h2>
                 <ul>
                     <li><strong>Job:</strong> <span th:text="${employee.type}"></span></li>

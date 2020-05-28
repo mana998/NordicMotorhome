@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Employee extends Person{
+public class Employee extends Person{ //Ilias
 
     @Id
     private int id;
@@ -22,10 +22,6 @@ public class Employee extends Person{
     public void setIsEnabled(Integer isEnabled) {
         this.isEnabled = isEnabled;
     }
-
-    //    public Integer getRights() { return rights; }
-//
-//    public void setRights(Integer rights) { this.rights = rights; }
 
     public int getId() {
         return id;
