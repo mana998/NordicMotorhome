@@ -68,7 +68,7 @@ public class AgreementService {
     }
 
     public List<Item> findItemsForAgreement(int agreementId) {
-        return agreementRepository.getAllLineItems(agreementId);
+        return agreementRepository.findItemsForAgreement(agreementId);
     }
 
     public void updateAgreement(Agreement theAgreement) {
@@ -82,4 +82,5 @@ public class AgreementService {
     public List<Agreement> findByEndDate(LocalDate endDate) {
         return agreementRepository.findByEndDate(endDate);
     }
+
 }
