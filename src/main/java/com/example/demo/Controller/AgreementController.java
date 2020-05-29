@@ -267,4 +267,27 @@ public class AgreementController {
         return "redirect:/viewAgreements";
     }
 
+    @GetMapping("/cancelAgreement")
+    public String showCancellationFee(@RequestParam ("agreementId") int agreementId, Model model) {
+        // get the agreement from the db
+        Agreement agreement = agreementService.findById(agreementId);
+        // and pass it to the model
+        model.addAttribute("now", LocalDate.now());
+        model.addAttribute("agreement", agreement);
+        //System.out.println(agreement);
+        return "cancelAgreement";
+    }
+
+    @PostMapping("/saveCancel")
+    public String saveCancel(@ModelAttribute("agreement") Agreement agreement) {
+        agreement.setCancelled(true);
+        // and save the agreement
+        agreementService.updateAgreement(agreement);
+        System.out.println(agreement);
+        return "redirect:/viewAgreements";
+    }
+
+
+
+
 }

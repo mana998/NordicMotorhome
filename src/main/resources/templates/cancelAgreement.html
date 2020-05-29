@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="header :: header_template">
+    <title>Cancel Agreement</title>
+    <!-- import header part-->
+</head>
+<body>
+<!-- import menu-->
+<div th:insert="menu :: menu_template"></div>
+
+<main class="main_body">
+    <br><br>
+    <h1 class="heading">Are you sure you want to cancel agreement <span th:text="${agreement.id}"></span>?</h1><br>
+    <div class="main table-wrapper" id="main">
+        <table class="fl-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Start date</th>
+                <th>End date</th>
+                <th>Total fee</th>
+                <th>Days prior to start date</th>
+                <th><strong>Cancellation Fee</strong></th>
+            </tr>
+            </thead>
+            <tbody>
+                <td th:text="${agreement.id}"></td>
+                <td th:text="${agreement.startDate}"></td>
+                <td th:text="${agreement.endDate}"></td>
+                <td th:text="${agreement.calculateTotalCost()}"></td>
+                <td th:text="${agreement.findDifferenceInDays(now, agreement.startDate)}"></td>
+                <td th:text="${agreement.calculateCancellationCost()}"></td>
+            </tbody>
+        </table>
+    </div>
+    <div class="wrapper">
+        <div class="element">
+            <form action="#" th:action="@{/saveCancel}" th:object="${agreement}" method="post">
+                <input type="hidden" th:field="*{id}">
+                <input type="hidden" th:field="*{renter.id}">
+                <input type="hidden" th:field="*{renter.firstName}">
+                <input type="hidden" th:field="*{renter.lastName}">
+                <input type="hidden" th:field="*{startDate}">
+                <input type="hidden" th:field="*{endDate}">
+                <input type="hidden" th:field="*{pickUpPoint}">
+                <input type="hidden" th:field="*{dropOffPoint}">
+                <input type="hidden" th:field="*{vehicle.vehicleID}">
+                <input type="hidden" th:field="*{vehicle.price}">
+                <input type="hidden" th:field="*{vehicle.plates}">
+                <input type="hidden" th:field="*{levelGasoline}">
+                <input class="button btn-action" type="submit" value="YES">
+            </form>
+        </div>
+        <div class="element">
+            <a th:href="@{/viewAgreements}"><button class="btn-action" style="font-size: 16px">NO</button></a>
+        </div>
+    </div>
+</main>
+<!-- import footer-->
+<div th:insert="footer :: footer_template"></div>
+</body>
+</html>

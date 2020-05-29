@@ -41,7 +41,7 @@
                         <th>Renter Name</th>
                         <th>Vehicle License Plate</th>
                         <th>Action</th>
-                        <!--<th></th>-->
+                        <th>Cancel</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -56,7 +56,12 @@
                             <!-- Add view function -->
                             <a th:href="@{/viewAgreement(agreementId=${agreement.id})}" ><button class="btn-action">VIEW</button></a>
                             <a th:href="@{/updateAgreement(agreementId=${agreement.id})}" ><button class="btn-action">UPDATE</button></a>
-                            <!-- <a th:href="@{/agreements/delete/{id}(id=${agreement.id})}" ><button class="btn-action">DELETE</button></a> -->
+                        </td>
+                        <td>
+                            <!-- Cancel button available if is not past the due date and is not cancelled already -->
+                            <div>
+                                <a th:if="${agreement.canBeCancelled(agreement.startDate)} and !${agreement.cancelled}" th:href="@{/cancelAgreement(agreementId=${agreement.id})}"><button class="btn-cancel">CANCEL</button></a>
+                            </div>
                         </td>
                     </tr>
                     </tbody>
