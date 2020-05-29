@@ -149,7 +149,7 @@ public class VehicleRepository { //Karolina
     //delete vehicle
     public Boolean deleteVehicle(int vehicleID){ //Marianna
         //checks whether vehicle has active/future contracts
-        String sql = "SELECT agreementID FROM agreement WHERE vehicleID = ? && end_date>=curdate() && is_cancelled = 0";
+        String sql = "SELECT agreementID FROM agreement WHERE vehicleID = ? && end_date>=curdate() && (is_cancelled IS NULL OR is_cancelled = 0)";
         int activeContracts;
         //confirmation of deletion set to true as default
         boolean confirmation = true;
