@@ -126,4 +126,23 @@ public class EmployeeRepository{ //Ilias
         }
         return null;
     }
+
+    // Method to delete employee
+    public Boolean deleteEmployee(int id){
+
+        String sql = "SELECT userID " +
+                "FROM users " +
+                "JOIN employee USING (userID) " +
+                "WHERE employeeID = ?";
+        Integer userId = template.queryForObject(sql, Integer.class, id);
+
+        sql = "DELETE address FROM address " +
+                "JOIN employee USING (addressID) " +
+                "WHERE employeeID = ?";
+        template.update(sql, id);
+
+
+        sql = "DELETE FROM users WHERE userID = ?";
+        return template.update(sql, userId) > 0;
+    }
 }

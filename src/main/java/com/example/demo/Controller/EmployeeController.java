@@ -69,4 +69,15 @@ public class EmployeeController { //Ilias
         return "redirect:/viewEmployees";
     }
 
+    //deletes an employee
+    @GetMapping("/deleteEmployee/{id}")
+    public String deleteEmployee(@PathVariable("id") int id){
+        boolean deleted = employeeService.deleteEmployee(id);
+        if(deleted){
+            return "redirect:/viewEmployees";
+        }else{
+            return "redirect:/viewEmployees";
+        }
+    }
+
 }
