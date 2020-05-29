@@ -27,4 +27,6 @@ public class EmployeeService { //Ilias
 
     public Employee updateEmployee(int id, Employee emp){ return empRepo.updateEmployee(id, emp); }
 
+    public boolean deleteEmployee(int id){ return empRepo.deleteEmployee(id); }
+
 }
