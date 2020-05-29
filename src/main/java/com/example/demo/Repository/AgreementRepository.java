@@ -33,11 +33,12 @@ public class AgreementRepository {
         return template.query(sql, new AgreementRowMapper());
     }
 
-    public List<Item> getAllLineItems(int agreementId) {
-        return template.query("SELECT extras_name AS name, extras_price AS price \n" +
+    // finds all items linked to a given agreement
+    public List<Item> findItemsForAgreement(int agreementId) {
+        return template.query("SELECT extrasID AS id, extras_name AS name, extras_price AS price \n" +
                         "FROM agreement_has_extras INNER JOIN extras USING (extrasID) \n" +
                         "WHERE agreementId = ? ",
-                        new Object[] { agreementId },itemRowMapper);
+                        new Object[] { agreementId }, itemRowMapper);
     }
 
     public List<Item> findAllItems() {
@@ -187,6 +188,5 @@ class AgreementRowMapperShort implements RowMapper<Agreement> {
 
         return agreement;
     }
-
 }
 

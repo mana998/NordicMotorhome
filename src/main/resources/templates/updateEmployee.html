@@ -14,6 +14,7 @@
 <main class="main_body">
     <form th:action="@{/updateEmployee}" method="post">
         <fieldset>
+            <!-- Personal information update tab           -->
             <p>Personal Information</p>
             <label>Employee ID:</label>
             <input type="text" name="id" th:value="${employee.id}" readonly="readonly" style="pointer-events: none; background-color: #EBEBE4;"><br><br>
@@ -30,6 +31,7 @@
         </fieldset> <br>
 
         <fieldset>
+            <!-- Address update tab           -->
             <p>Address</p>
             <label>Street:</label>
             <input type="text" name="street" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter." th:value="${employee.street}" required><br><br>
@@ -48,6 +50,7 @@
         </fieldset> <br>
 
         <fieldset>
+            <!-- Job update tab           -->
             <p>Job Specifics</p>
             <label>Job title:</label>
             <input type="text" name="type" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter." th:value="${employee.type}" required><br><br>

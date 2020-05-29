@@ -1,0 +1,48 @@
+<!DOCTYPE html> <!--Dimitrios-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="header :: header_template">
+    <title>Add new agreement</title>
+    <!-- import header part-->
+</head>
+<body>
+<!-- import menu-->
+<div th:insert="menu :: menu_template"></div>
+
+<!-- back button-->
+<div class="btn-undermenu">
+    <a th:href="@{/viewAgreements}">
+        <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
+    </a>
+</div>
+
+
+<main class="main_body">
+
+    <h1 class="heading">Update Agreement</h1><br>
+
+    <form action="#" th:action="@{/saveUpdate}" th:object="${agreement}" method="post">
+        <fieldset>
+            <p>Pick-up and drop-off points</p>
+            <!-- add hidden form field to handle the update -->
+            <input type="hidden" th:field="*{id}">
+            <input type="hidden" th:field="*{renter.id}">
+            <input type="hidden" th:field="*{renter.firstName}">
+            <input type="hidden" th:field="*{renter.lastName}">
+            <input type="hidden" th:field="*{startDate}">
+            <input type="hidden" th:field="*{endDate}">
+            <label>Pick-up point:</label>
+            <input type="number" min="0" max="999999" th:field="*{pickUpPoint}">
+            <label>Drop-off point:</label>
+            <input type="number" min="0" max="999999" th:field="*{dropOffPoint}">
+            <input type="hidden" th:field="*{vehicle.vehicleID}">
+            <input type="hidden" th:field="*{vehicle.price}">
+            <input type="hidden" th:field="*{vehicle.plates}">
+            <input type="hidden" th:field="*{levelGasoline}">
+        </fieldset>
+        <input class="btn-submit-add" type="submit" value="Save">
+    </form>
+</main>
+<!-- import footer-->
+<div th:insert="footer :: footer_template"></div>
+</body>
+</html>

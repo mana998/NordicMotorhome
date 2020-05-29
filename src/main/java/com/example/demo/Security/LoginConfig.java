@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
-public class LoginConfig extends WebSecurityConfigurerAdapter {
+public class LoginConfig extends WebSecurityConfigurerAdapter { //Ilias
 
     @Autowired
     private DataSource dataSource;

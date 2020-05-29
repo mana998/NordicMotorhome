@@ -1,9 +1,6 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Model.Agreement;
-import com.example.demo.Model.Item;
-import com.example.demo.Model.Renter;
-import com.example.demo.Model.Vehicle;
+import com.example.demo.Model.*;
 import com.example.demo.Service.AgreementService;
 import com.example.demo.Service.CountryService;
 import com.example.demo.Service.RenterService;
@@ -12,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionUsageException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -212,6 +211,7 @@ public class AgreementController {
         // set the item list associated with this agreement
         List<Item> itemList = agreementService.findItemsForAgreement(agreement.getId());
         agreement.setItems(itemList);
+        System.out.println(agreement);
         model.addAttribute("agreement", agreement);
         return "/viewAgreement";
     }
@@ -246,4 +246,48 @@ public class AgreementController {
         agreementService.updateAgreement(agreement);
         return "endAgreementShowCharges";
     }
+
+    // mapping for showing agreement form for update
+    @GetMapping("/updateAgreement")
+    public String showFormForUpdate(@RequestParam ("agreementId") int agreementId, Model model) {
+        // get the agreement from the db
+        Agreement agreement = agreementService.findById(agreementId);
+        // and pass it to the model
+        model.addAttribute("agreement", agreement);
+        return "updateAgreement";
+    }
+
+    @PostMapping("/saveUpdate")
+    public String saveUpdate(@ModelAttribute("agreement") Agreement agreement) {
+        // set the item list associated with this agreement
+        List<Item> itemList = agreementService.findItemsForAgreement(agreement.getId());
+        agreement.setItems(itemList);
+        // and save the agreement
+        agreementService.updateAgreement(agreement);
+        return "redirect:/viewAgreements";
+    }
+
+    @GetMapping("/cancelAgreement")
+    public String showCancellationFee(@RequestParam ("agreementId") int agreementId, Model model) {
+        // get the agreement from the db
+        Agreement agreement = agreementService.findById(agreementId);
+        // and pass it to the model
+        model.addAttribute("now", LocalDate.now());
+        model.addAttribute("agreement", agreement);
+        //System.out.println(agreement);
+        return "cancelAgreement";
+    }
+
+    @PostMapping("/saveCancel")
+    public String saveCancel(@ModelAttribute("agreement") Agreement agreement) {
+        agreement.setCancelled(true);
+        // and save the agreement
+        agreementService.updateAgreement(agreement);
+        System.out.println(agreement);
+        return "redirect:/viewAgreements";
+    }
+
+
+
+
 }

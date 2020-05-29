@@ -1,6 +1,7 @@
 <div th:fragment="menu_template" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="navigation">
         <nav class="flex-container" id="menu"  th:with="view=${#httpServletRequest.getServletPath()}">
+        <!-- We use thymeleaf classappend to add an .active class to our elements based on the url, so that CSS can keep the respective menu icons highlighted -->
 
             <!-- Home tab menu link           -->
             <a href="/" class="menu_link" title="Main menu" th:classappend="${#strings.equals(view,'/')? 'active' : ''}" id="home">
@@ -30,7 +31,7 @@
                 <button class="menu_item" title="Agreements menu"><strong>Agreements</strong></button>
             </a>
 
-            <!-- Employees tab menu link           -->
+            <!-- Employees tab menu link (only shows if the logged-in user has admin privileges)          -->
             <a th:if="${#authorization.expression('hasAuthority(''admin'')')}" th:href="@{/viewEmployees}" class="menu_link" th:classappend="${#strings.contains(view,'Employee')? 'active' : ''}" title="Employee menu - Admin only" id="employees">
                 <img src="http://localhost:8080/SVG/user-edit-solid.svg" class="svg menu_icons" height="20" width="20">
                 <br>

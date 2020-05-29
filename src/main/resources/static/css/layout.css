@@ -315,7 +315,18 @@ input.btn-submit-add{
     background-color: #324960;
 }
 
+.btn-cancel{
+    border: none;
+    color: white;
+    background-color: #FF5733;
+}
+
 .btn-action:hover{
+    color: #324960;
+    background-color: white;
+}
+
+.btn-cancel:hover{
     color: #324960;
     background-color: white;
 }
@@ -334,6 +345,12 @@ button:focus {
 
 .wrapper {
     text-align: center;
+}
+
+.element {
+    display: inline-block;
+    margin: 6px;
+    font-size: 20px;
 }
 
 
