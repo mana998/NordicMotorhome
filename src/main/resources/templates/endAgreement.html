@@ -45,12 +45,10 @@
                     <td th:text="${agreement.renter.firstName + ' ' + agreement.renter.lastName}"></td>
                     <td th:text="${agreement.vehicle.plates}"></td>
                     <td>
-                        <!-- Add end function -->
-                        <div th:with="condition=${agreement.drivenKm == 0}" th:remove="tag">
-                            <a th:if="${condition}" th:href="@{/showFormForUpdate(agreementId=${agreement.id})}"><button class="btn-action">END</button></a>
-                            <span th:unless="${condition}">ENDED</span>
+                        <!-- End button available if driven km is zero (meaning: not ended yet) and is not cancelled already -->
+                        <div>
+                            <a th:if="${agreement.drivenKm == 0} and !${agreement.cancelled}" th:href="@{/showFormForUpdate(agreementId=${agreement.id})}"><button class="btn-action">END</button></a>
                         </div>
-
                     </td>
                 </tr>
                 </tbody>

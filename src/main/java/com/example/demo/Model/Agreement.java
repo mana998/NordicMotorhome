@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 
+import org.apache.tomcat.jni.Local;
 import org.decimal4j.util.DoubleRounder;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -208,6 +209,30 @@ public class Agreement {
 
     public int findDifferenceInDays(LocalDate dateBefore, LocalDate dateAfter) {
         return  (int) DAYS.between(dateBefore, dateAfter);
+    }
+
+    public double calculateCancellationCost() {
+        double cancellationCost = 0;
+        LocalDate currentDate = LocalDate.now();
+        int daysDifference = findDifferenceInDays(currentDate, startDate);
+        if (daysDifference >= maxDaysPriorToRental) {
+            cancellationCost = calculateTotalCost() * percentageMaximumDays;
+            if (cancellationCost < minimumCancellationCost) {
+                return minimumCancellationCost;
+            }
+            return cancellationCost;
+        } else if (daysDifference >= minDaysPriorToRental) {
+            return calculateTotalCost() * percentageMinimumDays;
+        } else if (daysDifference >= 1) {
+            return calculateTotalCost() * percentageLessThanMinimumDays;
+        } else {
+            return calculateTotalCost() * percentageSameDay;
+        }
+    }
+
+    public boolean canBeCancelled(LocalDate startDate) {
+        LocalDate currentDate = LocalDate.now();
+        return findDifferenceInDays(currentDate, startDate) >= 0;
     }
 
     @Override
