@@ -22,6 +22,8 @@ public class RenterService { //Marianna
 
     public void updateRenter(Renter renter) {renterRepository.updateRenter(renter);}
 
+    public boolean deleteRenter(int id) { return renterRepository.deleteRenter(id);}
+
     // Dimitrios
     public List<Renter> findByDriverLicenseNumber(String driverLicenseNumber) {
         return renterRepository.findByDriverLicenseNumber(driverLicenseNumber);
