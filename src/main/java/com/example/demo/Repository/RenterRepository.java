@@ -2,6 +2,7 @@ package com.example.demo.Repository;
 
 import com.example.demo.Model.Renter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -99,6 +100,35 @@ public class RenterRepository {
         sql= "UPDATE renter SET first_name = ?, last_name = ?, CPR = ?, email = ?, phone = ?, driver_license_number = ? WHERE renterID = ?";
         template.update(sql, renter.getFirstName(), renter.getLastName(), renter.getCpr(), renter.getEmail(), renter.getPhone(), renter.getLicenseNumber(), renter.getId());
     }
+
+    public boolean deleteRenter(int id){
+        //checks whether exist with active or future contract exists
+        String sql = "SELECT agreementID FROM agreement WHERE renterID = ? && end_date>=curdate() && is_cancelled = 0";
+        int activeContracts;
+        //confirmation of deletion set to true as default
+        boolean confirmation = true;
+        try {
+            activeContracts = template.queryForObject(sql, Integer.class, id);
+            //exactly 1 future/active contract were found
+            //can't delete renter
+            confirmation = false;
+        } catch (EmptyResultDataAccessException e){
+            //this exception is okay - no contracts for the renter and it can execute finally block to delete the renter
+        } catch (IncorrectResultSizeDataAccessException e){
+            //more than 1 future/active contracts were found
+            //can't delete renter
+            confirmation = false;
+        } finally{
+            if (confirmation) {
+                //if renter doesn't have active/future contracts it deletes him
+                sql = "DELETE FROM renter WHERE renterID = ?";
+                template.update(sql, id);
+            }
+            //returns whether deletion has been completed or no
+            return confirmation;
+        }
+    }
+
 
 
     // Dimitrios

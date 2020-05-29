@@ -78,4 +78,16 @@ public class RenterController {
         return "redirect:/viewRenters";
     }
 
+    @GetMapping("/deleteRenter/{id}")
+    public String deleteRenter(@PathVariable("id") int id, Model model) {
+        //if renter was deleted
+        if (renterService.deleteRenter(id)) {
+            return "redirect:/viewRenters";
+        } else { //if renter wasn't deleted because of active/future contracts
+            model.addAttribute("failed", true);
+            //used forward instead of redirect to trigger javascript onload event
+            return "forward:/viewRenters";
+        }
+    }
+
 }
