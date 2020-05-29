@@ -28,7 +28,7 @@
             </ul>
         </section>
     </section>
-    <h1>Active Contracts:</h1></br>
+    <h1 th:if="${!activeAgreements.empty}">Active Contracts:</h1></br>
     <section class="grid-container">
         <article th:each="agreement: ${activeAgreements}" class="grid-column">
             <ul>
@@ -41,7 +41,7 @@
         </article>
     </section>
     </section>
-    <h1>Future Contracts:</h1></br>
+    <h1 th:if="${!futureAgreements.empty}">Future Contracts:</h1></br>
     <section class="grid-container">
         <article th:each="agreement: ${futureAgreements}" class="grid-column">
             <ul>
@@ -53,7 +53,7 @@
             </hr>
         </article>
     </section>
-    <h1>Inactive Contracts:</h1></br>
+    <h1 th:if="${!inactiveAgreements.empty}">Inactive Contracts:</h1></br>
     <section class="grid-container">
         <article th:each="agreement: ${inactiveAgreements}" class="grid-column">
             <ul>

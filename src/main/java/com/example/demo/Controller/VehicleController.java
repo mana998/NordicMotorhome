@@ -40,7 +40,7 @@ public class VehicleController { //Karolina
     public String addVehicle(Model model){
         //model.addAttribute("brands", brandService.showBrandsList());
         //model.addAttribute("models", modelService.showModelsList());
-        return "/addVehicle"; }
+        return "addVehicle"; }
 
     //add new vehicle
     @PostMapping("/addVehicle")
@@ -78,6 +78,19 @@ public class VehicleController { //Karolina
     public String updateVehicle(@ModelAttribute Vehicle vehicle) {
         vehicleService.updateVehicle(vehicle);
         return "redirect:/viewVehicles";
+    }
+
+    //delete vehicle
+    @GetMapping("/deleteVehicle/{vehicleID}")
+    public String deleteVehicle(@PathVariable("vehicleID") int vehicleID, Model model) {
+        // if vehicle was deleted
+        if (vehicleService.deleteVehicle(vehicleID)) {
+            return "redirect:/viewVehicles";
+        } else { // in case vehicle wasn't deleted due to active/future contracts
+            model.addAttribute("failed", true);
+            //used forward instead of redirect to trigger javascript onload event
+            return "forward:/viewVehicles";
+        }
     }
 
 }

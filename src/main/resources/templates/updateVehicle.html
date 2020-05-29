@@ -33,11 +33,12 @@
             <input type="text" pattern="[a-zA-Z0-9]+" title="Must contain only alphanumeric characters" name="plates" required="required" th:value="${vehicle.plates}"><br><br>
             <label>Price per Day:</label>
             <input type="number" min ="100" name="price" th:value="${vehicle.price}" required><br><br>
-            <label for="available">Availability:</label>
+            <label for="available">Available:</label>
             <select id="available" name="isAvailable" required>
-                <option th:value="${vehicle.isAvailable}" selected hidden><span th:text="${vehicle.isAvailable}"></span></option>
-                <option value="1" >true</option>
-                <option value="0">false</option>
+                <option th:value="${vehicle.isAvailable}" selected hidden><span th:if="${vehicle.isAvailable}">yes</span><span th:unless="${vehicle.isAvailable}">no</span></option>
+                <!--<option th:value="${vehicle.isAvailable}" selected hidden><span th:text="${vehicle.isAvailable}"></span></option>-->
+                <option value="1" >yes</option>
+                <option value="0">no</option>
             </select>
         </fieldset><br>
         <input class="btn-submit-add" type="submit" value="Submit Entry">

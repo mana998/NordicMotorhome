@@ -2,6 +2,7 @@ package com.example.demo.Repository;
 
 import com.example.demo.Model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,7 +23,8 @@ public class VehicleRepository { //Karolina
 
     //get all the information about vehicles from the database
     public List<Vehicle> showVehicleList(){
-        String sql = "SELECT vehicleID, plates, brand_name AS brand, model_name AS model, model.beds, model.price, is_available AS isAvailable \n" +
+        String sql = "SELECT vehicleID, plates, brand_name AS brand, model_name AS model, model.beds, model.price, " +
+                "is_available AS isAvailable \n" +
                 "FROM vehicle\n" +
                 "JOIN brand USING (brandID)\n" +
                 "JOIN model USING (modelID);";
@@ -31,7 +33,8 @@ public class VehicleRepository { //Karolina
 
     //get the information about specific vehicle from the database
     public Vehicle findVehicleById(int vehicleID){
-        String sql = "SELECT vehicleID, plates, brand_name AS brand, model_name AS model, model.beds, model.price, is_available AS isAvailable \n" +
+        String sql = "SELECT vehicleID, plates, brand_name AS brand, model_name AS model, model.beds, model.price, " +
+                "is_available AS isAvailable \n" +
                 "FROM vehicle\n" +
                 "JOIN brand USING (brandID)\n" +
                 "JOIN model USING (modelID)\n" +
@@ -141,5 +144,34 @@ public class VehicleRepository { //Karolina
                 "SET plates = ?, is_available = ?, price = ? " +
                 "WHERE vehicleID = ?";
         template.update(sql, vehicle.getPlates(), vehicle.isIsAvailable(), vehicle.getPrice(), vehicle.getVehicleID());
+    }
+
+    //delete vehicle
+    public Boolean deleteVehicle(int vehicleID){ //Marianna
+        //checks whether vehicle has active/future contracts
+        String sql = "SELECT agreementID FROM agreement WHERE vehicleID = ? && end_date>=curdate() && is_cancelled = 0";
+        int activeContracts;
+        //confirmation of deletion set to true as default
+        boolean confirmation = true;
+        try {
+            activeContracts = template.queryForObject(sql, Integer.class, vehicleID);
+            //if 1 active/future contract was found
+            //can't delete vehicle
+            confirmation = false;
+        } catch (EmptyResultDataAccessException e) {
+            //no contracts for vehicle so it can go further and execute finally to delete the vehicle
+        } catch (IncorrectResultSizeDataAccessException e){
+            //more than 1 active/future contract were found
+            //can't delete vehicle
+            confirmation = false;
+        } finally {
+            if (confirmation){
+                //if vehicle doesn't have agreements it gets deleted
+                sql = "DELETE FROM vehicle WHERE vehicleID = ?";
+                template.update(sql, vehicleID);
+            }
+            // returns true if deletion was completed, false if not
+            return confirmation;
+        }
     }
 }
