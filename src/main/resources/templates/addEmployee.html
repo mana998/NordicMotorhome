@@ -52,6 +52,7 @@
                 <label>Country:</label>
                 <!--    Country drop down list            -->
                 <select id="country" name="country">
+                    <option value="Denmark" selected hidden>Denmark</option>
                     <option th:each="country: ${countries}" th:value="${country}"><span th:text="${country}"></span></option>
                 </select><br><br>
             </fieldset> <br>

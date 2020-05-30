@@ -90,19 +90,23 @@ public class EmployeeRepository{ //Ilias
 
     // Method to update employee information
     public Employee updateEmployee(int id, Employee emp){
-        String sql = "UPDATE employee " +
+
+        String sql = "SELECT countryID FROM country WHERE name = ?";
+        Integer countryID = template.queryForObject(sql, Integer.class, emp.getCountry());
+
+                sql = "UPDATE employee " +
                 "JOIN users USING (userID) " +
                 "JOIN job j USING (jobID) "+
                 "JOIN address USING (addressID) " +
                 "JOIN zip USING (zipID) " +
                 "JOIN city c USING (cityID) " +
                 "SET first_name = ?, last_name = ?, cpr = ?, phone = ?, email = ?," +
-                " salary = ?, j.name = ?, street = ?, door = ?, floor = ?, building = ?, zip = ?, c.name = ? " +
+                " salary = ?, j.name = ?, street = ?, door = ?, floor = ?, building = ?, zip = ?, countryID = ?, c.name = ? " +
                 "WHERE employeeID = ?";
 
         template.update(sql, emp.getFirstName(), emp.getLastName(), emp.getCpr(), emp.getPhone(),
                 emp.getEmail(), emp.getSalary(), emp.getType(), emp.getStreet(), emp.getDoor(),
-                emp.getFloor(), emp.getBuilding(), emp.getZip(), emp.getCity(), emp.getId());
+                emp.getFloor(), emp.getBuilding(), emp.getZip(), countryID, emp.getCity(), emp.getId());
 
         //if the role was entered checks for username and password entry
         if(emp.getRole() != null) {

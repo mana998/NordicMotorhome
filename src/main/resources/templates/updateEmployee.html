@@ -46,7 +46,11 @@
             <label>Zip:</label>
             <input type="text" name="zip" pattern="\d+" title="Only numeric characters." th:value="${employee.zip}" required><br><br>
             <label>Country:</label>
-            <input type="text" name="country" style="pointer-events: none;" th:value="${employee.country}" disabled><br><br>
+            <!--    Country drop down list            -->
+            <select id="country" name="country" required>
+                <option th:value="${employee.country}" selected hidden><span th:text="${employee.country}"></span></option>
+                <option th:each="country: ${countries}" th:value="${country}"><span th:text="${country}"></span></option>
+            </select><br><br>
         </fieldset> <br>
 
         <fieldset>
