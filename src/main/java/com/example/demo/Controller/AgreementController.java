@@ -109,8 +109,8 @@ public class AgreementController {
         theModel.addAttribute("endDate", endDate);
         theModel.addAttribute("vehicleId", vehicleId);
         theModel.addAttribute("agreement", agreement);
-        List<Item> itemsList = agreementService.findAllItems();
-        theModel.addAttribute("itemsList", itemsList);
+        ItemCreation items = new ItemCreation(agreementService.findAllItems());
+        theModel.addAttribute("itemList", items);
         List<String> countries = countryService.showCountriesList();
         theModel.addAttribute("countries", countries);
         // in case we want to add a list of countries for the dropdown?
@@ -124,6 +124,7 @@ public class AgreementController {
                                 @PathVariable("endDate") String endDate,
                                 @PathVariable("vehicleId") int vehicleId,
                                 Model theModel,
+                                @ModelAttribute ("itemList") ItemCreation itemList,
                                 @ModelAttribute Renter renter, @ModelAttribute Agreement agreement) {
         // adds renter to the database
         renterService.addRenter(renter);
@@ -146,7 +147,7 @@ public class AgreementController {
         // stores new agreement to the database
         agreementService.addAgreement(agreement);
         // stores items associated with new agreement to the database
-        agreementService.addItems(agreement);
+        agreementService.addItems(agreement,itemList.getItems());
         theModel.addAttribute(agreement);
         return "addAgreementShowCharges";
     }
@@ -175,9 +176,8 @@ public class AgreementController {
         Agreement agreement = new Agreement();
         model.addAttribute("agreement", agreement);
         // finding all items from the database
-        List<Item> itemList = agreementService.findAllItems();
-        // putting them in the model
-        model.addAttribute("itemList", itemList);
+        ItemCreation items = new ItemCreation(agreementService.findAllItems());
+        model.addAttribute("itemList", items);
         return "addAgreementAddDetails";
     }
 
@@ -186,9 +186,11 @@ public class AgreementController {
     public String saveContractInfo(@PathVariable("startDate") String startDate,
                                    @PathVariable("endDate") String endDate,
                                    @PathVariable("vehicleId") int vehicleId,
-                                   @PathVariable("renterId") int renterId, @ModelAttribute Agreement agreement,
+                                   @PathVariable("renterId") int renterId,
+                                   @ModelAttribute ("itemList") ItemCreation itemList,
+                                   @ModelAttribute Agreement agreement,
                                    Model model) {
-        // converts the dates from string to LocaDate and sets the new agreement dates
+        // converts the dates from string to LocalDate and sets the new agreement dates
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDateConverted = LocalDate.parse(startDate, formatter);
         LocalDate endDateConverted = LocalDate.parse(endDate, formatter);
@@ -198,7 +200,8 @@ public class AgreementController {
         agreement.setRenter(renterService.findRenterById(renterId));
         agreement.setVehicle(vehicleService.findVehicleById(vehicleId));
         agreementService.addAgreement(agreement);
-        agreementService.addItems(agreement);
+        //gets list of items from wrapper class and inserts them into db
+        agreementService.addItems(agreement,itemList.getItems());
         // passes the new agreement to the model in order to show the charges/costs
         model.addAttribute("agreement", agreement);
         return "addAgreementShowCharges";
@@ -243,27 +246,31 @@ public class AgreementController {
         List<Item> itemList = agreementService.findItemsForAgreement(agreement.getId());
         agreement.setItems(itemList);
         // and save the agreement
-        agreementService.updateAgreement(agreement);
+        agreementService.endAgreement(agreement);
         return "endAgreementShowCharges";
     }
 
     // mapping for showing agreement form for update
-    @GetMapping("/updateAgreement")
-    public String showFormForUpdate(@RequestParam ("agreementId") int agreementId, Model model) {
+    @GetMapping("/updateAgreement/{id}")
+    public String showFormForUpdate(@PathVariable("id") int id, Model model) {
         // get the agreement from the db
-        Agreement agreement = agreementService.findById(agreementId);
         // and pass it to the model
-        model.addAttribute("agreement", agreement);
-        return "updateAgreement";
+        model.addAttribute("agreement", agreementService.findById(id));
+        //get all the items associated with the agreement
+        ItemCreation items = new ItemCreation(agreementService.findItemsForAgreement(id));
+        //add all the other available items in case new ones should be added to an agreement
+        items.addDifference(agreementService.findAllItems());
+        model.addAttribute("itemList", items);
+        return "/updateAgreement";
     }
 
-    @PostMapping("/saveUpdate")
-    public String saveUpdate(@ModelAttribute("agreement") Agreement agreement) {
-        // set the item list associated with this agreement
-        List<Item> itemList = agreementService.findItemsForAgreement(agreement.getId());
-        agreement.setItems(itemList);
+    @PostMapping("/saveUpdate/{id}")
+    public String saveUpdate( @ModelAttribute ("itemList") ItemCreation itemList,@ModelAttribute("agreement") Agreement agreement, @PathVariable("id") int id) {
         // and save the agreement
+        agreement.setId(id);
         agreementService.updateAgreement(agreement);
+        //update item list
+        agreementService.updateItems(agreement,itemList.getItems());
         return "redirect:/viewAgreements";
     }
 
@@ -271,6 +278,8 @@ public class AgreementController {
     public String showCancellationFee(@RequestParam ("agreementId") int agreementId, Model model) {
         // get the agreement from the db
         Agreement agreement = agreementService.findById(agreementId);
+        //get all items for the agreement
+        agreement.setItems(agreementService.findItemsForAgreement(agreement.getId()));
         // and pass it to the model
         model.addAttribute("now", LocalDate.now());
         model.addAttribute("agreement", agreement);
@@ -280,9 +289,7 @@ public class AgreementController {
 
     @PostMapping("/saveCancel")
     public String saveCancel(@ModelAttribute("agreement") Agreement agreement) {
-        agreement.setCancelled(true);
-        // and save the agreement
-        agreementService.updateAgreement(agreement);
+        agreementService.cancelAgreement(agreement.getId());
         System.out.println(agreement);
         return "redirect:/viewAgreements";
     }

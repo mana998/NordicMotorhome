@@ -21,6 +21,23 @@
     <input type="hidden" th:field="${agreement.id}">
     <section class="grid-container">
         <section>
+            <h2>Agreement Information & Charges</h2>
+            <ul>
+                <li><strong>Start Date:</strong> <span th:text="${#temporals.format(agreement.startDate, 'dd-MM-yyyy')}"></span></li>
+                <li><strong>End Date:</strong> <span th:text="${#temporals.format(agreement.endDate, 'dd-MM-yyyy')}"></span></li>
+                <li><strong>Vehicle Fee:</strong> <span th:text="${agreement.calculateVehicleCost()}"></span></li>
+                <li><strong>Transfer Fee:</strong> <span th:text="${agreement.calculateTransferCost()}"></span></li>
+                <li><strong>Extra Items Fee:</strong> <span th:text="${agreement.calculateItemsCost()}"></span></li>
+                <li><strong>Total Fee:</strong> <span th:text="${agreement.calculateTotalCost() + ' ' + 'EUR'}"></span></li>
+            </ul>
+        </section>
+        <section>
+            <h2>Extra Items</h2>
+            <ul th:each="item: ${agreement.items}">
+                <li><strong th:text="${item.name + ': '}"></strong> <span th:text="${item.quantity + 'x ' + item.price + 'DK'}"></span></li>
+            </ul>
+        </section>
+        <section>
             <h2>Renter Information</h2>
             <ul>
                 <li><strong>CPR:</strong> <span th:text="${agreement.renter.cpr}"></span></li>
@@ -37,9 +54,6 @@
                 <li th:text="${agreement.renter.country}"></li>
             </ul>
         </section>
-    </section>
-
-    <section class="grid-container">
         <section>
             <h2>Vehicle Information</h2>
             <ul>
@@ -48,17 +62,6 @@
                 <li><strong>Model:</strong> <span th:text="${agreement.vehicle.model}"></span></li>
                 <li><strong>Beds:</strong> <span th:text="${agreement.vehicle.beds}"></span></li>
                 <li><strong>Price:</strong> <span th:text="${agreement.vehicle.price}"></span></li>
-            </ul>
-        </section>
-        <section>
-            <h2>Agreement Information & Charges</h2>
-            <ul>
-                <li><strong>Start Date:</strong> <span th:text="${#temporals.format(agreement.startDate, 'dd-MM-yyyy')}"></span></li>
-                <li><strong>End Date:</strong> <span th:text="${#temporals.format(agreement.endDate, 'dd-MM-yyyy')}"></span></li>
-                <li><strong>Vehicle Fee:</strong> <span th:text="${agreement.calculateVehicleCost()}"></span></li>
-                <li><strong>Transfer Fee:</strong> <span th:text="${agreement.calculateTransferCost()}"></span></li>
-                <li><strong>Extra Items Fee:</strong> <span th:text="${agreement.calculateItemsCost()}"></span></li>
-                <li><strong>Total Fee:</strong> <span th:text="${agreement.calculateTotalCost() + ' ' + 'EUR'}"></span></li>
             </ul>
         </section>
     </section>

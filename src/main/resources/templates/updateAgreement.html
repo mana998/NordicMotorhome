@@ -20,25 +20,51 @@
 
     <h1 class="heading">Update Agreement</h1><br>
 
-    <form action="#" th:action="@{/saveUpdate}" th:object="${agreement}" method="post">
+    <form th:action="@{'/saveUpdate/'+${agreement.id}}"  th:object="${itemList}" method="post">
+        <fieldset>
+            <p>Renter</p>
+            <label>First Name:</label>
+            <input readonly name="renter.firstName" th:value="${agreement.renter.firstName}"><br>
+            <label>Last Name:</label>
+            <input readonly name="renter.lastName" th:value="${agreement.renter.lastName}"><br>
+        </fieldset>
+        <fieldset>
+            <p>Vehicle</p>
+            <label>Plate:</label>
+            <input readonly th:value="${agreement.vehicle.plates}"><br>
+            <label>Brand:</label>
+            <input readonly th:value="${agreement.vehicle.brand}"><br>
+            <label>Model:</label>
+            <input readonly th:value="${agreement.vehicle.model}"><br>
+            <label>Beds:</label>
+            <input readonly th:value="${agreement.vehicle.beds}"><br>
+            <label>Price:</label>
+            <input readonly th:value="${agreement.vehicle.price}"><br>
+        </fieldset>
+        <fieldset>
+            <p>Dates</p>
+            <label>Start Date:</label>
+            <input readonly th:value="${agreement.startDate}"><br>
+            <label>End Date:</label>
+            <input readonly th:value="${agreement.endDate}"><br>
+        </fieldset>
         <fieldset>
             <p>Pick-up and drop-off points</p>
-            <!-- add hidden form field to handle the update -->
-            <input type="hidden" th:field="*{id}">
-            <input type="hidden" th:field="*{renter.id}">
-            <input type="hidden" th:field="*{renter.firstName}">
-            <input type="hidden" th:field="*{renter.lastName}">
-            <input type="hidden" th:field="*{startDate}">
-            <input type="hidden" th:field="*{endDate}">
             <label>Pick-up point:</label>
-            <input type="number" min="0" max="999999" th:field="*{pickUpPoint}">
+            <input type="number" min="0" max="999999" th:value="${agreement.pickUpPoint}"><br>
             <label>Drop-off point:</label>
-            <input type="number" min="0" max="999999" th:field="*{dropOffPoint}">
-            <input type="hidden" th:field="*{vehicle.vehicleID}">
-            <input type="hidden" th:field="*{vehicle.price}">
-            <input type="hidden" th:field="*{vehicle.plates}">
-            <input type="hidden" th:field="*{levelGasoline}">
+            <input type="number" min="0" max="999999" th:field="${agreement.dropOffPoint}"><br>
         </fieldset>
+        <fieldset>
+            <p>Extra charges</p><!-- Marianna -->
+            <div th:each="item, itemStat: *{items}">
+                <label th:text="*{items[__${itemStat.index}__].name}"></label>
+                <input type="number" min ="0" th:name="${item.name}" th:field="*{items[__${itemStat.index}__].quantity}" th:value="*{items[__${itemStat.index}__].quantity}">
+                <input type="number" hidden  th:field="*{items[__${itemStat.index}__].id}" th:value="*{items[__${itemStat.index}__].id}"><br>
+                <input type="text" hidden  th:field="*{items[__${itemStat.index}__].name}" th:value="*{items[__${itemStat.index}__].name}">
+                <input type="number" hidden  th:field="*{items[__${itemStat.index}__].price}" th:value="*{items[__${itemStat.index}__].price}">
+            </div>
+        </fieldset> <br>
         <input class="btn-submit-add" type="submit" value="Save">
     </form>
 </main>

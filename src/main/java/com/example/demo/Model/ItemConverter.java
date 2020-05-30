@@ -12,9 +12,11 @@ public class ItemConverter implements Converter<String, Item> {
     private AgreementRepository agreementRepository;
 
     @Override
-    public Item convert(String id) {
-        int parseId = Integer.parseInt(id);
-        Item item = agreementRepository.findItemById(parseId);
-        return item;
+    public Item convert(String item) {
+        //retrieve return from toString method
+        //split it into array
+        String[] split = item.split(",");
+        //create new object based on the array elements
+        return new Item(Integer.parseInt(split[1]),split[2],Integer.parseInt(split[3]),Integer.parseInt(split[4]));
     }
 }

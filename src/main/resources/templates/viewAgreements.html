@@ -55,7 +55,7 @@
                         <td>
                             <!-- Add view function -->
                             <a th:href="@{/viewAgreement(agreementId=${agreement.id})}" ><button class="btn-action">VIEW</button></a>
-                            <a th:href="@{/updateAgreement(agreementId=${agreement.id})}" ><button class="btn-action">UPDATE</button></a>
+                            <a th:href="@{'/updateAgreement/'+${agreement.id}}" ><button class="btn-action">UPDATE</button></a>
                         </td>
                         <td>
                             <!-- Cancel button available if is not past the due date and is not cancelled already -->

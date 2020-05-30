@@ -4,18 +4,21 @@ public class Item {
 
     private int id;
     private String name;
+    private int quantity = 0;
     private double price;
 
     public Item() {}
 
-    public Item(int id, String name, double price) {
+    public Item(int id, String name, int quantity, double price) {
         this.id = id;
         this.name = name;
+        this.quantity = quantity;
         this.price = price;
     }
 
-    public Item(String name, double price) {
+    public Item(String name, int quantity, double price) {
         this.name = name;
+        this.quantity = quantity;
         this.price = price;
     }
 
@@ -26,7 +29,7 @@ public class Item {
     }
 
     public double getPrice() {
-        return price;
+        return price*quantity;
     }
 
     public void setName(String name) {
@@ -45,12 +48,17 @@ public class Item {
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "Item{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                '}';
+    public int getQuantity() {
+        return quantity;
     }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    @Override
+    public String toString(){
+        return id+','+name+','+quantity+','+price;
+    }
+
 }
