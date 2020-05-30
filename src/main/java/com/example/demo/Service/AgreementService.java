@@ -39,11 +39,15 @@ public class AgreementService {
         agreementRepository.addAgreement(agreement);
     }
 
-    public void addItems(Agreement agreement) {
+    public void addItems(Agreement agreement, List<Item> itemList) {
+        //gets the id of the latest agreement (one that should be assigned with items)
         int agreementId = findMaxAgreementId();
-        for (Item item : agreement.getItems()) {
-            agreementRepository.addItems(agreementId, item.getId());
-        }
+        agreementRepository.addItems(agreementId, itemList);
+    }
+
+    public void updateItems(Agreement agreement, List<Item> itemList) {
+        //gets the id of the current agreement (one that should be assigned with items)
+        agreementRepository.updateItems(agreement.getId(), itemList);
     }
 
     public int findMaxAgreementId() {
@@ -62,7 +66,7 @@ public class AgreementService {
         Renter renter = renterRepository.findRenterById(renterId);
         agreement.setRenter(renter);
         // find and set the extra items for this agreement
-        agreement.setItems(findItemsForAgreement(agreementId));
+        //List<Item> itemList = agreementRepository.findItemsForAgreement(agreement.getId());
         //agreement.setItems(itemList);
         return agreement;
     }
@@ -75,6 +79,14 @@ public class AgreementService {
         agreementRepository.updateAgreement(theAgreement);
     }
 
+    public void endAgreement(Agreement agreement) {
+        agreementRepository.endAgreement(agreement);
+    }
+
+    public void cancelAgreement(int id) {
+        agreementRepository.cancelAgreement(id);
+    }
+
     public List<Agreement> getSpecificAgreements(String addition) {
         return agreementRepository.getSpecificAgreements(addition);
     }
@@ -82,5 +94,7 @@ public class AgreementService {
     public List<Agreement> findByEndDate(LocalDate endDate) {
         return agreementRepository.findByEndDate(endDate);
     }
+
+
 
 }

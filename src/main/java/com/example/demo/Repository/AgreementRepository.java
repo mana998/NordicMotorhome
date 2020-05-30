@@ -5,6 +5,7 @@ import com.example.demo.Model.Item;
 import com.example.demo.Model.Renter;
 import com.example.demo.Model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -33,12 +34,10 @@ public class AgreementRepository {
         return template.query(sql, new AgreementRowMapper());
     }
 
-    // finds all items linked to a given agreement
+    //return all items with quantities belonging to the agreement
     public List<Item> findItemsForAgreement(int agreementId) {
-        return template.query("SELECT extrasID AS id, extras_name AS name, extras_price AS price \n" +
-                        "FROM agreement_has_extras INNER JOIN extras USING (extrasID) \n" +
-                        "WHERE agreementId = ? ",
-                        new Object[] { agreementId }, itemRowMapper);
+        String sql = "SELECT extrasID AS id, extras_name AS name, extras_price AS price, quantity FROM agreement_has_extras INNER JOIN extras USING (extrasID) WHERE agreementId = ?";
+        return template.query(sql, itemRowMapper, agreementId);
     }
 
     public List<Item> findAllItems() {
@@ -57,9 +56,51 @@ public class AgreementRepository {
         return template.queryForObject(sql, itemRowMapper, id);
     }
 
-    public void addItems(int agreementId, int itemId) {
-        String sql = "INSERT INTO agreement_has_extras (agreementID, extrasID) VALUES (?,?)";
-        template.update(sql, agreementId, itemId);
+    public void addItems(int agreementId, List<Item> items) {
+        //add each item from the list to the database
+        for(Item item:items){
+            //only if the quantity is greater than 0
+            if (item.getQuantity()>0) {
+                //and assign it to the corresponding agreement
+                String sql = "INSERT INTO agreement_has_extras (agreementID, extrasID, quantity) VALUES (?,?,?)";
+                template.update(sql, agreementId, item.getId(), item.getQuantity());
+            }
+        }
+    }
+
+    public void updateItems(int agreementId, List<Item> items) {
+        //add each item from the list to the database
+        String sql;
+        for(Item item:items){
+            //only if the quantity is greater than 0
+            if (item.getQuantity()>0) {
+                //check whether the item is already there
+                sql = "SELECT quantity FROM agreement_has_extras WHERE agreementID = ? && extrasID = ?";
+                try {
+                    //tries to execute the query
+                    //if item exists, updates the quantity
+                    template.queryForObject(sql, Integer.class, agreementId, item.getId());
+                    sql = "UPDATE agreement_has_extras SET  quantity = ? WHERE agreementID = ? && extrasID = ?";
+                    template.update(sql, item.getQuantity(), agreementId, item.getId());
+                } catch (IncorrectResultSizeDataAccessException e){
+                    //if item doesn't exist, inserts it into db
+                    sql = "INSERT INTO agreement_has_extras (agreementID, extrasID, quantity) VALUES (?,?,?)";
+                    template.update(sql, agreementId, item.getId(), item.getQuantity());
+                }
+            } else { //if quantity is 0, needs to remove from db
+                //check whether the item is already there
+                sql = "SELECT quantity FROM agreement_has_extras WHERE agreementID = ? && extrasID = ?";
+                try {
+                    //tries to execute the query
+                    //if item exists, deletes it
+                    template.queryForObject(sql, Integer.class, agreementId, item.getId());
+                    sql = "DELETE FROM agreement_has_extras WHERE agreementID = ? && extrasID = ?";
+                    template.update(sql, agreementId, item.getId());
+                } catch (IncorrectResultSizeDataAccessException e){
+                    //if item doesn't exist, do nothing as everzthing is okay
+                }
+            }
+        }
     }
 
     public int findMaxAgreementId() {
@@ -73,16 +114,23 @@ public class AgreementRepository {
         return template.queryForObject(sql, new AgreementRowMapper(), agreementId);
     }
 
-    // not used for now
     public void updateAgreement(Agreement agreement) {
         String updateStatement = "UPDATE agreement " +
-                "SET renterID = ?, vehicleID = ?, start_date = ?, end_date = ?, pick_up_point = ?," +
-                "drop_off_point = ?, driven_km = ?, level_of_gasoline = ?, is_cancelled = ? " +
-                "WHERE agreementID = ? ";
-        template.update(updateStatement, agreement.getRenter().getId(), agreement.getVehicle().getVehicleID(),
-                agreement.getStartDate(), agreement.getEndDate(), agreement.getPickUpPoint(),
-                agreement.getDropOffPoint(), agreement.getDrivenKm(), agreement.isLevelGasoline(),
-                agreement.isCancelled(), agreement.getId());
+                "SET pick_up_point = ?, drop_off_point = ? WHERE agreementID = ? ";
+        template.update(updateStatement, agreement.getPickUpPoint(),
+                agreement.getDropOffPoint(), agreement.getId());
+    }
+
+    public void cancelAgreement(int id) {
+        String updateStatement = "UPDATE agreement " +
+                "SET is_cancelled = true WHERE agreementID = ? ";
+        template.update(updateStatement, id);
+    }
+
+    public void endAgreement(Agreement agreement) {
+        String updateStatement = "UPDATE agreement " +
+                "SET driven_km = ?, level_of_gasoline = ? WHERE agreementID = ? ";
+        template.update(updateStatement, agreement.getDrivenKm(), agreement.isLevelGasoline(), agreement.getId());
     }
 
     // method for deciding if we can delete a renter

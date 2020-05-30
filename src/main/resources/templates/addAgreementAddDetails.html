@@ -13,7 +13,7 @@
     <h2 class="heading">Agreement Information</h2><br>
 
     <main class="main_body">
-        <form action="#" th:action="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter/{renterId}(startDate = ${startDate}, endDate=${endDate}, vehicleId=${vehicleId}, renterId=${renterId})}" method="post">
+        <form action="#" th:action="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter/{renterId}(startDate = ${startDate}, endDate=${endDate}, vehicleId=${vehicleId}, renterId=${renterId})}" th:object="${itemList}" method="post">
             <fieldset>
                 <p>Pick-up and drop-off</p>
                 <label>Pick-up point:</label>
@@ -26,11 +26,14 @@
 
             <fieldset>
                 <p>Extra charges</p>
-                <table>
-                    <tr th:each="item:${itemList}">
+                <table><!-- Marianna -->
+                    <tr th:each="item, itemStat: *{items}">
                         <td>
-                            <input type="checkbox" th:field="${agreement.items}" th:value="${item.id}">
-                            <label th:text="${item.name}"></label>
+                            <label th:text="*{items[__${itemStat.index}__].name}"></label>
+                            <input type="number" min="0" th:name="${item.name}" th:field="*{items[__${itemStat.index}__].quantity}" th:value="0">
+                            <input type="number" hidden  th:field="*{items[__${itemStat.index}__].id}" th:value="*{items[__${itemStat.index}__].id}">
+                            <input type="text" hidden  th:field="*{items[__${itemStat.index}__].name}" th:value="*{items[__${itemStat.index}__].name}">
+                            <input type="number" hidden  th:field="*{items[__${itemStat.index}__].price}" th:value="*{items[__${itemStat.index}__].price}">
                         </td>
                     </tr>
                 </table>
