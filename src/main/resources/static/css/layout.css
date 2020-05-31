@@ -319,6 +319,11 @@ input.btn-submit-add{
     filter: invert(55%) sepia(39%) saturate(689%) hue-rotate(181deg) brightness(96%) contrast(94%);
 }
 
+/*Remove underlign from buttons*/
+.btn-undermenu a{
+    text-decoration: none;
+}
+
 .btn-action{
     border: none;
     color: white;
@@ -371,6 +376,15 @@ button:focus {
     padding: 1em 10em;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: min-content;
+}
+
+.grid-container h2{
+    text-align: left;
+    font-size: 1em;
+}
+
+.grid-container ul{
+    padding-inline-start: 0;
 }
 
 /* For changing color on read only input fields in the form */
