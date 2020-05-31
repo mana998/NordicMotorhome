@@ -253,7 +253,13 @@ input.btn-submit-add{
 }
 
 .btn-undermenu{
-    margin: 5% 15% 2%;
+    display: inline-block;
+    margin: 5% 0% 2% 15%;
+}
+
+.btn-undermenu-next{
+    display: inline-block;
+    margin: 5% 0% 2% 2%;
 }
 
 .undermenu_button{
@@ -302,6 +308,10 @@ input.btn-submit-add{
 }
 
 .btn-undermenu:hover{
+    filter: invert(55%) sepia(39%) saturate(689%) hue-rotate(181deg) brightness(96%) contrast(94%);
+}
+
+.btn-undermenu-next:hover{
     filter: invert(55%) sepia(39%) saturate(689%) hue-rotate(181deg) brightness(96%) contrast(94%);
 }
 
