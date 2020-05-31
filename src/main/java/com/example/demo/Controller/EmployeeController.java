@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -49,7 +48,7 @@ public class EmployeeController { //Ilias
     @GetMapping("/viewEmployee/{id}")
     public String viewEmployee(@PathVariable("id") int id, Model model){
         model.addAttribute("employee", employeeService.findEmployeeById(id));
-        return "viewEmployee";
+        return "showEmployee";
     }
 
     //fill the update form with employee data and shows the update form

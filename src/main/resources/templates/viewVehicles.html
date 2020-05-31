@@ -4,7 +4,11 @@
     <title>Vehicles</title>
     <!-- import header part-->
 </head>
-<body>
+<!-- when page gets loaded, checks whether failed message was added to the model
+    failed message is added in case vehicle couldn't be deleted because of active/future contracts assigned to it
+    vehicle isn't deleted and pop up window is shown with a fail message
+    -->
+<body th:onload="${failed} ? 'return alert(&quot;Failed to delete the vehicle. Future/active contracts found.&quot;);'">
     <!-- import menu-->
     <div th:insert="menu :: menu_template"></div>
 
@@ -28,7 +32,7 @@
                         <th>Model</th>
                         <th>Beds</th>
                         <th>Price</th>
-                        <th>Availability</th>
+                        <th>Available</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -40,11 +44,11 @@
                         <td th:text="${vehicle.model}" />
                         <td th:text="${vehicle.beds}" />
                         <td th:text="${vehicle.price}" />
-                        <td th:text="${vehicle.isAvailable}" />
+                        <td><span th:if="${vehicle.isAvailable}">yes</span><span th:unless="${vehicle.isAvailable}">no</span></td>
                         <td>
                             <a th:href="@{'/showVehicle/'+${vehicle.vehicleID}}"><button class="btn-action">VIEW</button></a>
                             <a th:href="@{'/updateVehicle/'+${vehicle.vehicleID}}"><button class="btn-action">UPDATE</button></a>
-                            <a th:href="@{'/deleteVehicle/'+${vehicle.vehicleID}}"><button class="btn-action" onclick="return confirm('Are you sure you want to delete this item?');">DELETE</button></a>
+                            <a th:href="@{'/deleteVehicle/'+${vehicle.vehicleID}}"><button class="btn-action" onclick="return confirm('Are you sure you want to delete this item?');">DELETE</button></a><!-- cant delete vehicles with active/future contract-->
                         </td>
                     </tr>
                     </tbody>

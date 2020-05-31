@@ -3,8 +3,6 @@
 <!-- import header part-->
 <head th:insert="header :: header_template">
     <title>Add Employee</title>
-    <!--    Import JS file-->
-    <script src="http://localhost:8080/js/scripts.js"></script>
 </head>
 <body>
     <!-- import menu-->
@@ -13,7 +11,8 @@
     <!-- back button-->
     <div class="btn-undermenu">
         <a th:href="@{/viewEmployees}">
-            <img src="SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
+            <img src="SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
+            <button class="btn-back" style="cursor: pointer"><strong>BACK</strong></button>
         </a>
     </div>
 
@@ -52,6 +51,7 @@
                 <label>Country:</label>
                 <!--    Country drop down list            -->
                 <select id="country" name="country">
+                    <option value="Denmark" selected hidden>Denmark</option>
                     <option th:each="country: ${countries}" th:value="${country}"><span th:text="${country}"></span></option>
                 </select><br><br>
             </fieldset> <br>
@@ -79,7 +79,7 @@
                 </div>
             </fieldset> <br>
 
-           <input class="btn-submit-add" type="submit" value="Submit Entry">
+           <input class="btn-submit-add" type="submit" value="Submit">
 
         </form><br>
     </main>

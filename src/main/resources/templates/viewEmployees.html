@@ -1,27 +1,29 @@
 <!DOCTYPE html> <!-- Ilias-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<!-- import header part-->
 <head th:insert="header :: header_template">
     <title>Employees</title>
-    <!-- import header part-->
 </head>
 <body>
     <!-- import menu-->
     <div th:insert="menu :: menu_template"></div>
 
-    <!-- add button-->
-    <div class="btn-undermenu">
-        <a th:href="@{/addEmployee}">
-            <img src="SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>ADD NEW</strong></button>
-        </a>
-    </div>
         <main class="main_body">
+
             <h1 class="heading" style="margin: 70px 0 0 0;">Employees</h1>
+
+            <!-- add button-->
+            <div class="btn-undermenu">
+                <a th:href="@{/addEmployee}">
+                    <img src="SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>ADD NEW</strong></button>
+                </a>
+            </div>
 
             <div class="main table-wrapper" id="main">
                 <table class="fl-table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Surname</th>
                 <th>CPR</th>
@@ -48,16 +50,16 @@
                     <td>
                         <!--  View Single employee information button  -->
                         <a th:href="@{'/viewEmployee/'+${employee.id}}">
-                            <button class="btn-action">View</button>
-                        </a>
-                        <!--  Delete employee button  -->
-                        <a th:href="@{'/deleteEmployee/'+${employee.id}}">
-                        <!-- The delete button asks for confirmation  -->
-                            <button class="btn-action" onclick="return confirm('Are you sure you want to delete this employee?');">Delete</button>
+                            <button class="btn-action">VIEW</button>
                         </a>
                         <!--  Update employee button  -->
                         <a th:href="@{'/updateEmployee/'+${employee.id}}">
-                            <button class="btn-action">Update</button>
+                            <button class="btn-action">UPDATE</button>
+                        </a>
+                        <!--  Delete employee button  -->
+                        <a th:href="@{'/deleteEmployee/'+${employee.id}}">
+                            <!-- The delete button asks for confirmation  -->
+                            <button class="btn-action" onclick="return confirm('Are you sure you want to delete this employee?');">DELETE</button>
                         </a>
                     </td>
                 </tr>
