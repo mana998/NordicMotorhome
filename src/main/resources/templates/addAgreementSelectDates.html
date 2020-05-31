@@ -15,12 +15,12 @@
             <fieldset>
                 <p>Time period, number of beds and price</p>
                 <div class="form-group">
-                    <label for="startDate">*From:</label>
+                    <label for="startDate">From:</label>
                     <input type="date" th:attr="min=${now}" placeholder="Enter date" id="startDate" th:field="${agreement.startDate}" required>
                 </div>
                 <br>
                 <div class="form-group">
-                    <label for="endDate">*To:</label>
+                    <label for="endDate">To:</label>
                     <input type="date" class="form-control" th:attr="min=${now}" placeholder="Enter date" id="endDate" th:field="${agreement.endDate}" required>
                 </div><br>
                 <label for="price">Number of beds:</label>

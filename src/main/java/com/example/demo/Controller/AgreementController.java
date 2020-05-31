@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.TransactionUsageException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.model.IModel;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -214,7 +215,6 @@ public class AgreementController {
         // set the item list associated with this agreement
         List<Item> itemList = agreementService.findItemsForAgreement(agreement.getId());
         agreement.setItems(itemList);
-        System.out.println(agreement);
         model.addAttribute("agreement", agreement);
         return "/viewAgreement";
     }
@@ -241,13 +241,18 @@ public class AgreementController {
     }
 
     @PostMapping("/save")
-    public String saveAgreement(@ModelAttribute("agreement") Agreement agreement) {
+    public String saveAgreement(@ModelAttribute("agreement") Agreement agreement, Model model) {
         // set the item list associated with this agreement
         List<Item> itemList = agreementService.findItemsForAgreement(agreement.getId());
         agreement.setItems(itemList);
         // and save the agreement
         agreementService.endAgreement(agreement);
-        return "endAgreementShowCharges";
+        model.addAttribute(agreement);
+        model.addAttribute("now", LocalDate.now());
+        LocalDate dueDate = LocalDate.now( )
+                .plusMonths( 1 );
+        model.addAttribute("dueDate", dueDate);
+        return "showInvoice";
     }
 
     // mapping for showing agreement form for update
@@ -271,7 +276,7 @@ public class AgreementController {
         agreementService.updateAgreement(agreement);
         //update item list
         agreementService.updateItems(agreement,itemList.getItems());
-        return "redirect:/viewAgreements";
+        return "redirect:/agreement/viewAgreements";
     }
 
     @GetMapping("/cancelAgreement")
@@ -283,18 +288,26 @@ public class AgreementController {
         // and pass it to the model
         model.addAttribute("now", LocalDate.now());
         model.addAttribute("agreement", agreement);
-        //System.out.println(agreement);
         return "cancelAgreement";
     }
 
     @PostMapping("/saveCancel")
     public String saveCancel(@ModelAttribute("agreement") Agreement agreement) {
         agreementService.cancelAgreement(agreement.getId());
-        System.out.println(agreement);
         return "redirect:/agreement/viewAgreements";
     }
 
-
-
-
+    @GetMapping("/showInvoice")
+    public String showInvoice(@RequestParam("agreementId") int agreementId, Model model) {
+        Agreement agreement = agreementService.findById(agreementId);
+        // set the item list associated with this agreement
+        List<Item> itemList = agreementService.findItemsForAgreement(agreement.getId());
+        agreement.setItems(itemList);
+        model.addAttribute("agreement", agreement);
+        model.addAttribute("now", LocalDate.now());
+        LocalDate dueDate = LocalDate.now( )
+                .plusMonths( 1 );
+        model.addAttribute("dueDate", dueDate);
+        return "showInvoice";
+    }
 }
