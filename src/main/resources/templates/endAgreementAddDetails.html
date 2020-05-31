@@ -11,7 +11,7 @@
 <h1 class="heading">End Agreement</h1><br>
 
 <main class="main_body">
-    <form action="#" th:action="@{/save}" th:object="${agreement}" method="post">
+    <form action="#" th:action="@{/agreement/save}" th:object="${agreement}" method="post">
         <fieldset>
             <!-- add hidden form field to handle the update -->
             <input type="hidden" th:field="*{id}">

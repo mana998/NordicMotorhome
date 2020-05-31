@@ -35,7 +35,7 @@
     </div>
     <div class="wrapper">
         <div class="element">
-            <form action="#" th:action="@{/saveCancel}" th:object="${agreement}" method="post">
+            <form action="#" th:action="@{/agreement/saveCancel}" th:object="${agreement}" method="post">
                 <input type="hidden" th:field="*{id}">
                 <input type="hidden" th:field="*{renter.id}">
                 <input type="hidden" th:field="*{renter.firstName}">
@@ -52,7 +52,7 @@
             </form>
         </div>
         <div class="element">
-            <a th:href="@{/viewAgreements}"><button class="btn-action" style="font-size: 16px">NO</button></a>
+            <a th:href="@{/agreement/viewAgreements}"><button class="btn-action" style="font-size: 16px">NO</button></a>
         </div>
     </div>
 </main>

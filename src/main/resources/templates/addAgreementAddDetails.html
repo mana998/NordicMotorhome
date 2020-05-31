@@ -13,7 +13,7 @@
     <h2 class="heading">Agreement Information</h2><br>
 
     <main class="main_body">
-        <form action="#" th:action="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter/{renterId}(startDate = ${startDate}, endDate=${endDate}, vehicleId=${vehicleId}, renterId=${renterId})}" th:object="${itemList}" method="post">
+        <form action="#" th:action="@{/agreement/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}/existing-renter/{renterId}(startDate = ${startDate}, endDate=${endDate}, vehicleId=${vehicleId}, renterId=${renterId})}" th:object="${itemList}" method="post">
             <fieldset>
                 <p>Pick-up and drop-off</p>
                 <label>Pick-up point:</label>

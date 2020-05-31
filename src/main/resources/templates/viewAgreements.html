@@ -16,7 +16,7 @@
                     <div style="float:left;">
                         <!-- button for adding new agreement -->
                         <div class="btn-undermenu">
-                            <a th:href="@{/create/selectDates}">
+                            <a th:href="@{/agreement/create/selectDates}">
                                 <img src="SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>ADD AGREEMENT</strong></button>
                             </a>
                         </div>
@@ -24,7 +24,7 @@
                     <div style="float:left;">
                         <!-- button for ending an agreement -->
                         <div class="btn-undermenu">
-                            <a th:href="@{/showAgreementListForEnd}">
+                            <a th:href="@{/agreement/showAgreementListForEnd}">
                                 <img src="SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>END AGREEMENT</strong></button>
                             </a>
                         </div>
@@ -54,13 +54,13 @@
                         <td th:text="${agreement.vehicle.plates}"></td>
                         <td>
                             <!-- Add view function -->
-                            <a th:href="@{/viewAgreement(agreementId=${agreement.id})}" ><button class="btn-action">VIEW</button></a>
-                            <a th:href="@{'/updateAgreement/'+${agreement.id}}" ><button class="btn-action">UPDATE</button></a>
+                            <a th:href="@{/agreement/viewAgreement(agreementId=${agreement.id})}" ><button class="btn-action">VIEW</button></a>
+                            <a th:href="@{'/agreement/updateAgreement/'+${agreement.id}}" ><button class="btn-action">UPDATE</button></a>
                         </td>
                         <td>
                             <!-- Cancel button available if is not past the due date and is not cancelled already -->
                             <div>
-                                <a th:if="${agreement.canBeCancelled(agreement.startDate)} and !${agreement.cancelled}" th:href="@{/cancelAgreement(agreementId=${agreement.id})}"><button class="btn-cancel">CANCEL</button></a>
+                                <a th:if="${agreement.canBeCancelled(agreement.startDate)} and !${agreement.cancelled}" th:href="@{/agreement/cancelAgreement(agreementId=${agreement.id})}"><button class="btn-cancel">CANCEL</button></a>
                             </div>
                         </td>
                     </tr>

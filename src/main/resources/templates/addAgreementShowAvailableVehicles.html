@@ -37,7 +37,7 @@
                     <td th:text="${vehicle.price}"></td>
                     <td>
                         <!-- Add select button -->
-                        <a th:href="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}(startDate = ${startDate},
+                        <a th:href="@{/agreement/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}(startDate = ${startDate},
                         endDate = ${endDate}, vehicleId=${vehicle.vehicleID})}"><button class="btn-action">SELECT</button></a>
                     </td>
                 </tr>
