@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-//@RequestMapping("/agreements")
+@RequestMapping("/agreement")
 public class AgreementController {
 
     private AgreementService agreementService;
@@ -85,7 +85,7 @@ public class AgreementController {
     }
 
     // mapping for showing page where the user chooses between new or existing renter
-    @GetMapping("/create/{startDate}/{endDate}/selectVehicle/{vehicleId}")
+    @GetMapping("/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}")
     public String showPageNewOrExistingRenter(@PathVariable("startDate") String startDate,
                                               @PathVariable("endDate") String endDate,
                                               @PathVariable("vehicleId") int vehicleId,
@@ -97,7 +97,7 @@ public class AgreementController {
     }
 
     // mapping for showing form for adding info about both the new renter and the agreement itself
-    @GetMapping("/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/new-renter")
+    @GetMapping("/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}/new-renter")
     public String showRenterForm(@PathVariable("startDate") String startDate,
                                  @PathVariable("endDate") String endDate,
                                  @PathVariable("vehicleId") int vehicleId,
@@ -119,7 +119,7 @@ public class AgreementController {
     }
 
     // mapping for posting information about the new renter and the new agreement
-    @PostMapping("/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/new-renter")
+    @PostMapping("/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}/new-renter")
     public String saveNewRenter(@PathVariable("startDate") String startDate,
                                 @PathVariable("endDate") String endDate,
                                 @PathVariable("vehicleId") int vehicleId,
@@ -153,7 +153,7 @@ public class AgreementController {
     }
 
     // mapping for showing renters to select, in case the user selects the existing renter option
-    @GetMapping("create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter")
+    @GetMapping("create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}/existing-renter")
     public String listRenters(@PathVariable("startDate") String startDate,
                               @PathVariable("endDate") String endDate,
                               @PathVariable("vehicleId") int vehicleId,
@@ -167,7 +167,7 @@ public class AgreementController {
     }
 
     // mapping for showing form for adding agreement info if the user selects existing renter
-    @GetMapping("/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter/{renterId}")
+    @GetMapping("/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}/existing-renter/{renterId}")
     public String showAgreementDetails(@PathVariable("startDate") String startDate,
                                        @PathVariable("endDate") String endDate,
                                        @PathVariable("vehicleId") int vehicleId,
@@ -182,7 +182,7 @@ public class AgreementController {
     }
 
     // mapping for posting info about the new agreement if the user selects existing renter
-    @PostMapping("/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter/{renterId}")
+    @PostMapping("/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}/existing-renter/{renterId}")
     public String saveContractInfo(@PathVariable("startDate") String startDate,
                                    @PathVariable("endDate") String endDate,
                                    @PathVariable("vehicleId") int vehicleId,
@@ -291,7 +291,7 @@ public class AgreementController {
     public String saveCancel(@ModelAttribute("agreement") Agreement agreement) {
         agreementService.cancelAgreement(agreement.getId());
         System.out.println(agreement);
-        return "redirect:/viewAgreements";
+        return "redirect:/agreement/viewAgreements";
     }
 
 

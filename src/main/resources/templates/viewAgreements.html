@@ -1,7 +1,7 @@
-<!DOCTYPE html> <!--Dimitrios-->
+<!DOCTYPE html> <!--Dimitrios--> <!-- Karolina-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
     <head th:insert="header :: header_template">
-    <title>Agreements</title>
+    <title id="title">Agreements</title>
     <!-- import header part-->
     </head>
     <body>
@@ -10,63 +10,61 @@
 
         <main class="main_body">
             <h1 class="heading" style="margin: 70px 0 0 0;">Agreements</h1>
-
-            <!-- add wrapper and buttons over the table -->
-            <div class="wrapper-undermenu">
-                    <div style="float:left;">
-                        <!-- button for adding new agreement -->
-                        <div class="btn-undermenu">
-                            <a th:href="@{/create/selectDates}">
-                                <img src="SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>ADD AGREEMENT</strong></button>
-                            </a>
-                        </div>
-                    </div>
-                    <div style="float:left;">
-                        <!-- button for ending an agreement -->
-                        <div class="btn-undermenu">
-                            <a th:href="@{/showAgreementListForEnd}">
-                                <img src="SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>END AGREEMENT</strong></button>
-                            </a>
-                        </div>
-                    </div>
-            </div>
-            <!-- agreement table -->
-            <div class="main table-wrapper" id="main">
-                <table class="fl-table">
-                    <thead>
-                    <tr>
-                        <th>Agreement ID</th>
-                        <th>From</th>
-                        <th>To</th>
-                        <th>Renter Name</th>
-                        <th>Vehicle License Plate</th>
-                        <th>Action</th>
-                        <th>Cancel</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="agreement:${agreements}">
-                        <td th:text="${agreement.id}"></td>
-                        <td th:text="${#temporals.format(agreement.startDate, 'dd-MM-yyyy')}"></td>
-                        <td th:text="${#temporals.format(agreement.endDate, 'dd-MM-yyyy')}"></td>
-                        <td th:text="${agreement.renter.firstName + ' ' + agreement.renter.lastName}"></td>
-                        <!-- add license plate here!!! -->
-                        <td th:text="${agreement.vehicle.plates}"></td>
-                        <td>
-                            <!-- Add view function -->
-                            <a th:href="@{/viewAgreement(agreementId=${agreement.id})}" ><button class="btn-action">VIEW</button></a>
-                            <a th:href="@{'/updateAgreement/'+${agreement.id}}" ><button class="btn-action">UPDATE</button></a>
-                        </td>
-                        <td>
-                            <!-- Cancel button available if is not past the due date and is not cancelled already -->
-                            <div>
-                                <a th:if="${agreement.canBeCancelled(agreement.startDate)} and !${agreement.cancelled}" th:href="@{/cancelAgreement(agreementId=${agreement.id})}"><button class="btn-cancel">CANCEL</button></a>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+                <!-- button for adding new agreement -->
+                <div class="btn-undermenu">
+                    <a th:href="@{/agreement/create/selectDates}">
+                        <img src="http://localhost:8080/SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30">
+                        <button class="btn-add">
+                            <strong>ADD NEW</strong>
+                        </button>
+                    </a>
+                </div>
+                <!-- button for ending an agreement -->
+                <div class="btn-undermenu-next">
+                    <a th:href="@{/agreement/showAgreementListForEnd}">
+                        <img src="http://localhost:8080/SVG/receipt-solid.svg" class="svg undermenu_button" height="30" width="30">
+                        <button class="btn-add">
+                            <strong>END AGREEMENT</strong>
+                        </button>
+                    </a>
+                </div>
+                <!-- agreement table -->
+                <div class="main table-wrapper" id="main">
+                    <table class="fl-table">
+                        <thead>
+                        <tr>
+                            <th>Agreement ID</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Renter Name</th>
+                            <th>Vehicle License Plate</th>
+                            <th>Action</th>
+                            <th>Cancel</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="agreement:${agreements}">
+                            <td th:text="${agreement.id}"></td>
+                            <td th:text="${#temporals.format(agreement.startDate, 'dd-MM-yyyy')}"></td>
+                            <td th:text="${#temporals.format(agreement.endDate, 'dd-MM-yyyy')}"></td>
+                            <td th:text="${agreement.renter.firstName + ' ' + agreement.renter.lastName}"></td>
+                            <!-- add license plate here!!! -->
+                            <td th:text="${agreement.vehicle.plates}"></td>
+                            <td>
+                                <!-- Add view function -->
+                                <a th:href="@{/agreement/viewAgreement(agreementId=${agreement.id})}" ><button class="btn-action">VIEW</button></a>
+                                <a th:href="@{'/agreement/updateAgreement/'+${agreement.id}}" ><button class="btn-action">UPDATE</button></a>
+                            </td>
+                            <td>
+                                <!-- Cancel button available if is not past the due date and is not cancelled already -->
+                                <div>
+                                    <a th:if="${agreement.canBeCancelled(agreement.startDate)} and !${agreement.cancelled}" th:href="@{/agreement/cancelAgreement(agreementId=${agreement.id})}"><button class="btn-cancel">CANCEL</button></a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
         </main>
         <div th:insert="footer :: footer_template"></div>
     </body>

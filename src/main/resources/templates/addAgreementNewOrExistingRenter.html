@@ -1,7 +1,7 @@
 <!DOCTYPE html> <!--Dimitrios--><!--Karolina-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:insert="header :: header_template">
-    <title>Add new agreement</title>
+    <title id="title">Add Agreement</title>
     <!-- import header part-->
 </head>
 <body>
@@ -23,8 +23,8 @@
                 <tbody>
                 <tr>
                     <td>
-                        <a th:href="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/new-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}"><button class="btn-action" style="font-size: 14px">New Renter</button></a>
-                        <a th:href="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}"><button class="btn-action" style="font-size: 14px">Existing Renter</button></a>
+                        <a th:href="@{/agreement/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}/new-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}"><button class="btn-action" style="font-size: 14px">New Renter</button></a>
+                        <a th:href="@{/agreement/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}/existing-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}"><button class="btn-action" style="font-size: 14px">Existing Renter</button></a>
                     </td>
                 </tr>
                 </tbody>

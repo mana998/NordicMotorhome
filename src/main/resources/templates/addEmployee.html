@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <!-- import header part-->
 <head th:insert="header :: header_template">
-    <title>Add Employee</title>
+    <title id="title">Add Employee</title>
 </head>
 <body>
     <!-- import menu-->
@@ -11,7 +11,7 @@
     <!-- back button-->
     <div class="btn-undermenu">
         <a th:href="@{/viewEmployees}">
-            <img src="SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
+            <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
             <button class="btn-back" style="cursor: pointer"><strong>BACK</strong></button>
         </a>
     </div>
@@ -22,35 +22,35 @@
                <!-- Personal Information entry form-->
                 <p>Personal Information</p>
                 <label>First name:</label>
-                <input type="text" name="firstName" pattern="[A-Z][a-z]+" title="Must start with a capital letter." placeholder="ex. John" required><br><br>
+                <input type="text" maxlength="45" name="firstName" pattern="[A-Z][a-z]+" title="Must start with a capital letter followed by lowercase letters." placeholder="ex. John" required><br><br>
                 <label>Last name:</label>
-                <input type="text" name="lastName" pattern="[A-Z][a-z]+" title="Must start with a capital letter." placeholder="ex. Smith" required><br><br>
+                <input type="text" maxlength="45" name="lastName" pattern="[A-Z][a-z]+" title="Must start with a capital letter followed by lowercase letters." placeholder="ex. Smith" required><br><br>
                 <label>CPR:</label>
-                <input type="text" name="cpr" pattern="(\d){6}-(\d){4}" title="Must be in this format: DDMMYY-SSSS" placeholder="ex. 251278-4568" required><br><br>
+                <input type="text" maxlength="20" name="cpr" pattern="(\d){6}-(\d){4}" title="Must be in this format: DDMMYY-SSSS" placeholder="ex. 251278-4568" required><br><br>
                 <label>Telephone:</label>
-                <input type="text" name="phone" pattern="00\d+" title="Must include country code: 004552189658" placeholder="ex. 52189658" required><br><br>
+                <input type="text" maxlength="20" name="phone" pattern="00\d+" title="Must include country code: 004552189658" placeholder="ex. 004552189658" required><br><br>
                 <label>Email:</label>
-                <input type="email" name="email" placeholder="ex. smith@gmail.com" required><br><br>
+                <input type="email" maxlength="45" name="email" placeholder="ex. smith@gmail.com" required><br><br>
             </fieldset> <br>
 
             <fieldset>
                 <!-- Address entry form-->
                 <p>Address</p>
                 <label>Street:</label>
-                <input type="text" name="street" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter." placeholder="ex. Falkoner Alle" required><br><br>
+                <input type="text" maxlength="45" name="street" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter followed by lowercase letters." placeholder="ex. Falkoner Alle" required><br><br>
                 <label>Building number:</label>
-                <input type="text" name="building" pattern="\d+" title="Only numeric characters." placeholder="ex. 45" required><br><br>
+                <input type="number" max="2147483647" name="building" title="Only numeric characters." placeholder="ex. 45" required><br><br>
                 <label>Floor:</label>
-                <input type="text" name="floor" pattern="\d+" title="Only numeric characters." placeholder="ex. 3" required><br><br>
+                <input type="number" max="200" name="floor" title="Only numeric characters." placeholder="ex. 3" required><br><br>
                 <label>Door:</label>
-                <input type="text" name="door" pattern="tv|th|mf" title="Must contain only tv, th, mf." placeholder="ex. th" required><br><br>
+                <input type="text" name="door" pattern="tv|th|mf|-" title="Must contain only tv, th, mf, -." placeholder="ex. th" required><br><br>
                 <label>City:</label>
-                <input type="text" name="city" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Must start with a capital letter." placeholder="ex. Copenhagen" required><br><br>
+                <input type="text" name="city" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter followed by lowercase letters." placeholder="ex. Copenhagen" required><br><br>
                 <label>Zip:</label>
-                <input type="text" name="zip" pattern="\d+" title="Only numeric characters." placeholder="ex. 2545" required><br><br>
+                <input type="text" maxlength="10" name="zip" pattern="\d+" title="Only numeric characters." placeholder="ex. 2545" required><br><br>
                 <label>Country:</label>
                 <!--    Country drop down list            -->
-                <select id="country" name="country">
+                <select id="country" name="country" onchange="cprOrPass(this)">
                     <option value="Denmark" selected hidden>Denmark</option>
                     <option th:each="country: ${countries}" th:value="${country}"><span th:text="${country}"></span></option>
                 </select><br><br>
@@ -60,7 +60,7 @@
                 <!-- Job entry form-->
                 <p>Job Specifics</p>
                 <label>Job title:</label>
-                <input type="text" name="type" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter." placeholder="ex. Sales Assistant" required><br><br>
+                <input type="text" maxlength="45" name="type" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter followed by lowercase letters." placeholder="ex. Sales Assistant" required><br><br>
                 <label>Salary:</label>
                 <input type="text" name="salary" pattern="\d+" title="Only numeric characters." placeholder="ex. 25000" required><br><br>
                 <label>System role:</label>
@@ -73,9 +73,9 @@
                 <br>
                 <div id="pass" style="display:none;">
                     <label>Enter username:</label>
-                    <input id="usern" type="text" name="username"><br><br>
+                    <input id="usern" maxlength="45" type="text" name="username" placeholder="Username"><br><br>
                     <label>Enter password:</label>
-                    <input id="passwd" type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"><br><br>
+                    <input id="passwd" maxlength="64" type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"><br><br>
                 </div>
             </fieldset> <br>
 

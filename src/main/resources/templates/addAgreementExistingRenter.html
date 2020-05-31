@@ -1,7 +1,7 @@
 <!DOCTYPE html> <!--Dimitrios--><!--Karolina-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:insert="header :: header_template">
-    <title>Add new agreement</title>
+    <title id="title">Add Agreement</title>
     <!-- import header part-->
 </head>
 <body>
@@ -19,7 +19,7 @@
                 <tbody>
                 <tr>
                     <td>
-                        <form action="#" th:action="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}" method="get" class="form-inline">
+                        <form action="#" th:action="@{/agreement/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}/existing-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}" method="get" class="form-inline">
                             <div>
                                 <label>
                                     <input type="text" name="driverLicenseNumber" placeholder="Enter driver license" />
@@ -52,7 +52,7 @@
                     <td th:text="${renter.phone}"></td>
                     <!-- Add select button -->
                     <td>
-                        <a th:href="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/existing-renter/{renterId}(startDate = ${startDate},
+                        <a th:href="@{/agreement/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}/existing-renter/{renterId}(startDate = ${startDate},
                                                 endDate = ${endDate}, vehicleId=${vehicleId}, renterId=${renter.id})}"><button class="btn-action">SELECT</button></a>
                     </td>
                 </tr>

@@ -1,7 +1,7 @@
 <!DOCTYPE html> <!--Karolina-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:insert="header :: header_template">
-    <title>Vehicle Information</title>
+    <title id="title">Vehicle Information</title>
     <!-- import header part-->
 </head>
 <body>
@@ -49,7 +49,7 @@
                 <li><strong>Id:</strong> <span th:text="${agreement.id}"></span></li>
                 <li><strong>Dates:</strong> <span th:text="${#temporals.format(agreement.startDate, 'dd/MM/yyyy') + ' - ' + #temporals.format(agreement.endDate, 'dd/MM/yyyy')}"></span></li>
                 <li><strong>Renter:</strong> <span th:text="${agreement.renter.firstName + ' ' + agreement.renter.lastName}"></span></li>
-                <li><a th:href="@{'/showAgreement/'+${agreement.id}}"><button class="btn-action">VIEW</button></a></li>
+                <li><a th:href="@{'/agreement/showAgreement/'+${agreement.id}}"><button class="btn-action">VIEW</button></a></li>
             </ul>
             </hr>
         </article>
@@ -62,7 +62,7 @@
                 <li><strong>Dates:</strong> <span th:text="${#temporals.format(agreement.startDate, 'dd/MM/yyyy') + ' - ' + #temporals.format(agreement.endDate, 'dd/MM/yyyy')}"></span></li>
                 <li><strong>Renter:</strong> <span th:text="${agreement.renter.firstName + ' ' + agreement.renter.lastName}"></span></li>
                 <strong><li th:text="${agreement.cancelled} ? 'Cancelled'" style="color: red">Cancelled</li></strong>
-                <li><a th:href="@{'/showAgreement/'+${agreement.id}}"><button class="btn-action">VIEW</button></a></li>
+                <li><a th:href="@{'/agreement/showAgreement/'+${agreement.id}}"><button class="btn-action">VIEW</button></a></li>
             </ul>
             </hr>
         </article>

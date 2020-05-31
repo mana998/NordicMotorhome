@@ -1,7 +1,7 @@
 <!DOCTYPE html> <!--Karolina-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:insert="header :: header_template">
-    <title>Update vehicle</title>
+    <title id="title">Update Vehicle</title>
     <!-- import header part-->
 </head>
 <body>
@@ -23,15 +23,15 @@
         <fieldset>
             <p>You are able to change plates, price and availability.</p>
             <label>Vehicle ID:</label>
-            <input type="text" name="vehicleID" th:value="${vehicle.vehicleID}" readonly="readonly" style="pointer-events: none; background-color: #EBEBE4;"><br><br>
+            <input type="text" name="vehicleID" th:value="${vehicle.vehicleID}" readonly="readonly" class="read-only"><br><br>
             <label>Brand:</label>
-            <input type="text" name="brand" th:value="${vehicle.brand}" readonly="readonly" style="pointer-events: none; background-color: #EBEBE4;"><br><br>
+            <input type="text" name="brand" th:value="${vehicle.brand}" readonly="readonly" class="read-only"><br><br>
             <label>Model:</label>
-            <input type="text" name="model" th:value="${vehicle.model}" readonly="readonly" style="pointer-events: none; background-color: #EBEBE4;"><br><br>
+            <input type="text" name="model" th:value="${vehicle.model}" readonly="readonly" class="read-only"><br><br>
             <label>Number of beds:</label>
-            <input type="text" name="beds" th:value="${vehicle.beds}" readonly="readonly" style="pointer-events: none; background-color: #EBEBE4;"><br><br>
+            <input type="text" name="beds" th:value="${vehicle.beds}" readonly="readonly" class="read-only"><br><br>
             <label>Plates:</label>
-            <input type="text" pattern="[a-zA-Z0-9]+" title="Must contain only alphanumeric characters" name="plates" required="required" th:value="${vehicle.plates}"><br><br>
+            <input type="text" maxlength="12" pattern="[a-zA-Z0-9]+" title="Must contain only alphanumeric characters" name="plates" placeholder="ex. XM23640" required="required" th:value="${vehicle.plates}"><br><br>
             <label>Price per Day:</label>
             <input type="number" min ="100" name="price" th:value="${vehicle.price}" required><br><br>
             <label for="available">Available:</label>
