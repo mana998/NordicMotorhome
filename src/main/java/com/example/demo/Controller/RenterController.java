@@ -73,7 +73,6 @@ public class RenterController {
     //update renter information
     @PostMapping("/updateRenter/{id}")
     public String updateRenter(@ModelAttribute Renter renter,@PathVariable("id") int id){
-        renter.setId(id);
         renterService.updateRenter(renter);
         return "redirect:/viewRenters";
     }
