@@ -56,7 +56,7 @@ a.menu_link:hover{
 
 .quote{
     margin: auto;
-    font-family: "Brush Script MT", "Segoe Script", "Segoe Print";
+    font-family: "Brush Script MT", "Segoe Script", "Segoe Print", cursive, sans-serif;
     font-size: 40px;
 }
 
