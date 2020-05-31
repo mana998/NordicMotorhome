@@ -9,6 +9,14 @@
 <!-- import menu-->
 <div th:insert="menu :: menu_template"></div>
 
+<!-- back button-->
+<div class="btn-undermenu">
+    <a th:href="@{/viewEmployees}">
+        <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
+        <button class="btn-back" style="cursor: pointer"><strong>BACK</strong></button>
+    </a>
+</div>
+
 <h1 class="emp">Update Employee</h1>
 
 <main class="main_body">
