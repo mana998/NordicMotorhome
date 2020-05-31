@@ -31,7 +31,7 @@
             <label>Number of beds:</label>
             <input type="text" name="beds" th:value="${vehicle.beds}" readonly="readonly" style="pointer-events: none; background-color: #EBEBE4;"><br><br>
             <label>Plates:</label>
-            <input type="text" pattern="[a-zA-Z0-9]+" title="Must contain only alphanumeric characters" name="plates" required="required" th:value="${vehicle.plates}"><br><br>
+            <input type="text" maxlength="12" pattern="[a-zA-Z0-9]+" title="Must contain only alphanumeric characters" name="plates" placeholder="ex. XM23640" required="required" th:value="${vehicle.plates}"><br><br>
             <label>Price per Day:</label>
             <input type="number" min ="100" name="price" th:value="${vehicle.price}" required><br><br>
             <label for="available">Available:</label>

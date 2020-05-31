@@ -23,14 +23,14 @@
             <fieldset>
                 <p>Vehicle Information</p>
                 <label>Enter Plates:</label>
-                <input type="text" pattern="[a-zA-Z0-9]+" title="Must contain only alphanumeric characters" name="plates" placeholder="ex. XM23640" required="required"><br><br>
+                <input type="text" maxlength="12" pattern="[a-zA-Z0-9]+" title="Must contain only alphanumeric characters" name="plates" placeholder="ex. XM23640" required="required"><br><br>
                 <!--<label>Select brand from existing:</label>  !--check later if possible to select from existing OR type new--
                 <select id="brand" name="brand">
                     <option th:value="${brand}" selected hidden><span th:text="${brand}"></span></option>
                     <option th:each="brand: ${brands}" th:value="${brand}"><span th:text="${brand}"></span></option>
                 </select>-->
                 <label>Enter brand:</label>
-                <input type="text" pattern="[A-Z][a-z]+" title="Must start with a capital letter." name="brand" placeholder="ex. Sunlight" required="required"><br><br>
+                <input type="text" maxlength="12" pattern="[A-Z][a-z]+" title="Must start with a capital letter followed by lowercase letters." name="brand" placeholder="ex. Sunlight" required="required"><br><br>
                 <!--<label>Select or type the model:</label>  !--doesn't work, doesn't take name--
                 <input type="text" list="model" />
                 <datalist id="model" name="model">
@@ -38,7 +38,7 @@
                 <option th:each="model: ${models}" th:value="${model}"><span th:text="${model}"></span></option>
                 </datalist>-->
                 <label>Type model:</label>
-                <input type="text" pattern="[a-zA-Z0-9]+[a-zA-Z0-9 ]+" title="Must contain only alphanumeric characters" name="model" placeholder="ex. V 66" required="required"><br><br>
+                <input type="text" maxlength="45" pattern="[a-zA-Z0-9]+[a-zA-Z0-9 ]+" title="Must contain only alphanumeric characters" name="model" placeholder="ex. V 66" required="required"><br><br>
                 <label>Enter Number of Beds*:</label>
                 <input type="number" min ="2" name="beds" placeholder="ex. 4" required="required"><br><br>
                 <label>Enter Price per Day*:</label>
