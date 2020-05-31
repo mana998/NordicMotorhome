@@ -1,7 +1,7 @@
 <!DOCTYPE html> <!--Dimitrios-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
     <head th:insert="header :: header_template">
-    <title>Agreements</title>
+    <title id="title">Agreements</title>
     <!-- import header part-->
     </head>
     <body>
@@ -16,16 +16,18 @@
                     <div style="float:left;">
                         <!-- button for adding new agreement -->
                         <div class="btn-undermenu">
+
                             <a th:href="@{/agreement/create/selectDates}">
-                                <img src="SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>ADD AGREEMENT</strong></button>
+                                <img src="http://localhost:8080/SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>ADD AGREEMENT</strong></button>
                             </a>
                         </div>
                     </div>
                     <div style="float:left;">
                         <!-- button for ending an agreement -->
                         <div class="btn-undermenu">
+
                             <a th:href="@{/agreement/showAgreementListForEnd}">
-                                <img src="SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>END AGREEMENT</strong></button>
+                                <img src="http://localhost:8080/SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>END AGREEMENT</strong></button>
                             </a>
                         </div>
                     </div>

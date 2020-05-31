@@ -1,7 +1,7 @@
 <!DOCTYPE html> <!--Marianna-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:insert="header :: header_template">
-    <title>Add Renter</title>
+    <title id="title">Add Renter</title>
     <!-- import header part-->
 </head>
 <body>
@@ -11,7 +11,8 @@
     <!-- back button-->
     <div class="btn-undermenu">
         <a th:href="@{/viewRenters}">
-            <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
+            <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
+            <button class="btn-back" style="cursor: pointer"><strong>BACK</strong></button>
         </a>
     </div>
 
@@ -21,34 +22,33 @@
             <fieldset>
                 <p>Personal Information</p>
                 <label for="firstName">First name:</label><br>
-                <input type="text" pattern="[A-Z][a-z]+" title="Must start with a capital letter." id="firstName" name="firstName" required="required" placeholder="ex. John"><br>
+                <input type="text" maxlength="45" pattern="[A-Z][a-z]+" title="Must start with a capital letter followed by lowercase letters." id="firstName" name="firstName" required="required" placeholder="ex. John"><br>
                 <label for="lastName">Last name:</label><br>
-                <input type="text" pattern="[A-Z][a-z]+" title="Must start with a capital letter." id="lastName" name="lastName" required="required" placeholder="ex. Smith"><br>
-                <label for="cpr" id="cprLabel">CPR:</label><br>
+                <input type="text" maxlength="45" pattern="[A-Z][a-z]+" title="Must start with a capital letter followed by lowercase letters." id="lastName" name="lastName" required="required" placeholder="ex. Smith"><br>
+                <label for="cpr" maxlength="20" id="cprLabel">CPR:</label><br>
                 <input type="text" pattern="(\d){6}-(\d){4}" title="Must be in this format: DDMMYY-SSSS" id="cpr" name="cpr" required="required" placeholder="ex. 251278-4568"><br>
                 <label for="phone">Phone:</label><br>
-                <input type="text" pattern="00\d+" title="Must include country code: 004552189658" id="phone" name="phone" required="required" placeholder="ex. 004552189658"><br>
+                <input type="text" maxlength="20" pattern="00\d+" title="Must include country code: 004552189658" id="phone" name="phone" required="required" placeholder="ex. 004552189658"><br>
                 <label for="email">Email:</label><br>
-                <input type="email" id="email" name="email" required="required" placeholder="ex. smith@gmail.com"><br>
+                <input type="email" maxlength="45" id="email" name="email" required="required" placeholder="ex. smith@gmail.com"><br>
                 <label for="licenseNumber">License Number:</label><br>
-                <input type="text" pattern="[a-zA-Z0-9]+" title="Must contain only alphanumeric characters" id="licenseNumber" name="licenseNumber" required="required" placeholder="License Number"></br>
+                <input type="text" maxlength="45" pattern="[a-zA-Z0-9]+" title="Must contain only alphanumeric characters" id="licenseNumber" name="licenseNumber" required="required" placeholder="License Number"></br>
             </fieldset></br>
 
             <fieldset>
                 <p>Address</p>
                 <label for="street">Street:</label><br>
-                <input type="text" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with capital letter." id="street" name="street" required="required" placeholder="ex. Falkoner Alle"><br>
+                <input type="text" maxlength="45" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with capital letter followed by lowercase letters." id="street" name="street" required="required" placeholder="ex. Falkoner Alle"><br>
                 <label for="building">Building:</label><br>
-                <input type="text" pattern="\d+" title="Only numeric characters." id="building" name="building" required="required" placeholder="ex. 45"><br>
+                <input type="number" max="2147483647" title="Only numeric characters." id="building" name="building" required="required" placeholder="ex. 45"><br>
                 <label for="floor">Floor:</label><br>
-                <input type="text" pattern="\d+" title="Only numeric characters." id="floor" name="floor" required="required" placeholder="ex. 3"><br>
-                <!--doesn't need to be required in case of customers outside of Denmark-->
+                <input type="number" max="200" title="Only numeric characters." id="floor" name="floor" required="required" placeholder="ex. 3"><br>
                 <label for="door">Door:</label><br>
-                <input type="text" pattern="tv|th|mf" title="Must contain only tv, th, mf." id="door" name="door" placeholder="ex. th"><br>
-                <label for="zip">Zip:</label><br>
-                <input type="text" pattern="\d+" title="Only numeric characters." id="zip" name="zip" required="required" placeholder="ex. 1050"><br>
+                <input type="text" pattern="tv|th|mf|-" title="Must contain only tv, th, mf, -." id="door" name="door" required="required" placeholder="ex. th"><br>
                 <label for="city">City:</label><br>
-                <input type="text" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter." id="city" name="city" required="required" placeholder="ex. Copenhagen"><br>
+                <input type="text" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter followed by lowercase letters." id="city" name="city" required="required" placeholder="ex. Copenhagen"><br>
+                <label for="zip">Zip:</label><br>
+                <input type="text" maxlength="10" pattern="\d+" title="Only numeric characters." id="zip" name="zip" required="required" placeholder="ex. 1050"><br>
                 <label for="country">Country:</label><br>
                 <select id="country" name="country" onchange="cprOrPass(this)" required>
                     <option value="" selected disabled hidden>Choose here</option>

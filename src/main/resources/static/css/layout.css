@@ -56,7 +56,7 @@ a.menu_link:hover{
 
 .quote{
     margin: auto;
-    font-family: "Brush Script MT";
+    font-family: "Brush Script MT", "Segoe Script", "Segoe Print";
     font-size: 40px;
 }
 
@@ -253,7 +253,13 @@ input.btn-submit-add{
 }
 
 .btn-undermenu{
-    margin: 5% 15% 2%;
+    display: inline-block;
+    margin: 5% 0% 2% 15%;
+}
+
+.btn-undermenu-next{
+    display: inline-block;
+    margin: 5% 0% 2% 2%;
 }
 
 .undermenu_button{
@@ -305,8 +311,17 @@ input.btn-submit-add{
     filter: invert(55%) sepia(39%) saturate(689%) hue-rotate(181deg) brightness(96%) contrast(94%);
 }
 
+.btn-undermenu-next:hover{
+    filter: invert(55%) sepia(39%) saturate(689%) hue-rotate(181deg) brightness(96%) contrast(94%);
+}
+
 .btn-body:hover{
     filter: invert(55%) sepia(39%) saturate(689%) hue-rotate(181deg) brightness(96%) contrast(94%);
+}
+
+/*Remove underlign from buttons*/
+.btn-undermenu a{
+    text-decoration: none;
 }
 
 .btn-action{
@@ -361,6 +376,21 @@ button:focus {
     padding: 1em 10em;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: min-content;
+}
+
+.grid-container h2{
+    text-align: left;
+    font-size: 1em;
+}
+
+.grid-container ul{
+    padding-inline-start: 0;
+}
+
+/* For changing color on read only input fields in the form */
+.read-only{
+    pointer-events: none;
+    background-color: #EBEBE4;
 }
 
 html, body {

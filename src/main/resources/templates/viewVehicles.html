@@ -1,7 +1,7 @@
 <!DOCTYPE html> <!--Karolina-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:insert="header :: header_template">
-    <title>Vehicles</title>
+    <title id="title">Vehicles</title>
     <!-- import header part-->
 </head>
 <!-- when page gets loaded, checks whether failed message was added to the model
@@ -18,7 +18,7 @@
         <!-- add button-->
         <div class="btn-undermenu">
              <a th:href="@{/addVehicle}">
-                <img src="SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>ADD NEW</strong></button>
+                <img src="http://localhost:8080/SVG/plus-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-add"><strong>ADD NEW</strong></button>
              </a>
         </div>
 

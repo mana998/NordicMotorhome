@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <!-- import header part-->
 <head th:insert="header :: header_template">
-    <title>View Employee</title>
+    <title id="title">Employee Information</title>
 </head>
 <body>
     <!-- import menu-->
@@ -11,7 +11,8 @@
     <!-- back button-->
     <div class="btn-undermenu">
         <a th:href="@{/viewEmployees}">
-            <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
+            <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
+            <button class="btn-back" style="cursor: pointer"><strong>BACK</strong></button>
         </a>
     </div>
 

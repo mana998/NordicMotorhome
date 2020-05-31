@@ -1,7 +1,7 @@
 <!DOCTYPE html> <!--Dimitrios-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:insert="header :: header_template">
-    <title>Add new agreement</title>
+    <title id="title">Update Agreement</title>
     <!-- import header part-->
 </head>
 <body>
@@ -11,7 +11,8 @@
 <!-- back button-->
 <div class="btn-undermenu">
     <a th:href="@{/agreement/viewAgreements}">
-        <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
+        <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
+        <button class="btn-back" style="cursor: pointer"><strong>BACK</strong></button>
     </a>
 </div>
 
@@ -24,29 +25,29 @@
         <fieldset>
             <p>Renter</p>
             <label>First Name:</label>
-            <input readonly name="renter.firstName" th:value="${agreement.renter.firstName}"><br>
+            <input readonly class="read-only" name="renter.firstName" th:value="${agreement.renter.firstName}"><br>
             <label>Last Name:</label>
-            <input readonly name="renter.lastName" th:value="${agreement.renter.lastName}"><br>
+            <input readonly class="read-only" name="renter.lastName" th:value="${agreement.renter.lastName}"><br>
         </fieldset>
         <fieldset>
             <p>Vehicle</p>
             <label>Plate:</label>
-            <input readonly th:value="${agreement.vehicle.plates}"><br>
+            <input readonly class="read-only" th:value="${agreement.vehicle.plates}"><br>
             <label>Brand:</label>
-            <input readonly th:value="${agreement.vehicle.brand}"><br>
+            <input readonly class="read-only" th:value="${agreement.vehicle.brand}"><br>
             <label>Model:</label>
-            <input readonly th:value="${agreement.vehicle.model}"><br>
+            <input readonly class="read-only" th:value="${agreement.vehicle.model}"><br>
             <label>Beds:</label>
-            <input readonly th:value="${agreement.vehicle.beds}"><br>
+            <input readonly class="read-only" th:value="${agreement.vehicle.beds}"><br>
             <label>Price:</label>
-            <input readonly th:value="${agreement.vehicle.price}"><br>
+            <input readonly class="read-only" th:value="${agreement.vehicle.price}"><br>
         </fieldset>
         <fieldset>
             <p>Dates</p>
             <label>Start Date:</label>
-            <input readonly th:value="${agreement.startDate}"><br>
+            <input readonly class="read-only" th:value="${agreement.startDate}"><br>
             <label>End Date:</label>
-            <input readonly th:value="${agreement.endDate}"><br>
+            <input readonly class="read-only" th:value="${agreement.endDate}"><br>
         </fieldset>
         <fieldset>
             <p>Pick-up and drop-off points</p>

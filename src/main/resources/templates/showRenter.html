@@ -1,7 +1,7 @@
 <!DOCTYPE html> <!--Marianna-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:insert="header :: header_template">
-    <title>Renter Information</title>
+    <title id="title">Renter Information</title>
     <!-- import header part-->
 </head>
 <body>
@@ -11,7 +11,8 @@
 <!-- back button-->
 <div class="btn-undermenu">
     <a th:href="@{/viewRenters}">
-        <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30"><button class="btn-back"><strong>BACK</strong></button>
+        <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
+        <button class="btn-back" style="cursor: pointer"><strong>BACK</strong></button>
     </a>
 </div>
 

@@ -41,13 +41,13 @@
     </div>
 
     <div>
-        <a href="/" class="menu_link" id="banner"><img src="http://localhost:8080/image/banner.png" height="80"></a>
+        <a href="/" id="banner"><img src="http://localhost:8080/image/banner.png" height="80"></a>
     </div>
 
     <div id="logout">
-        <form th:action="@{/logout}" method="get">
-            <button class="logout"><strong>LOG OUT</strong></button>
+        <a href="/logout" class="menu_link">
+            <button class="logout"><strong>LOG OUT</strong> </button>
             <img src="http://localhost:8080/SVG/sign-out-alt-solid.svg" class="svg logout_button" height="30" width="30">
-        </form>
+        </a>
     </div>
 </div>
