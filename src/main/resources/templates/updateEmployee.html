@@ -25,7 +25,7 @@
             <!-- Personal information update tab           -->
             <p>Personal Information</p>
             <label>Employee ID:</label>
-            <input type="text" name="id" th:value="${employee.id}" readonly="readonly" style="pointer-events: none; background-color: #EBEBE4;"><br><br>
+            <input type="text" name="id" th:value="${employee.id}" readonly="readonly" class="read-only"><br><br>
             <label>First name:</label>
             <input type="text" maxlength="45" name="firstName" pattern="[A-Z][a-z]+" title="Must start with a capital letter followed by lowercase letters." th:value="${employee.firstName}" placeholder="ex. John" required><br><br>
             <label>Last name:</label>

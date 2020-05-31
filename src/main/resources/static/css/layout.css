@@ -373,6 +373,12 @@ button:focus {
     grid-template-rows: min-content;
 }
 
+/* For changing color on read only input fields in the form */
+.read-only{
+    pointer-events: none;
+    background-color: #EBEBE4;
+}
+
 html, body {
     height: 100%;
 }
