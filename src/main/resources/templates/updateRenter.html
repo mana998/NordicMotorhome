@@ -21,9 +21,9 @@
             <fieldset>
                 <p>Personal Information</p>
                 <label for="firstName">First name:</label><br>
-                <input type="text" pattern="[A-Z][a-z]+" title="Must start with a capital letter." id="firstName" name="firstName" required="required" placeholder="ex. John" th:value="${renter.firstName}"><br>
+                <input type="text" pattern="[A-Z][a-z]+" title="Must start with a capital letter followed by lowercase letters." id="firstName" name="firstName" required="required" placeholder="ex. John" th:value="${renter.firstName}"><br>
                 <label for="lastName">Last name:</label><br>
-                <input type="text" pattern="[A-Z][a-z]+" title="Must start with a capital letter." id="lastName" name="lastName" required="required" placeholder="ex. Smith" th:value="${renter.lastName}"><br>
+                <input type="text" pattern="[A-Z][a-z]+" title="Must start with a capital letter followed by lowercase letters." id="lastName" name="lastName" required="required" placeholder="ex. Smith" th:value="${renter.lastName}"><br>
                 <label for="cpr" id="cprLabel">CPR:</label><br>
                 <input type="text" pattern="(\d){6}-(\d){4}" title="Must be in this format: DDMMYY-SSSS" id="cpr" name="cpr" required="required" placeholder="ex. 251278-4568" th:value="${renter.cpr}"><br>
                 <label for="phone">Phone:</label><br>
@@ -37,18 +37,17 @@
             <fieldset>
                 <p>Address</p>
                 <label for="street">Street:</label><br>
-                <input type="text" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with capital letter." id="street" name="street" required="required" placeholder="ex. Falkoner Alle" th:value="${renter.street}"><br>
+                <input type="text" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with capital letter followed by lowercase letters." id="street" name="street" required="required" placeholder="ex. Falkoner Alle" th:value="${renter.street}"><br>
                 <label for="building">Building:</label><br>
                 <input type="text" pattern="\d+" title="Only numeric characters." id="building" name="building" required="required" placeholder="ex. 45" th:value="${renter.building}"><br>
                 <label for="floor">Floor:</label><br>
                 <input type="text" pattern="\d+" title="Only numeric characters." id="floor" name="floor" required="required" placeholder="ex. 3" th:value="${renter.floor}"><br>
-                <!--doesn't need to be required in case of customers outside of Denmark-->
                 <label for="door">Door:</label><br>
-                <input type="text" pattern="tv|th|mf" title="Must contain only tv, th, mf." id="door" name="door" placeholder="ex. th" th:value="${renter.door}"><br>
+                <input type="text" pattern="tv|th|mf|-" title="Must contain only tv, th, mf,-." id="door" name="door" required="required" placeholder="ex. th" th:value="${renter.door}"><br>
+                <label for="city">City:</label><br>
+                <input type="text" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter followed by lowercase letters." id="city" name="city" required="required" placeholder="ex. Copenhagen" th:value="${renter.city}"><br>
                 <label for="zip">Zip:</label><br>
                 <input type="text" pattern="\d+" title="Only numeric characters." id="zip" name="zip" required="required" placeholder="ex. 1050" th:value="${renter.zip}"><br>
-                <label for="city">City:</label><br>
-                <input type="text" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter." id="city" name="city" required="required" placeholder="ex. Copenhagen" th:value="${renter.city}"><br>
                 <label for="country">Country:</label><br>
                 <select id="country" name="country" onchange="cprOrPass(this)" required>
                     <option th:value="${renter.country}" selected hidden><span th:text="${renter.country}"></span></option>

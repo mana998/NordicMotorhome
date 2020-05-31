@@ -19,32 +19,32 @@
             <label>Employee ID:</label>
             <input type="text" name="id" th:value="${employee.id}" readonly="readonly" style="pointer-events: none; background-color: #EBEBE4;"><br><br>
             <label>First name:</label>
-            <input type="text" name="firstName" pattern="[A-Z][a-z]+" title="Must start with a capital letter." th:value="${employee.firstName}" required><br><br>
+            <input type="text" name="firstName" pattern="[A-Z][a-z]+" title="Must start with a capital letter followed by lowercase letters." th:value="${employee.firstName}" placeholder="ex. John" required><br><br>
             <label>Last name:</label>
-            <input type="text" name="lastName" pattern="[A-Z][a-z]+" title="Must start with a capital letter." th:value="${employee.lastName}" required><br><br>
+            <input type="text" name="lastName" pattern="[A-Z][a-z]+" title="Must start with a capital letter followed by lowercase letters." th:value="${employee.lastName}" placeholder="ex. Smith" required><br><br>
             <label>CPR:</label>
-            <input type="text" name="cpr" pattern="(\d){6}-(\d){4}" title="Must be in this format: DDMMYY-SSSS" th:value="${employee.cpr}" required><br><br>
+            <input type="text" name="cpr" pattern="(\d){6}-(\d){4}" title="Must be in this format: DDMMYY-SSSS" th:value="${employee.cpr}" placeholder="ex. 251278-4568" required><br><br>
             <label>Telephone:</label>
-            <input type="text" name="phone" pattern="00\d+" title="Must include country code: 004552189658" th:value="${employee.phone}" required><br><br>
+            <input type="text" name="phone" pattern="00\d+" title="Must include country code: 004552189658" th:value="${employee.phone}" placeholder="ex. 004552189658" required><br><br>
             <label>Email:</label>
-            <input type="email" name="email" th:value="${employee.email}" required><br><br>
+            <input type="email" name="email" th:value="${employee.email}" placeholder="ex. smith@gmail.com" required><br><br>
         </fieldset> <br>
 
         <fieldset>
             <!-- Address update tab           -->
             <p>Address</p>
             <label>Street:</label>
-            <input type="text" name="street" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter." th:value="${employee.street}" required><br><br>
+            <input type="text" name="street" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter followed by lowercase letters." th:value="${employee.street}" placeholder="ex. Falkoner Alle" required><br><br>
             <label>Building number:</label>
-            <input type="text" name="building" pattern="\d+" title="Only numeric characters." th:value="${employee.building}" required><br><br>
+            <input type="text" name="building" pattern="\d+" title="Only numeric characters." th:value="${employee.building}" placeholder="ex. 45" required><br><br>
             <label>Floor:</label>
-            <input type="text" name="floor" pattern="\d+" title="Only numeric characters." th:value="${employee.floor}" required><br><br>
+            <input type="text" name="floor" pattern="\d+" title="Only numeric characters." th:value="${employee.floor}" placeholder="ex. 3" required><br><br>
             <label>Door:</label>
-            <input type="text" name="door" pattern="tv|th|mf" title="Must contain only tv, th, mf." th:value="${employee.door}" required><br><br>
+            <input type="text" name="door" pattern="tv|th|mf|-" title="Must contain only tv, th, mf, -." th:value="${employee.door}" placeholder="ex. th" required><br><br>
             <label>City:</label>
-            <input type="text" name="city" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Must start with a capital letter." th:value="${employee.city}" required><br><br>
+            <input type="text" name="city" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter followed by lowercase letters." th:value="${employee.city}" placeholder="ex. Copenhagen" required><br><br>
             <label>Zip:</label>
-            <input type="text" name="zip" pattern="\d+" title="Only numeric characters." th:value="${employee.zip}" required><br><br>
+            <input type="text" name="zip" pattern="\d+" title="Only numeric characters." th:value="${employee.zip}" placeholder="ex. 1050" required><br><br>
             <label>Country:</label>
             <!--    Country drop down list            -->
             <select id="country" name="country" onchange="cprOrPass(this)" required>
@@ -57,9 +57,9 @@
             <!-- Job update tab           -->
             <p>Job Specifics</p>
             <label>Job title:</label>
-            <input type="text" name="type" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter." th:value="${employee.type}" required><br><br>
+            <input type="text" name="type" pattern="[A-ZÄÖÜÅÆØ][a-zäöüßøæå]+([ -][A-ZÄÖÜÅÆØ][a-zäöüßøæå]*)*" title="Each word must start with a capital letter followed by lowercase letters." th:value="${employee.type}" placeholder="ex. Sales Assistant" required><br><br>
             <label>Salary:</label>
-            <input type="text" name="salary" pattern="\d+" title="Only numeric characters." th:value="${employee.salary}" required><br><br>
+            <input type="text" name="salary" pattern="\d+" title="Only numeric characters." th:value="${employee.salary}" placeholder="ex. 25000" required><br><br>
 
             <input type="checkbox" id="chk1" name="chk1" onclick="showPriv(this)">
             <label for="chk1">Would you like to change system privileges?</label>
