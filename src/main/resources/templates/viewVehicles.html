@@ -48,7 +48,7 @@
                         <td>
                             <a th:href="@{'/showVehicle/'+${vehicle.vehicleID}}"><button class="btn-action">VIEW</button></a>
                             <a th:href="@{'/updateVehicle/'+${vehicle.vehicleID}}"><button class="btn-action">UPDATE</button></a>
-                            <a th:href="@{'/deleteVehicle/'+${vehicle.vehicleID}}"><button class="btn-action" onclick="return confirm('Are you sure you want to delete this item?');">DELETE</button></a><!-- cant delete vehicles with active/future contract-->
+                            <a th:href="@{'/deleteVehicle/'+${vehicle.vehicleID}}"><button class="btn-action" onclick="return confirm('Are you sure you want to delete this vehicle?');">DELETE</button></a><!-- cant delete vehicles with active/future contract-->
                         </td>
                     </tr>
                     </tbody>

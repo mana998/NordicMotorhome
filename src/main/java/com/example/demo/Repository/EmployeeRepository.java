@@ -17,7 +17,7 @@ public class EmployeeRepository{ //Ilias
     JdbcTemplate template;
 
     //Method to get all the employees and their data from the DB
-    public List<Employee> fetchAll(){
+    public List<Employee> showEmployeesList(){
         // Using aliases as DB column names and our Employee variables have different names
         String sql = "SELECT employeeID AS id, first_name AS firstName, last_name AS lastName, " +
                             "CPR AS cpr, email, phone, salary, IFNULL(username, 'N/A') AS username, " +

@@ -324,10 +324,15 @@ input.btn-submit-add{
     text-decoration: none;
 }
 
+.btn-undermenu-next a{
+    text-decoration: none;
+}
+
 .btn-action{
     border: none;
     color: white;
     background-color: #324960;
+    cursor: pointer;
 }
 
 .btn-cancel{
@@ -373,7 +378,7 @@ button:focus {
 .grid-container{
     display: grid;
     margin : 0;
-    padding: 1em 10em;
+    padding: 1em 15%;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: min-content;
 }

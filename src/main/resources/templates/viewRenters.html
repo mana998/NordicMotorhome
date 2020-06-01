@@ -48,7 +48,7 @@
                         <td>
                             <a th:href="@{'/showRenter/'+${renter.id}}"><button class="btn-action">VIEW</button></a>
                             <a th:href="@{'/updateRenter/'+${renter.id}}"><button class="btn-action">UPDATE</button></a>
-                            <a th:href="@{'/deleteRenter/'+${renter.id}}"><button class="btn-action" onclick="return confirm('Are you sure you want to delete this item?');">DELETE</button></a><!-- cant delete members with active contract-->
+                            <a th:href="@{'/deleteRenter/'+${renter.id}}"><button class="btn-action" onclick="return confirm('Are you sure you want to delete this renter?');">DELETE</button></a><!-- cant delete members with active contract-->
                         </td>
                     </tr>
                     </tbody>

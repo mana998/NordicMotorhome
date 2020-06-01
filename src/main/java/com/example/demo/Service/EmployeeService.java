@@ -13,8 +13,8 @@ public class EmployeeService { //Ilias
     @Autowired
     EmployeeRepository empRepo;
 
-    public List<Employee> fetchAll(){
-        return empRepo.fetchAll();
+    public List<Employee> showEmployeesList(){
+        return empRepo.showEmployeesList();
     }
 
     public Employee addEmployee(Employee emp){

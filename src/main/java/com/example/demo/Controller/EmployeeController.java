@@ -22,7 +22,7 @@ public class EmployeeController { //Ilias
     @GetMapping("/viewEmployees")
     public String employees(Model model){
                 //Gets all the employees from the database
-                List<Employee> employeeList = employeeService.fetchAll();
+                List<Employee> employeeList = employeeService.showEmployeesList();
                 //and passes them to the model
                 model.addAttribute("employees", employeeList);
         return "viewEmployees";
