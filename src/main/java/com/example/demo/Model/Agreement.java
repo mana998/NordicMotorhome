@@ -222,11 +222,11 @@ public class Agreement {
             }
             return cancellationCost;
         } else if (daysDifference >= minDaysPriorToRental) {
-            return calculateTotalCost() * percentageMinimumDays;
+            return DoubleRounder.round(calculateTotalCost() * percentageMinimumDays, 2);
         } else if (daysDifference >= 1) {
-            return calculateTotalCost() * percentageLessThanMinimumDays;
+            return DoubleRounder.round(calculateTotalCost() * percentageLessThanMinimumDays, 2);
         } else {
-            return calculateTotalCost() * percentageSameDay;
+            return DoubleRounder.round(calculateTotalCost() * percentageSameDay, 2);
         }
     }
 

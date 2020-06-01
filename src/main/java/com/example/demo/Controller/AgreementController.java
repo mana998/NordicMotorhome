@@ -149,8 +149,7 @@ public class AgreementController {
         agreementService.addAgreement(agreement);
         // stores items associated with new agreement to the database
         agreementService.addItems(agreement,itemList.getItems());
-        theModel.addAttribute(agreement);
-        return "addAgreementShowCharges";
+        return "redirect:/agreement/viewAgreements";
     }
 
     // mapping for showing renters to select, in case the user selects the existing renter option
@@ -184,7 +183,7 @@ public class AgreementController {
 
     // mapping for posting info about the new agreement if the user selects existing renter
     @PostMapping("/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}/existing-renter/{renterId}")
-    public String saveContractInfo(@PathVariable("startDate") String startDate,
+    public String saveAgreementExistingRenter(@PathVariable("startDate") String startDate,
                                    @PathVariable("endDate") String endDate,
                                    @PathVariable("vehicleId") int vehicleId,
                                    @PathVariable("renterId") int renterId,
@@ -203,9 +202,7 @@ public class AgreementController {
         agreementService.addAgreement(agreement);
         //gets list of items from wrapper class and inserts them into db
         agreementService.addItems(agreement,itemList.getItems());
-        // passes the new agreement to the model in order to show the charges/costs
-        model.addAttribute("agreement", agreement);
-        return "addAgreementShowCharges";
+        return "redirect:/agreement/viewAgreements";
     }
 
     // mapping for showing a selected agreement

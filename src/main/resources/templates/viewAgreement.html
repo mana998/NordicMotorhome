@@ -35,7 +35,7 @@
         <section>
             <h2>Extra Items</h2>
             <ul th:each="item: ${agreement.items}">
-                <li><strong th:text="${item.name + ': '}"></strong> <span th:text="${item.quantity + 'x ' + item.price + 'DK'}"></span></li>
+                <li><strong th:text="${item.name + ': '}"></strong> <span th:text="${item.quantity + ' x ' + item.price + ' EUR'}"></span></li>
             </ul>
         </section>
         <section>
