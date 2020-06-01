@@ -30,8 +30,8 @@
             <input type="text" maxlength="45" name="firstName" pattern="[A-Z][a-z]+" title="Must start with a capital letter followed by lowercase letters." th:value="${employee.firstName}" placeholder="ex. John" required><br><br>
             <label>Last name:</label>
             <input type="text" maxlength="45" name="lastName" pattern="[A-Z][a-z]+" title="Must start with a capital letter followed by lowercase letters." th:value="${employee.lastName}" placeholder="ex. Smith" required><br><br>
-            <label>CPR:</label>
-            <input type="text" maxlength="20" name="cpr" pattern="(\d){6}-(\d){4}" title="Must be in this format: DDMMYY-SSSS" th:value="${employee.cpr}" placeholder="ex. 251278-4568" required><br><br>
+            <label id="cprLabel">CPR:</label>
+            <input type="text" id="cpr" maxlength="20" name="cpr" pattern="(\d){6}-(\d){4}" title="Must be in this format: DDMMYY-SSSS" th:value="${employee.cpr}" placeholder="ex. 251278-4568" required><br><br>
             <label>Telephone:</label>
             <input type="text" maxlength="20" name="phone" pattern="00\d+" title="Must include country code: 004552189658" th:value="${employee.phone}" placeholder="ex. 004552189658" required><br><br>
             <label>Email:</label>
