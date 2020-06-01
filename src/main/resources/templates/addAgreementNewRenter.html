@@ -29,7 +29,7 @@
                 <label for="lastName">Last name:</label><br>
                 <input type="text" maxlength="45" pattern="[A-Z][a-z]+" title="Must start with a capital letter followed by lowercase letters." id="lastName" name="lastName" required="required" placeholder="ex. Smith"><br>
                 <label for="cpr" maxlength="20" id="cprLabel">CPR:</label><br>
-                <input type="text"  title="Must be in this format: DDMMYY-SSSS" id="cpr" name="cpr" required="required" placeholder="ex. 251278-4568"><br>
+                <input type="text" pattern="(\d){6}-(\d){4}" title="Must be in this format: DDMMYY-SSSS" id="cpr" name="cpr" required="required" placeholder="ex. 251278-4568"><br>
                 <label for="phone">Phone:</label><br>
                 <input type="text" maxlength="20" pattern="00\d+" title="Must include country code: 004552189658" id="phone" name="phone" required="required" placeholder="ex. 004552189658"><br>
                 <label for="email">Email:</label><br>
