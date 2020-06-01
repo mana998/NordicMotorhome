@@ -15,68 +15,69 @@
         <button class="btn-back" style="cursor: pointer"><strong>BACK</strong></button>
     </a>
 </div>
+<main class="main_body">
+    <div class="main" id="main">
 
-<div class="main" id="main">
-
-<h1 th:text="${renter.firstName} + ' ' + ${renter.lastName}"></h1>
-    <section class="grid-container">
-        <section>
-            <h2>Contact Information</h2>
-            <ul>
-                <li><strong th:text="${renter.country == 'Denmark'} ? 'CPR:' : 'Passport:'" >CPR:</strong> <span th:text="${renter.cpr}"></span></li>
-                <li><strong>Email:</strong> <span th:text="${renter.email}"></span></li>
-                <li><strong>Phone:</strong> <span th:text="${renter.phone}"></span></li>
-                <li><strong>License Number:</strong> <span th:text="${renter.licenseNumber}"></span></li>
-            </ul>
+    <h1 th:text="${renter.firstName} + ' ' + ${renter.lastName}"></h1>
+        <section class="grid-container">
+            <section>
+                <h2>Contact Information</h2>
+                <ul>
+                    <li><strong th:text="${renter.country == 'Denmark'} ? 'CPR:' : 'Passport:'" >CPR:</strong> <span th:text="${renter.cpr}"></span></li>
+                    <li><strong>Email:</strong> <span th:text="${renter.email}"></span></li>
+                    <li><strong>Phone:</strong> <span th:text="${renter.phone}"></span></li>
+                    <li><strong>License Number:</strong> <span th:text="${renter.licenseNumber}"></span></li>
+                </ul>
+            </section>
+            <section>
+                <h2>Address</h2>
+                <ul>
+                    <li th:text="${renter.street + ' ' + renter.building + ', ' + renter.floor + ' ' + renter.door}"></li>
+                    <li th:text="${renter.zip + ' ' + renter.city}"></li>
+                    <li th:text="${renter.country}"></li>
+                </ul>
+            </section>
         </section>
-        <section>
-            <h2>Address</h2>
-            <ul>
-                <li th:text="${renter.street + ' ' + renter.building + ', ' + renter.floor + ' ' + renter.door}"></li>
-                <li th:text="${renter.zip + ' ' + renter.city}"></li>
-                <li th:text="${renter.country}"></li>
-            </ul>
+        <h1 th:if="${!activeAgreements.empty}">Active Agreements:</h1></br>
+        <section class="grid-container">
+            <article th:each="agreement: ${activeAgreements}" class="grid-column">
+                <ul>
+                    <li><strong>Id:</strong> <span th:text="${agreement.id}"></span></li>
+                    <li><strong>Dates:</strong> <span th:text="${#temporals.format(agreement.startDate, 'dd/MM/yyyy') + ' - ' + #temporals.format(agreement.endDate, 'dd/MM/yyyy')}"></span></li>
+                    <li><strong>Vehicle:</strong> <span th:text="${agreement.vehicle.brand + ' ' + agreement.vehicle.model}"></span></li>
+                    <li><a th:href="@{'/showAgreement/'+${agreement.id}}"><button class="btn-action">VIEW</button></a></li>
+                </ul>
+                </hr>
+            </article>
         </section>
-    </section>
-    <h1 th:if="${!activeAgreements.empty}">Active Contracts:</h1></br>
-    <section class="grid-container">
-        <article th:each="agreement: ${activeAgreements}" class="grid-column">
-            <ul>
-                <li><strong>Id:</strong> <span th:text="${agreement.id}"></span></li>
-                <li><strong>Dates:</strong> <span th:text="${#temporals.format(agreement.startDate, 'dd/MM/yyyy') + ' - ' + #temporals.format(agreement.endDate, 'dd/MM/yyyy')}"></span></li>
-                <li><strong>Vehicle:</strong> <span th:text="${agreement.vehicle.brand + ' ' + agreement.vehicle.model}"></span></li>
-                <li><a th:href="@{'/showAgreement/'+${agreement.id}}"><button class="btn-action">VIEW</button></a></li>
-            </ul>
-            </hr>
-        </article>
-    </section>
-    <h1 th:if="${!futureAgreements.empty}">Future Contracts:</h1></br>
-    <section class="grid-container">
-        <article th:each="agreement: ${futureAgreements}" class="grid-column">
-            <ul>
-                <li><strong>Id:</strong> <span th:text="${agreement.id}"></span></li>
-                <li><strong>Dates:</strong> <span th:text="${#temporals.format(agreement.startDate, 'dd/MM/yyyy') + ' - ' + #temporals.format(agreement.endDate, 'dd/MM/yyyy')}"></span></li>
-                <li><strong>Vehicle:</strong> <span th:text="${agreement.vehicle.brand + ' ' + agreement.vehicle.model}"></span></li>
-                <li><a th:href="@{'/agreement/showAgreement/'+${agreement.id}}"><button class="btn-action">VIEW</button></a></li>
-            </ul>
-            </hr>
-        </article>
-    </section>
-    <h1 th:if="${!inactiveAgreements.empty}">Inactive Contracts:</h1></br>
-    <section class="grid-container">
-        <article th:each="agreement: ${inactiveAgreements}" class="grid-column">
-            <ul>
-                <li><strong>Id:</strong> <span th:text="${agreement.id}"></span></li>
-                <li><strong>Dates:</strong> <span th:text="${#temporals.format(agreement.startDate, 'dd/MM/yyyy') + ' - ' + #temporals.format(agreement.endDate, 'dd/MM/yyyy')}"></span></li>
-                <li><strong>Vehicle:</strong> <span th:text="${agreement.vehicle.brand + ' ' + agreement.vehicle.model}"></span></li>
-                <strong><li th:text="${agreement.cancelled} ? 'Cancelled'" style="color: red">Cancelled</li></strong>
-                <li><a th:href="@{'/agreement/showAgreement/'+${agreement.id}}"><button class="btn-action">VIEW</button></a></li>
-            </ul>
-            </hr>
-        </article>
-    </section>
+        <h1 th:if="${!futureAgreements.empty}">Future Agreements:</h1></br>
+        <section class="grid-container">
+            <article th:each="agreement: ${futureAgreements}" class="grid-column">
+                <ul>
+                    <li><strong>Id:</strong> <span th:text="${agreement.id}"></span></li>
+                    <li><strong>Dates:</strong> <span th:text="${#temporals.format(agreement.startDate, 'dd/MM/yyyy') + ' - ' + #temporals.format(agreement.endDate, 'dd/MM/yyyy')}"></span></li>
+                    <li><strong>Vehicle:</strong> <span th:text="${agreement.vehicle.brand + ' ' + agreement.vehicle.model}"></span></li>
+                    <li><a th:href="@{'/agreement/showAgreement/'+${agreement.id}}"><button class="btn-action">VIEW</button></a></li>
+                </ul>
+                </hr>
+            </article>
+        </section>
+        <h1 th:if="${!inactiveAgreements.empty}">Inactive Agreements:</h1></br>
+        <section class="grid-container">
+            <article th:each="agreement: ${inactiveAgreements}" class="grid-column">
+                <ul>
+                    <li><strong>Id:</strong> <span th:text="${agreement.id}"></span></li>
+                    <li><strong>Dates:</strong> <span th:text="${#temporals.format(agreement.startDate, 'dd/MM/yyyy') + ' - ' + #temporals.format(agreement.endDate, 'dd/MM/yyyy')}"></span></li>
+                    <li><strong>Vehicle:</strong> <span th:text="${agreement.vehicle.brand + ' ' + agreement.vehicle.model}"></span></li>
+                    <strong><li th:text="${agreement.cancelled} ? 'Cancelled'" style="color: red">Cancelled</li></strong>
+                    <li><a th:href="@{'/agreement/showAgreement/'+${agreement.id}}"><button class="btn-action">VIEW</button></a></li>
+                </ul>
+                </hr>
+            </article>
+        </section>
 
-</div>
+    </div>
+</main>
 <!-- insert footer -->
 <div th:insert="footer :: footer_template"></div>
 </body>
