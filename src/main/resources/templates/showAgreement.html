@@ -26,10 +26,10 @@
             <ul>
                 <li><strong>Start Date:</strong> <span th:text="${#temporals.format(agreement.startDate, 'dd-MM-yyyy')}"></span></li>
                 <li><strong>End Date:</strong> <span th:text="${#temporals.format(agreement.endDate, 'dd-MM-yyyy')}"></span></li>
-                <li><strong>Vehicle Fee:</strong> <span th:text="${agreement.calculateVehicleCost()}"></span></li>
-                <li><strong>Transfer Fee:</strong> <span th:text="${agreement.calculateTransferCost()}"></span></li>
-                <li><strong>Extra Items Fee:</strong> <span th:text="${agreement.calculateItemsCost()}"></span></li>
-                <li><strong>Total Fee:</strong> <span th:text="${agreement.calculateTotalCost() + ' ' + 'EUR'}"></span></li>
+                <li><strong>Vehicle Fee:</strong> <span th:text="${agreement.calculateVehicleFee()}"></span></li>
+                <li><strong>Transfer Fee:</strong> <span th:text="${agreement.calculateTransferFee()}"></span></li>
+                <li><strong>Extra Items Fee:</strong> <span th:text="${agreement.calculateItemsFee()}"></span></li>
+                <li><strong>Total Fee:</strong> <span th:text="${agreement.calculateTotalPrice() + ' ' + 'EUR'}"></span></li>
             </ul>
         </section>
         <section>

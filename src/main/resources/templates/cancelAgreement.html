@@ -27,9 +27,9 @@
                 <td th:text="${agreement.id}"></td>
                 <td th:text="${agreement.startDate}"></td>
                 <td th:text="${agreement.endDate}"></td>
-                <td th:text="${agreement.calculateTotalCost()}"></td>
+                <td th:text="${agreement.calculateTotalPrice()}"></td>
                 <td th:text="${agreement.findDifferenceInDays(now, agreement.startDate)}"></td>
-                <td th:text="${agreement.calculateCancellationCost()}"></td>
+                <td th:text="${agreement.calculateCancellationFee()}"></td>
             </tbody>
         </table>
     </div>

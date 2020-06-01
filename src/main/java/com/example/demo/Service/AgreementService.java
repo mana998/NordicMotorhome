@@ -80,7 +80,7 @@ public class AgreementService {
     }
 
     public void endAgreement(Agreement agreement) {
-        agreementRepository.endAgreement(agreement);
+        agreementRepository.generateInvoice(agreement);
     }
 
     public void cancelAgreement(int id) {

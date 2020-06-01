@@ -28,7 +28,7 @@
             <input readonly class="read-only" name="renter.firstName" th:value="${agreement.renter.firstName}"><br>
             <label>Last Name:</label>
             <input readonly class="read-only" name="renter.lastName" th:value="${agreement.renter.lastName}"><br>
-        </fieldset>
+        </fieldset><br>
         <fieldset>
             <p>Vehicle</p>
             <label>Plate:</label>
@@ -41,21 +41,21 @@
             <input readonly class="read-only" th:value="${agreement.vehicle.beds}"><br>
             <label>Price:</label>
             <input readonly class="read-only" th:value="${agreement.vehicle.price}"><br>
-        </fieldset>
+        </fieldset><br>
         <fieldset>
             <p>Dates</p>
             <label>Start Date:</label>
             <input readonly class="read-only" th:value="${agreement.startDate}"><br>
             <label>End Date:</label>
             <input readonly class="read-only" th:value="${agreement.endDate}"><br>
-        </fieldset>
+        </fieldset><br>
         <fieldset>
             <p>Pick-up and drop-off points</p>
             <label>Pick-up point:</label>
             <input type="number" min="0" max="999999" th:value="${agreement.pickUpPoint}"><br>
             <label>Drop-off point:</label>
             <input type="number" min="0" max="999999" th:field="${agreement.dropOffPoint}"><br>
-        </fieldset>
+        </fieldset><br>
         <fieldset>
             <p>Extra charges</p><!-- Marianna -->
             <div th:each="item, itemStat: *{items}">
@@ -66,7 +66,7 @@
                 <input type="number" hidden  th:field="*{items[__${itemStat.index}__].price}" th:value="*{items[__${itemStat.index}__].price}">
             </div>
         </fieldset> <br>
-        <input class="btn-submit-add" type="submit" value="Save">
+        <input class="btn-submit-add" type="submit" value="Submit">
     </form>
 </main>
 <!-- import footer-->

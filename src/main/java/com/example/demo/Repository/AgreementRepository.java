@@ -127,7 +127,7 @@ public class AgreementRepository {
         template.update(updateStatement, id);
     }
 
-    public void endAgreement(Agreement agreement) {
+    public void generateInvoice(Agreement agreement) {
         String updateStatement = "UPDATE agreement " +
                 "SET driven_km = ?, level_of_gasoline = ? WHERE agreementID = ? ";
         template.update(updateStatement, agreement.getDrivenKm(), agreement.isLevelGasoline(), agreement.getId());
