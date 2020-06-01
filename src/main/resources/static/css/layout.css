@@ -373,7 +373,7 @@ button:focus {
 .grid-container{
     display: grid;
     margin : 0;
-    padding: 1em 10em;
+    padding: 1em 15%;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: min-content;
 }
