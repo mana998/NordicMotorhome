@@ -60,14 +60,12 @@
             </fieldset><br>
 
             <fieldset>
-                <p>Agreement Information</p>
-                <p>Pick-up and drop-off</p>
-                <label>Pick-up point:</label>
-                <input type="number" min="0" max="999999" th:field="${agreement.pickUpPoint}" placeholder="distance in km" required><br><br>
-                <small>Must be non negative decimal number.</small><br>
-                <label>Drop-off point:</label>
-                <input type="number" min="0" max="999999" th:field="${agreement.dropOffPoint}" placeholder="distance in km" required><br><br>
-                <small>Must be non negative decimal number.</small><br>
+                <p>Pick-up and drop-off points</p>
+                <label>Pick-up:</label>
+                <input type="number" min="0" max="999999" title="Must be non negative decimal number." th:field="${agreement.pickUpPoint}" placeholder="distance in km" required><br><br>
+                <label>Drop-off:</label>
+                <input type="number" min="0" max="999999" title="Must be non negative decimal number." th:field="${agreement.dropOffPoint}" placeholder="distance in km" required><br><br>
+                <br>
             </fieldset> <br>
 
             <fieldset>
