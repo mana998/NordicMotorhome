@@ -5,6 +5,7 @@ import com.example.demo.Model.Item;
 import com.example.demo.Model.Renter;
 import com.example.demo.Model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -29,7 +30,7 @@ public class AgreementRepository {
     public List<Agreement> findAll(){
         String sql = "SELECT agreementID, renterID, first_name, last_name, vehicleID, plates, price, start_date, end_date, pick_up_point, drop_off_point, " +
                 "driven_km, level_of_gasoline, is_cancelled " +
-                "FROM agreement INNER JOIN vehicle USING (vehicleID) INNER JOIN renter USING (renterID) INNER JOIN model USING (modelID) ORDER BY agreementID ";
+                "FROM agreement LEFT JOIN vehicle USING (vehicleID) LEFT JOIN renter USING (renterID) LEFT JOIN model USING (modelID) ORDER BY agreementID ";
         new AgreementRowMapper();
         return template.query(sql, new AgreementRowMapper());
     }
@@ -112,7 +113,7 @@ public class AgreementRepository {
     public Agreement findById(int agreementId) {
         String sql = "SELECT agreementID, renterID, first_name, last_name, vehicleID, start_date, end_date, pick_up_point, drop_off_point, " +
                      "driven_km, level_of_gasoline, plates, price, is_cancelled " +
-                     "FROM agreement INNER JOIN vehicle USING (vehicleID) INNER JOIN renter USING (renterID) INNER JOIN model USING (modelID) WHERE agreementID = ? ";
+                     "FROM agreement LEFT JOIN vehicle USING (vehicleID) LEFT JOIN renter USING (renterID) LEFT JOIN model USING (modelID) WHERE agreementID = ? ";
         return template.queryForObject(sql, new AgreementRowMapper(), agreementId);
     }
 

@@ -55,12 +55,16 @@ public class AgreementService {
         Agreement agreement = agreementRepository.findById(agreementId);
         // find and set the vehicle for this agreement
         int vehicleId = agreement.getVehicle().getVehicleID();
-        Vehicle vehicle = vehicleRepository.findVehicleById(vehicleId);
-        agreement.setVehicle(vehicle);
+        if (vehicleId != 0) {
+            Vehicle vehicle = vehicleRepository.findVehicleById(vehicleId);
+            agreement.setVehicle(vehicle);
+        }
         // find and set the renter for this agreement
         int renterId = agreement.getRenter().getId();
-        Renter renter = renterRepository.findRenterById(renterId);
-        agreement.setRenter(renter);
+        if (renterId != 0) {
+            Renter renter = renterRepository.findRenterById(renterId);
+            agreement.setRenter(renter);
+        }
         // find and set the extra items for this agreement
         //List<Item> itemList = agreementRepository.findItemsForAgreement(agreement.getId());
         //agreement.setItems(itemList);

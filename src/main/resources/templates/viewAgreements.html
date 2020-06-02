@@ -33,7 +33,7 @@
                     <table class="fl-table">
                         <thead>
                         <tr>
-                            <th>Agreement ID</th>
+                            <th>ID</th>
                             <th>From</th>
                             <th>To</th>
                             <th>Renter Name</th>
@@ -46,17 +46,17 @@
                             <td th:text="${agreement.id}"></td>
                             <td th:text="${#temporals.format(agreement.startDate, 'dd-MM-yyyy')}"></td>
                             <td th:text="${#temporals.format(agreement.endDate, 'dd-MM-yyyy')}"></td>
-                            <td th:text="${agreement.renter.firstName + ' ' + agreement.renter.lastName}"></td>
+                            <td th:text="${agreement.renter.firstName} ? ${agreement.renter.firstName + ' ' + agreement.renter.lastName}: 'N/A'"></td>
                             <!-- add license plate here!!! -->
-                            <td th:text="${agreement.vehicle.plates}"></td>
+                            <td th:text="${agreement.vehicle.plates} ? ${agreement.vehicle.plates} : 'N/A' "></td>
                             <td>
                                 <!-- Add view function -->
                                 <a th:href="@{/agreement/viewAgreement(agreementId=${agreement.id})}" ><button class="btn-action">VIEW</button></a>
                                 <a th:href="@{'/agreement/updateAgreement/'+${agreement.id}}" ><button class="btn-action">UPDATE</button></a>
-                                <a th:if="${agreement.drivenKm == 0} and !${agreement.cancelled}" th:href="@{/agreement/showFormForUpdate(agreementId=${agreement.id})}"><button class="btn-action">GENERATE INVOICE</button></a>
-                                <a th:if="!${agreement.drivenKm == 0} or ${agreement.cancelled}"><button class="btn-action-disabled" disabled>GENERATE INVOICE</button></a>
-                                <a th:if="${agreement.canBeCancelled(agreement.startDate)} and !${agreement.cancelled}" th:href="@{/agreement/cancelAgreement(agreementId=${agreement.id})}"><button class="btn-cancel">CANCEL</button></a>
-                                <a th:if="!${agreement.canBeCancelled(agreement.startDate)} or ${agreement.cancelled}"><button class="btn-cancel-disabled" disabled>CANCEL</button></a>
+                                <a th:if="${agreement.drivenKm == 0} and !${agreement.cancelled} and ${agreement.renter.firstName} and ${agreement.vehicle.plates}" th:href="@{/agreement/showFormForUpdate(agreementId=${agreement.id})}"><button class="btn-action">GENERATE INVOICE</button></a>
+                                <a th:if="!${agreement.drivenKm == 0} or ${agreement.cancelled} or !${agreement.renter.firstName} or !${agreement.vehicle.plates}"><button class="btn-action-disabled" disabled>GENERATE INVOICE</button></a>
+                                <a th:if="${agreement.canBeCancelled(agreement.startDate)} and !${agreement.cancelled} and ${agreement.renter.firstName} and ${agreement.vehicle.plates}" th:href="@{/agreement/cancelAgreement(agreementId=${agreement.id})}"><button class="btn-cancel">CANCEL</button></a>
+                                <a th:if="!${agreement.canBeCancelled(agreement.startDate)} or ${agreement.cancelled} or !${agreement.renter.firstName} or !${agreement.vehicle.plates}"><button class="btn-cancel-disabled" disabled>CANCEL</button></a>
                             </td>
                         </tr>
                         </tbody>

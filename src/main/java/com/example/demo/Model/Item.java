@@ -32,6 +32,10 @@ public class Item {
         return price*quantity;
     }
 
+    public double getSinglePrice() {
+        return price;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
