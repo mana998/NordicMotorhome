@@ -50,9 +50,6 @@ public class AgreementController {
         // passes agreement object to handle date input for starting and ending date
         Agreement agreement = new Agreement();
         model.addAttribute("agreement", agreement);
-        // passes vehicle object to handle input for number of beds and vehicle price
-        Vehicle vehicle = new Vehicle();
-        model.addAttribute(vehicle);
         // passes the current date to the model in order to handle the minimum accepted date in the form
         model.addAttribute("now", LocalDate.now());
         return "addAgreementSelectDates";
@@ -60,7 +57,7 @@ public class AgreementController {
 
     // mapping for posting the two dates and finding available vehicles
     @PostMapping("/create/selectDates")
-    public String saveDates(@ModelAttribute Agreement agreement, @ModelAttribute Vehicle vehicle, Model model) {
+    public String saveDates(@ModelAttribute Agreement agreement, Model model) {
         // if the end date is before the start date, then switch the dates
         if (agreement.getEndDate().isBefore(agreement.getStartDate())) {
             LocalDate tempDate = agreement.getEndDate();
@@ -70,8 +67,8 @@ public class AgreementController {
         model.addAttribute("startDate", agreement.getStartDate());
         model.addAttribute("endDate", agreement.getEndDate());
         List<Vehicle> availableVehicles = vehicleService.findVehiclesAvailableForAgreement(agreement.getStartDate(),
-                agreement.getEndDate(), vehicle.getBeds(), vehicle.getPrice());
-        // if there are no available vehicles based on search criteria, show noresults page
+                agreement.getEndDate(), agreement.getVehicle().getBeds(), agreement.getVehicle().getPrice());
+        // if there are no available vehicles based on search criteria, show no-results page
         if (availableVehicles.isEmpty()) {
             return "noresults";
         } else {
@@ -80,7 +77,6 @@ public class AgreementController {
             return "addAgreementShowAvailableVehicles";
         }
     }
-
 
     // mapping for showing page where the user chooses between new or existing renter
     @GetMapping("/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}")
@@ -111,8 +107,6 @@ public class AgreementController {
         theModel.addAttribute("itemList", items);
         List<String> countries = countryService.showCountriesList();
         theModel.addAttribute("countries", countries);
-        // in case we want to add a list of countries for the dropdown?
-        //theModel.addAttribute("countryList", countryList.getCountries());
         return "addAgreementNewRenter";
     }
 

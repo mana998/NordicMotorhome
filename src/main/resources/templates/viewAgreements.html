@@ -39,7 +39,8 @@
                             <th>Renter Name</th>
                             <th>Vehicle License Plate</th>
                             <th>Action</th>
-                            <th>Cancel</th>
+                            <th>Cancellation</th>
+                            <th>Invoice</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -59,6 +60,13 @@
                                 <!-- Cancel button available if is not past the due date and is not cancelled already -->
                                 <div>
                                     <a th:if="${agreement.canBeCancelled(agreement.startDate)} and !${agreement.cancelled}" th:href="@{/agreement/cancelAgreement(agreementId=${agreement.id})}"><button class="btn-cancel">CANCEL</button></a>
+                                </div>
+                            </td>
+                            <!-- Generate Invoice function -->
+                            <td>
+                                <!-- End button available if driven km is zero (meaning: not ended yet) and is not cancelled already -->
+                                <div>
+                                    <a th:if="${agreement.drivenKm == 0} and !${agreement.cancelled}" th:href="@{/agreement/showFormForUpdate(agreementId=${agreement.id})}"><button class="btn-action">GENERATE INVOICE</button></a>
                                 </div>
                             </td>
                         </tr>

@@ -93,4 +93,5 @@ public class Vehicle { //Karolina
     public void setIsAvailable(boolean isAvailable) {
         this.isAvailable = isAvailable;
     }
+
 }
