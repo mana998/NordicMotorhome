@@ -200,6 +200,7 @@ public class AgreementController {
     @GetMapping("/viewAgreement")
     public String showSingle(@RequestParam("agreementId") int agreementId, Model model) {
         Agreement agreement = agreementService.findById(agreementId);
+        setVehicleRenter(agreement);
         // set the item list associated with this agreement
         List<Item> itemList = agreementService.findItemsForAgreement(agreement.getId());
         agreement.setItems(itemList);
@@ -222,6 +223,7 @@ public class AgreementController {
     public String showFormForInvoice(@RequestParam ("agreementId") int agreementId, Model model) {
         // get the agreement from the db
         Agreement agreement = agreementService.findById(agreementId);
+        setVehicleRenter(agreement);
         // set agreement as a model attribute to pre-populate the form
         model.addAttribute("agreement", agreement);
         // send over to the form
@@ -247,8 +249,10 @@ public class AgreementController {
     @GetMapping("/updateAgreement/{id}")
     public String showFormForUpdate(@PathVariable("id") int id, Model model) {
         // get the agreement from the db
+        Agreement agreement = agreementService.findById(id);
+        setVehicleRenter(agreement);
         // and pass it to the model
-        model.addAttribute("agreement", agreementService.findById(id));
+        model.addAttribute("agreement", agreement);
         //get all the items associated with the agreement
         ItemCreation items = new ItemCreation(agreementService.findItemsForAgreement(id));
         //add all the other available items in case new ones should be added to an agreement
@@ -271,8 +275,10 @@ public class AgreementController {
     public String showCancellationFee(@RequestParam ("agreementId") int agreementId, Model model) {
         // get the agreement from the db
         Agreement agreement = agreementService.findById(agreementId);
-        //get all items for the agreement
+        setVehicleRenter(agreement);
         agreement.setItems(agreementService.findItemsForAgreement(agreement.getId()));
+        // and pass it to the model
+        model.addAttribute("agreement", agreement);
         // and pass it to the model
         model.addAttribute("now", LocalDate.now());
         model.addAttribute("agreement", agreement);
@@ -286,5 +292,23 @@ public class AgreementController {
         agreement.setItems(agreementService.findItemsForAgreement(agreement.getId()));
         model.addAttribute("agreement", agreement);
         return "showInvoice";
+    }                                                  
+
+
+    //method for assigning vehicle and renter to the agreement
+    public void setVehicleRenter (Agreement agreement) {
+        // find and set the vehicle for this agreement
+        int vehicleId = agreement.getVehicle().getVehicleID();
+        if (vehicleId != 0) {
+            Vehicle vehicle = vehicleService.findVehicleById(vehicleId);
+            agreement.setVehicle(vehicle);
+        }
+        // find and set the renter for this agreement
+        int renterId = agreement.getRenter().getId();
+        if (renterId != 0) {
+            Renter renter = renterService.findRenterById(renterId);
+            agreement.setRenter(renter);
+        }
     }
+ 
 }

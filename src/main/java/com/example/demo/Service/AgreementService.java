@@ -2,11 +2,7 @@ package com.example.demo.Service;
 
 import com.example.demo.Model.Agreement;
 import com.example.demo.Model.Item;
-import com.example.demo.Model.Renter;
-import com.example.demo.Model.Vehicle;
 import com.example.demo.Repository.AgreementRepository;
-import com.example.demo.Repository.RenterRepository;
-import com.example.demo.Repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +13,10 @@ import java.util.List;
 public class AgreementService {
 
     private AgreementRepository agreementRepository;
-    private VehicleRepository vehicleRepository;
-    private RenterRepository renterRepository;
 
     @Autowired
-    public AgreementService(AgreementRepository agreementRepository, VehicleRepository vehicleRepository, RenterRepository renterRepository) {
+    public AgreementService(AgreementRepository agreementRepository) {
         this.agreementRepository = agreementRepository;
-        this.vehicleRepository = vehicleRepository;
-        this.renterRepository = renterRepository;
     }
 
     public List<Agreement> findAll() {
@@ -53,21 +45,6 @@ public class AgreementService {
     public Agreement findById(int agreementId) {
         // find agreement by the agreement id
         Agreement agreement = agreementRepository.findById(agreementId);
-        // find and set the vehicle for this agreement
-        int vehicleId = agreement.getVehicle().getVehicleID();
-        if (vehicleId != 0) {
-            Vehicle vehicle = vehicleRepository.findVehicleById(vehicleId);
-            agreement.setVehicle(vehicle);
-        }
-        // find and set the renter for this agreement
-        int renterId = agreement.getRenter().getId();
-        if (renterId != 0) {
-            Renter renter = renterRepository.findRenterById(renterId);
-            agreement.setRenter(renter);
-        }
-        // find and set the extra items for this agreement
-        //List<Item> itemList = agreementRepository.findItemsForAgreement(agreement.getId());
-        //agreement.setItems(itemList);
         return agreement;
     }
 
