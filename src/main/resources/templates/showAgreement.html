@@ -35,7 +35,7 @@
             <section>
                 <h2>Extra Items</h2>
                 <ul th:each="item: ${agreement.items}">
-                    <li><strong th:text="${item.name + ': '}"></strong> <span th:text="${item.quantity + ' x ' + item.price + ' EUR'}"></span></li>
+                    <li><strong th:text="${item.name + ': '}"></strong> <span th:text="${item.quantity + 'x ' + item.price + ' EUR'}"></span></li>
                 </ul>
             </section>
         </section>
@@ -44,6 +44,7 @@
             <section>
                 <h2>Renter Information</h2>
                 <ul>
+                    <li><strong>Name:</strong> <span th:text="${agreement.renter.firstName + ' ' + agreement.renter.lastName}"></span></li>
                     <li><strong>CPR:</strong> <span th:text="${agreement.renter.cpr}"></span></li>
                     <li><strong>Email:</strong> <span th:text="${agreement.renter.email}"></span></li>
                     <li><strong>Phone:</strong> <span th:text="${agreement.renter.phone}"></span></li>
