@@ -131,7 +131,6 @@ public class VehicleRepository { //Karolina
                         "OR (start_date <= ? AND end_date <= ? AND end_date >= ?)" +
                         ")" +
                         "AND beds >= ? AND price <= ? ";
-
         List<Vehicle> result = template.query(sql, new Object[] {sqlFromDate, sqlToDate, sqlFromDate, sqlToDate, sqlFromDate,
                 sqlToDate, sqlFromDate, sqlFromDate, sqlToDate, sqlToDate, beds, price}, rowMapper);
         return result;

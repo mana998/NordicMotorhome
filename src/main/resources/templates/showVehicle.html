@@ -17,7 +17,7 @@
 </div>
 <main class="main_body">
     <div class="main" id="main">
-
+        <!-- display vehicle information -->
         <h1 th:text="${vehicle.brand} + ' ' + ${vehicle.model} + ' ' + ${vehicle.plates}"></h1>
         <section class="grid-container">
             <section>
@@ -29,6 +29,7 @@
                 </ul>
             </section>
         </section>
+        <!-- display active agreements if any -->
         <h1 th:if="${!activeAgreements.empty}">Active Agreements:</h1></br>
         <section class="grid-container">
             <article th:each="agreement: ${activeAgreements}" class="grid-column">
@@ -42,6 +43,7 @@
             </article>
         </section>
         </section>
+        <!-- display future agreements if any -->
         <h1 th:if="${!futureAgreements.empty}">Future Agreements:</h1></br>
         <section class="grid-container">
             <article th:each="agreement: ${futureAgreements}" class="grid-column">
@@ -54,6 +56,7 @@
                 </hr>
             </article>
         </section>
+        <!-- display inactive agreements if any -->
         <h1 th:if="${!inactiveAgreements.empty}">Inactive Agreements:</h1></br>
         <section class="grid-container">
             <article th:each="agreement: ${inactiveAgreements}" class="grid-column">
