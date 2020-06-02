@@ -149,12 +149,23 @@ public class Agreement {
     }
 
     public double calculateTotalPrice() {
-        return calculateExtraKmFee() + calculateVehicleFee() + calculateItemsFee() + calculateTransferFee()
-                + calculateFuelFee();
+      return calculateExtraKmFee() + calculateVehicleFee() + calculateItemsFee() + calculateTransferFee()
+                    + calculateFuelFee();
+    }
+
+    public double calculateInvoiceTotal() {
+        if (isCancelled) {
+            return calculateCancellationFee();
+        } else {
+            return calculateTotalPrice();
+        }
     }
 
     public double calculateExtraKmFee() {
         int days = findDifferenceInDays(startDate, endDate);
+        if (days==0) {
+            days=1;
+        }
         double extraKm = drivenKm - (days * freeKmPerDay);
         double extraKmCost;
         extraKmCost = extraKm * pricePerExtraKm;
@@ -231,7 +242,7 @@ public class Agreement {
 
     public boolean canBeCancelled(LocalDate startDate) {
         LocalDate currentDate = LocalDate.now();
-        return findDifferenceInDays(currentDate, startDate) >= 0;
+        return findDifferenceInDays(currentDate, startDate) >= 0 && drivenKm==0;
     }
 
     @Override
