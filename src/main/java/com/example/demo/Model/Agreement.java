@@ -1,6 +1,5 @@
 package com.example.demo.Model;
 
-import org.apache.tomcat.jni.Local;
 import org.decimal4j.util.DoubleRounder;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -8,36 +7,36 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-import static java.lang.Math.ceil;
 import static java.lang.String.valueOf;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Agreement {
 
     // prices are in euros
+    final double transferFeePerKm = 0.70;
+    final double fuelFee = 70.00;
     final double freeKmPerDay = 400.00;
-    final double transferCostPerKm = 0.70;
-    final double tankCost = 70.00;
     final double pricePerExtraKm = 1.00;
     // cancellation costs
+    final double minimumCancellationCost = 200.00;
     final int maxDaysPriorToRental = 50;
+    final double percentageMaxDays = 0.20;
     final int minDaysPriorToRental = 15;
-    final double percentageMaximumDays = 0.20;
-    final double minimumCancellationCost = 200;
-    final double percentageMinimumDays = 0.50;
-    final double percentageLessThanMinimumDays = 0.80;
+    final double percentageMinDays = 0.50;
+    final double percentageLessThanMinDays = 0.80;
     final double percentageSameDay = 0.95;
+    // high season and middle season months
     final List<String> highSeason = Arrays.asList("JUNE", "JULY", "AUGUST");
     final List<String> middleSeason = Arrays.asList("SEPTEMBER", "OCTOBER", "APRIL", "MAY");
 
     private int id;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate startDate; // dates are important!!!
+    private LocalDate startDate;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate endDate;
-    private Vehicle vehicle; // either plate or name or both
-    private Renter renter; // last name and first letter of first name
-    private double drivenKm;
+    private Vehicle vehicle;
+    private Renter renter;
+    private double drivenKm; // km driven by the renter
     private double pickUpPoint;
     private double dropOffPoint;
     private List<Item> items;
@@ -149,12 +148,12 @@ public class Agreement {
         isCancelled = cancelled;
     }
 
-    public double calculateTotalCost() {
-        return calculateExtraKmCost() + calculateVehicleCost() + calculateItemsCost() + calculateTransferCost()
-                + calculateTankCost();
+    public double calculateTotalPrice() {
+        return calculateExtraKmFee() + calculateVehicleFee() + calculateItemsFee() + calculateTransferFee()
+                + calculateFuelFee();
     }
 
-    public double calculateExtraKmCost() {
+    public double calculateExtraKmFee() {
         int days = findDifferenceInDays(startDate, endDate);
         double extraKm = drivenKm - (days * freeKmPerDay);
         double extraKmCost;
@@ -166,7 +165,7 @@ public class Agreement {
         }
     }
 
-    public double calculateVehicleCost() {
+    public double calculateVehicleFee() {
         int daysBetween = findDifferenceInDays(startDate, endDate);
         double price = vehicle.getPrice();
         String month = valueOf(startDate.getMonth());
@@ -181,7 +180,7 @@ public class Agreement {
         return daysBetween * price;
     }
 
-    public double calculateItemsCost() {
+    public double calculateItemsFee() {
         double result = 0;
         for (Item item : items) {
             result += item.getPrice();
@@ -189,21 +188,21 @@ public class Agreement {
         return result;
     }
 
-    public double calculateTransferCost() {
+    public double calculateTransferFee() {
         if (pickUpPoint != 0 || dropOffPoint != 0) {
-            double result = (pickUpPoint * transferCostPerKm) + (dropOffPoint * transferCostPerKm);
+            double result = (pickUpPoint * transferFeePerKm) + (dropOffPoint * transferFeePerKm);
             return DoubleRounder.round(result, 2);
         }
         return 0;
     }
 
-    public double calculateTankCost() {
+    public double calculateFuelFee() {
         // if level of gasoline in the tank is more than half full, then no charge
         if (levelGasoline) {
             return 0.0;
             // else, charge the renter
         } else {
-            return tankCost;
+            return fuelFee;
         }
     }
 
@@ -211,22 +210,22 @@ public class Agreement {
         return  (int) DAYS.between(dateBefore, dateAfter);
     }
 
-    public double calculateCancellationCost() {
-        double cancellationCost = 0;
+    public double calculateCancellationFee() {
+        double cancellationFee = 0;
         LocalDate currentDate = LocalDate.now();
         int daysDifference = findDifferenceInDays(currentDate, startDate);
         if (daysDifference >= maxDaysPriorToRental) {
-            cancellationCost = calculateTotalCost() * percentageMaximumDays;
-            if (cancellationCost < minimumCancellationCost) {
+            cancellationFee = calculateTotalPrice() * percentageMaxDays;
+            if (cancellationFee < minimumCancellationCost) {
                 return minimumCancellationCost;
             }
-            return cancellationCost;
+            return cancellationFee;
         } else if (daysDifference >= minDaysPriorToRental) {
-            return calculateTotalCost() * percentageMinimumDays;
+            return DoubleRounder.round(calculateTotalPrice() * percentageMinDays, 2);
         } else if (daysDifference >= 1) {
-            return calculateTotalCost() * percentageLessThanMinimumDays;
+            return DoubleRounder.round(calculateTotalPrice() * percentageLessThanMinDays, 2);
         } else {
-            return calculateTotalCost() * percentageSameDay;
+            return DoubleRounder.round(calculateTotalPrice() * percentageSameDay, 2);
         }
     }
 

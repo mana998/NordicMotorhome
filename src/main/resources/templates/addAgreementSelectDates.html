@@ -7,31 +7,28 @@
 <body>
     <!-- import menu-->
     <div th:insert="menu :: menu_template"></div>
-
-    <h1 class="heading">Add New Agreement</h1>
-
+    <!-- back button-->
+    <div class="btn-undermenu">
+        <a th:href="@{/agreement/viewAgreements}">
+            <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
+            <button class="btn-back" style="cursor: pointer"><strong>BACK</strong></button>
+        </a>
+    </div>
     <main class="main_body">
-        <form action="#" th:action="@{/create/selectDates}" method="post">
-            <fieldset>
-                <p>Time period, number of beds and price</p>
-                <div class="form-group">
-                    <label for="startDate">*From:</label>
-                    <input type="date" th:attr="min=${now}" placeholder="Enter date" id="startDate" th:field="${agreement.startDate}" required>
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="endDate">*To:</label>
-                    <input type="date" class="form-control" th:attr="min=${now}" placeholder="Enter date" id="endDate" th:field="${agreement.endDate}" required>
-                </div><br>
-                <label for="price">Number of beds:</label>
-                <input type="number" min="2" max="6" th:field="${vehicle.beds}" id="beds" required value="2"><br>
-                <small>Must be a number between 2 and 6.</small><br><br>
-
-                <label for="price">Maximum price:</label>
-                <input type="number" min="200" max="1000" th:field="${vehicle.price}" id="price" required value="200"><br>
-                <small>Must be a number between 200 and 1000.</small><br>
-            </fieldset><br>
-            <input class="btn-submit-add" type="submit" value="Find Available Vehicles">
+        <h1 class="heading">Add New Agreement</h1>
+        <form action="#" th:action="@{/agreement/create/selectDates}" th:object="${agreement}" method="post">
+            <fieldset style="width: 300px;">
+            <p>Time period, number of beds and price</p>
+            <label for="startDate">From:</label><br>
+            <input type="date" th:attr="min=${now}" id="startDate" name="startDate" required="required"><br>
+            <label for="endDate">To:</label><br>
+            <input type="date" th:attr="min=${now}" id="endDate" name="endDate" required="required"><br>
+            <label for="beds">Minimum number of beds:</label><br>
+            <input type="number" min="0" max="2147483647" title="Only numeric characters." id="beds" name="vehicle.beds" required="required" placeholder="ex. 4"><br>
+            <label for="price">Maximum price in EUR:</label><br>
+            <input type="number" min="0" max="2147483647" title="Only numeric characters." id="price" name="vehicle.price" required="required" placeholder="ex. 500"><br>
+        </fieldset><br>
+        <input class="btn-submit-add" type="submit" value="Find Available Vehicles">
         </form>
     </main>
     <!-- import footer-->

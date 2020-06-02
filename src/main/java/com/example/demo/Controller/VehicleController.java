@@ -2,8 +2,6 @@ package com.example.demo.Controller;
 
 import com.example.demo.Model.Vehicle;
 import com.example.demo.Service.AgreementService;
-import com.example.demo.Service.BrandService;
-import com.example.demo.Service.ModelService;
 import com.example.demo.Service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,10 +19,6 @@ public class VehicleController { //Karolina
     @Autowired
     VehicleService vehicleService;
     @Autowired
-    BrandService brandService;
-    @Autowired
-    ModelService modelService;
-    @Autowired
     AgreementService agreementService;
 
     //display table with all vehicles
@@ -37,9 +31,7 @@ public class VehicleController { //Karolina
 
     //display add vehicle form
     @GetMapping("/addVehicle")
-    public String addVehicle(Model model){
-        //model.addAttribute("brands", brandService.showBrandsList());
-        //model.addAttribute("models", modelService.showModelsList());
+    public String addVehicle(){
         return "addVehicle"; }
 
     //add new vehicle

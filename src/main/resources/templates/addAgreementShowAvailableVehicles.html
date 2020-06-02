@@ -7,12 +7,18 @@
 <body>
     <!-- import menu-->
     <div th:insert="menu :: menu_template"></div>
-
-    <h1 class="heading">Add New Agreement</h1><br>
-
-    <h2 class="heading">Available vehicles between <span th:text="${#temporals.format(startDate, 'dd-MM-yyyy')} + ' and ' + ${#temporals.format(endDate, 'dd-MM-yyyy')}"></span>:</h2><br>
+    <!-- back button-->
+    <div class="btn-undermenu">
+        <a th:href="@{/agreement/create/selectDates}">
+            <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
+            <button class="btn-back" style="cursor: pointer"><strong>BACK</strong></button>
+        </a>
+    </div>
 
     <main class="main_body">
+        <h1 class="heading">Add New Agreement</h1><br>
+
+        <h2 class="heading">Available vehicles between <span th:text="${#temporals.format(startDate, 'dd-MM-yyyy')} + ' and ' + ${#temporals.format(endDate, 'dd-MM-yyyy')}"></span>:</h2><br>
 
         <div class="main table-wrapper" id="main">
             <table class="fl-table">
@@ -37,7 +43,7 @@
                     <td th:text="${vehicle.price}"></td>
                     <td>
                         <!-- Add select button -->
-                        <a th:href="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}(startDate = ${startDate},
+                        <a th:href="@{/agreement/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}(startDate = ${startDate},
                         endDate = ${endDate}, vehicleId=${vehicle.vehicleID})}"><button class="btn-action">SELECT</button></a>
                     </td>
                 </tr>

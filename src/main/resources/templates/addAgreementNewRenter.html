@@ -10,16 +10,16 @@
 
     <!-- back button-->
     <div class="btn-undermenu">
-        <a th:href="@{/create/selectDates}">
+        <a th:href="@{/agreement/viewAgreements}">
             <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
-            <button class="btn-back" style="cursor: pointer"><strong>Back to agreement list</strong></button>
+            <button class="btn-back" style="cursor: pointer"><strong>BACK</strong></button>
         </a>
     </div>
 
     <h1 class="heading">Add New Agreement</h1><br>
 
     <main class="main_body">
-        <form th:action="@{/create/{startDate}/{endDate}/selectVehicle/{vehicleId}/new-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}" th:object="${itemList}" method="post">
+        <form th:action="@{/agreement/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}/new-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}" th:object="${itemList}" method="post">
             <!-- Add hidden form field to handle the update -->
             <input type="hidden" th:field="${agreement.id}" />
             <fieldset>
@@ -35,7 +35,7 @@
                 <label for="email">Email:</label><br>
                 <input type="email" maxlength="45" id="email" name="email" required="required" placeholder="ex. smith@gmail.com"><br>
                 <label for="licenseNumber">License Number:</label><br>
-                <input type="text" maxlength="45" pattern="[a-zA-Z0-9]+" title="Must contain only alphanumeric characters" id="licenseNumber" name="licenseNumber" required="required" placeholder="License Number"></br>
+                <input type="text" maxlength="45" pattern="[a-zA-Z0-9]+" title="Must contain only alphanumeric characters" id="licenseNumber" name="licenseNumber" required="required" placeholder="ex. 20346734LK29382"></br>
             </fieldset></br>
 
             <fieldset>
@@ -60,14 +60,12 @@
             </fieldset><br>
 
             <fieldset>
-                <p>Agreement Information</p>
-                <p>Pick-up and drop-off</p>
-                <label>Pick-up point:</label>
-                <input type="number" min="0" max="999999" th:field="${agreement.pickUpPoint}" placeholder="distance in km" required><br><br>
-                <small>Must be non negative decimal number.</small><br>
-                <label>Drop-off point:</label>
-                <input type="number" min="0" max="999999" th:field="${agreement.dropOffPoint}" placeholder="distance in km" required><br><br>
-                <small>Must be non negative decimal number.</small><br>
+                <p>Pick-up and drop-off points</p>
+                <label for="pickUpPoint">Pick-up:</label><br>
+                <input type="number" min="0" max="2147483647" title="Only numeric characters." id="pickUpPoint" name="pickUpPoint" required="required" placeholder="ex. 45"><br>
+                <label for="dropOffPoint">Drop-off:</label><br>
+                <input type="number" min="0" max="2147483647" title="Only numeric characters." id="dropOffPoint" name="dropOffPoint" required="required" placeholder="ex. 45"><br>
+                <br>
             </fieldset> <br>
 
             <fieldset>

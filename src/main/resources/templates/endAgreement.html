@@ -7,10 +7,21 @@
 <body>
     <!-- import menu-->
     <div th:insert="menu :: menu_template"></div>
+
+    <!-- back button-->
+    <div class="btn-undermenu">
+        <a th:href="@{/agreement/viewAgreements}">
+            <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
+            <button class="btn-back" style="cursor: pointer"><strong>BACK</strong></button>
+        </a>
+    </div>
+
+    <h1 class="heading">Generate Invoice</h1>
+
     <main class="main_body">
-        <br><h2>End agreement</h2>
+
         <div class="main table-wrapper" id="main">
-            <form action="#" th:action="@{/showAgreementListForEnd}" method="get" class="form-inline">
+            <form action="#" th:action="@{/agreement/showAgreementListForEnd}" method="get" class="form-inline">
                 <div style="float:left;">
                     <div>
                         <p style="margin-right: 3px;">Search by the end date of the agreement: </p>
@@ -34,7 +45,6 @@
                     <th>Renter Name</th>
                     <th>Vehicle License Plate</th>
                     <th>Action</th>
-                    <!--<th></th>-->
                 </tr>
                 </thead>
                 <tbody>
@@ -47,7 +57,7 @@
                     <td>
                         <!-- End button available if driven km is zero (meaning: not ended yet) and is not cancelled already -->
                         <div>
-                            <a th:if="${agreement.drivenKm == 0} and !${agreement.cancelled}" th:href="@{/showFormForUpdate(agreementId=${agreement.id})}"><button class="btn-action">END</button></a>
+                            <a th:if="${agreement.drivenKm == 0} and !${agreement.cancelled}" th:href="@{/agreement/showFormForUpdate(agreementId=${agreement.id})}"><button class="btn-action">GENERATE</button></a>
                         </div>
                     </td>
                 </tr>

@@ -41,17 +41,13 @@ public class AgreementService {
 
     public void addItems(Agreement agreement, List<Item> itemList) {
         //gets the id of the latest agreement (one that should be assigned with items)
-        int agreementId = findMaxAgreementId();
+        int agreementId = agreementRepository.findMaxAgreementId();
         agreementRepository.addItems(agreementId, itemList);
     }
 
     public void updateItems(Agreement agreement, List<Item> itemList) {
         //gets the id of the current agreement (one that should be assigned with items)
         agreementRepository.updateItems(agreement.getId(), itemList);
-    }
-
-    public int findMaxAgreementId() {
-        return agreementRepository.findMaxAgreementId();
     }
 
     public Agreement findById(int agreementId) {
@@ -80,7 +76,7 @@ public class AgreementService {
     }
 
     public void endAgreement(Agreement agreement) {
-        agreementRepository.endAgreement(agreement);
+        agreementRepository.generateInvoice(agreement);
     }
 
     public void cancelAgreement(int id) {

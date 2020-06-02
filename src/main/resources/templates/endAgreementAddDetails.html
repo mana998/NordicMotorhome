@@ -11,18 +11,20 @@
 <h1 class="heading">End Agreement</h1><br>
 
 <main class="main_body">
-    <form action="#" th:action="@{/save}" th:object="${agreement}" method="post">
+    <form action="#" th:action="@{/agreement/save}" th:object="${agreement}" method="post">
         <fieldset>
             <!-- add hidden form field to handle the update -->
             <input type="hidden" th:field="*{id}">
             <input type="hidden" th:field="*{renter.id}">
             <input type="hidden" th:field="*{renter.firstName}">
             <input type="hidden" th:field="*{renter.lastName}">
+            <input type="hidden" th:field="*{renter.cpr}">
+            <input type="hidden" th:field="*{renter.email}">
+            <input type="hidden" th:field="*{renter.phone}">
             <input type="hidden" th:field="*{startDate}">
             <input type="hidden" th:field="*{endDate}">
             <input type="hidden" th:field="*{pickUpPoint}">
             <input type="hidden" th:field="*{dropOffPoint}">
-            <input type="hidden" th:field="*{startDate}">
             <input type="hidden" th:field="*{vehicle.vehicleID}">
             <input type="hidden" th:field="*{vehicle.price}">
             <input type="hidden" th:field="*{vehicle.plates}">
@@ -32,11 +34,9 @@
             <label for="yes">yes</label>
             <input type="radio" id="no" name="levelGasoline" th:field="${agreement.levelGasoline}" value="0">
             <label for="no">no</label><br><br>
+            <label for="drivenKm">How many km has the renter driven?</label>
+            <input type="number" min="1" max="2147483647" title="Only numeric characters." id="drivenKm" name="drivenKm" required="required" placeholder="ex. 45"><br>
 
-            <!-- add number input for driven km -->
-            <label>How many km has the renter driven?:</label>
-            <input type="number" min="1" max="999999" th:field="${agreement.drivenKm}" placeholder="Driven kilometers" required><br>
-            <small>Must be non negative decimal number.</small><br>
         </fieldset>
         <input class="btn-submit-add" type="submit" value="Submit">
     </form>

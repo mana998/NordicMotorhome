@@ -1,0 +1,131 @@
+<!DOCTYPE html> <!--Dimitrios-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="header :: header_template">
+    <title id="title">Generate Invoice</title>
+</head>
+
+<body>
+<!-- import menu-->
+<div th:insert="menu :: menu_template"></div>
+<!-- back button-->
+<div class="btn-undermenu">
+    <a th:href="@{/agreement/showAgreementListForEnd}">
+        <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
+        <button class="btn-back" style="cursor: pointer"><strong>BACK</strong></button>
+    </a>
+</div>
+<input type="hidden" th:field="${agreement.id}">
+<h1>Invoice</h1>
+
+<div class="invoice-box">
+    <table cellpadding="0" cellspacing="0">
+        <tr class="top">
+            <td colspan="2">
+                <table>
+                    <tr>
+                        <td class="title">
+                            <img src="http://localhost:8080/image/logo.png" style="width: 100px; height: 100px;">
+                        </td>
+                        <td>
+                            Invoice for Agreement <span th:text="${agreement.id}"></span><br>
+                            Created: <span th:text="${#temporals.format(now, 'dd-MM-yyyy')}"></span><br>
+                            Due: <span th:text="${#temporals.format(dueDate, 'dd-MM-yyyy')}"></span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr class="information">
+            <td colspan="2">
+                <table>
+                    <tr>
+                        <td>
+                            Nordic Motorhome Rental<br>
+                            Glostrupvej 245, 2340 <br>
+                            Brøndby, Denmark
+                        </td>
+
+                        <td>
+                            <span th:text="${agreement.renter.firstName} + ' ' + ${agreement.renter.lastName}"></span><br>
+                            <span th:text="${agreement.renter.email}"></span><br>
+                            <span th:text="${agreement.renter.phone}"></span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr class="heading">
+            <td>
+                Item
+            </td>
+
+            <td>
+                Price
+            </td>
+        </tr>
+
+        <tr class="item">
+            <td>
+                Vehicle Fee (days x price per day)
+            </td>
+
+            <td>
+                <span th:text="${agreement.calculateVehicleFee()}"></span>
+            </td>
+        </tr>
+
+        <tr class="item" th:each="item: ${agreement.items}">
+            <td>
+                <span th:text="${item.name + ' (' + item.quantity + ')'}"></span>
+            </td>
+
+            <td>
+                <span th:text="${item.price}"></span>
+            </td>
+        </tr>
+
+        <tr class="item">
+            <td>
+                Transfer Fee
+            </td>
+
+            <td>
+                <span th:text="${agreement.calculateTransferFee()}"></span>
+            </td>
+        </tr>
+
+        <tr class="item">
+            <td>
+                Fuel Fee
+            </td>
+
+            <td>
+                <span th:text="${agreement.calculateFuelFee()}"></span>
+            </td>
+        </tr>
+
+        <tr class="item last">
+            <td>
+                Extra km Fee
+            </td>
+
+            <td>
+                <span th:text="${agreement.calculateExtraKmFee()}"></span>
+            </td>
+        </tr>
+
+        <tr class="total">
+            <td></td>
+
+            <td>
+                Total: <span th:text="${agreement.calculateTotalPrice() + ' ' + 'EUR'}"></span>
+            </td>
+        </tr>
+    </table>
+</div>
+<!-- insert footer -->
+<div th:insert="footer :: footer_template"></div>
+</body>
+</html>

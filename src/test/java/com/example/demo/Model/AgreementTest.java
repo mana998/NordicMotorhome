@@ -23,7 +23,7 @@ class AgreementTest {
         agreement.setStartDate(date1);
         LocalDate date2 = LocalDate.of(2020, 5, 27);
         agreement.setEndDate(date2);
-        assertEquals(0, agreement.calculateExtraKmCost());
+        assertEquals(0, agreement.calculateExtraKmFee());
     }
 
     @Test

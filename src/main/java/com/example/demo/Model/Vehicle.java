@@ -18,16 +18,6 @@ public class Vehicle { //Karolina
     public Vehicle() {
     }
 
-    /*public Vehicle(int vehicleID, String plates, String brand, String model, int beds, double price, boolean isAvailable) {
-        this.vehicleID = vehicleID;
-        this.plates = plates;
-        this.brand = brand;
-        this.model = model;
-        this.beds = beds;
-        this.price = price;
-        this.isAvailable = isAvailable;
-    }*/
-
     public Vehicle(String plates, String brand, String model, int beds, double price, boolean isAvailable) {
         this.vehicleID = vehicleID;
         this.plates = plates;
@@ -93,4 +83,5 @@ public class Vehicle { //Karolina
     public void setIsAvailable(boolean isAvailable) {
         this.isAvailable = isAvailable;
     }
+
 }

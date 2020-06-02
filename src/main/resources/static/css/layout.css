@@ -1,13 +1,11 @@
+/* Set the general font and font-color on the website */
 body, button{
     font-family: Tahoma, sans-serif ;
     color: #324960;
     margin: 0;
 }
 
-#tabs{
-    padding: 0 10%;
-}
-
+/* Style menu */
 .flex-container{
     display: flex;
     margin : 0;
@@ -35,7 +33,6 @@ a.menu_link:hover{
 }
 
 .menu_item{
-    /* align-content: flex-star;*/
     font-size: 1em;
     cursor: pointer;
 }
@@ -45,9 +42,29 @@ a.menu_link:hover{
     filter: invert(24%) sepia(50%) saturate(395%) hue-rotate(169deg) brightness(95%) contrast(92%);
 }
 
+#menu {
+    padding: 0 40% 0 15%;
+    margin : 0;
+}
+
+/* Style banner */
+#banner{
+    position: fixed;
+    left:10px;
+    top:10px;
+    width:90px;
+    margin-top: 0;
+}
+
+/*#navigation{
+    position:fixed;
+    top: 0;
+    background-color: #c9ccf0;
+}*/
+
+/* Style image and quote on the home page */
 .motorimg{
     display: flex;
-
 }
 
 .motorimg img{
@@ -60,9 +77,11 @@ a.menu_link:hover{
     font-size: 40px;
 }
 
+/* Style welcome message to the logged-in user */
 .myuser{
     text-align: left;
-    margin-left: 10px;
+    margin-top: 55px;
+    margin-left: 22px;
     font-size: 15px;
 }
 
@@ -71,6 +90,7 @@ a.menu_link:hover{
     font-weight: bold;
 }
 
+/* Style logout button in the right top corner */
 #logout{
     position: fixed;
     right:0px;
@@ -98,37 +118,7 @@ button.logout{
     cursor: pointer;
 }
 
-#menu {
-    /*  list-style-type: none;*/
-    padding: 0 40% 0 15%;
-    margin : 0;
-}
-
-input{
-    font-size: 16px;
-    border: none;
-    text-decoration: none;
-}
-
-input:hover{
-    background-color: cornflowerblue;
-    color: white;
-}
-
-#banner{
-    position: fixed;
-    left:10px;
-    top:0px;
-    width:100px;
-    margin-top: 0;
-}
-
-#navigation{
-    position:fixed;
-    top: 0;
-    background-color: #c9ccf0;
-}
-
+/* Style table */
 .table-wrapper{
     margin: 0% 15% 5%;
     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
@@ -170,6 +160,7 @@ input:hover{
     background: #F8F8F8;
 }
 
+/* Style headers */
 h1, h2 {
     text-align: center;
 }
@@ -178,20 +169,25 @@ h2{
     font-size: 14px;
 }
 
+/* Style list elements */
 li {
     list-style-type: none;
     text-align: left;
 }
 
-footer {
-    background: cornflowerblue;
-    color: white;
-    font-size: 13px;
-    padding: 10px;
-    text-align: center;
-    margin-bottom: 0;
+/* Style input in forms - also buttons */
+input{
+    font-size: 16px;
+    border: none;
+    text-decoration: none;
 }
 
+input:hover{
+    background-color: cornflowerblue;
+    color: white;
+}
+
+/* Style form */
 fieldset{
     border:1px solid lightgrey;
     -moz-border-radius:8px;
@@ -252,6 +248,7 @@ input.btn-submit-add{
     display:block;
 }
 
+/* Style buttons which are below the menu*/
 .btn-undermenu{
     display: inline-block;
     margin: 5% 0% 2% 15%;
@@ -260,6 +257,10 @@ input.btn-submit-add{
 .btn-undermenu-next{
     display: inline-block;
     margin: 5% 0% 2% 2%;
+}
+
+.btn-undermenu-next .btn-add{
+    width: 170px;
 }
 
 .undermenu_button{
@@ -319,21 +320,33 @@ input.btn-submit-add{
     filter: invert(55%) sepia(39%) saturate(689%) hue-rotate(181deg) brightness(96%) contrast(94%);
 }
 
-/*Remove underlign from buttons*/
-.btn-undermenu a{
-    text-decoration: none;
-}
-
+/* Style actions buttons in table*/
 .btn-action{
     border: none;
     color: white;
     background-color: #324960;
+    cursor: pointer;
+}
+
+.btn-action-disabled{
+    border: none;
+    color: white;
+    background-color: #324960;
+    opacity: 50%;
+}
+
+.btn-cancel-disabled{
+    border: none;
+    color: white;
+    background-color: #FF5733;
+    opacity: 50%;
 }
 
 .btn-cancel{
     border: none;
     color: white;
     background-color: #FF5733;
+    cursor: pointer;
 }
 
 .btn-action:hover{
@@ -350,10 +363,24 @@ input.btn-submit-add{
     background: #f8f8f8;
 }
 
+.fl-table tr:nth-child(even) .btn-cancel:hover {
+    background: #f8f8f8;
+}
+
+/* Remove underline from buttons */
+.btn-undermenu a{
+    text-decoration: none;
+}
+
+.btn-undermenu-next a{
+    text-decoration: none;
+}
+
 td a{
     text-decoration: none;
 }
 
+/* Remove the blue outline around buttons while being pressed */
 button:focus {
     outline: 0;
 }
@@ -368,12 +395,11 @@ button:focus {
     font-size: 20px;
 }
 
-
-/* For displaying collumns in SHOW pages*/
+/* Display columns on SHOW pages*/
 .grid-container{
     display: grid;
     margin : 0;
-    padding: 1em 10em;
+    padding: 1em 15%;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: min-content;
 }
@@ -387,31 +413,109 @@ button:focus {
     padding-inline-start: 0;
 }
 
-/* For changing color on read only input fields in the form */
+/* Change color on read only input fields in the form */
 .read-only{
     pointer-events: none;
     background-color: #EBEBE4;
 }
 
+/* Style invoice */
+.invoice-box {
+    max-width: 800px;
+    margin: auto;
+    margin-bottom: 100px;
+    padding: 30px;
+    border: 1px solid #eee;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+    font-size: 16px;
+    line-height: 24px;
+    font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    color: #555;
+}
+
+.invoice-box table {
+    width: 100%;
+    line-height: inherit;
+    text-align: left;
+}
+
+.invoice-box table td {
+    padding: 5px;
+    vertical-align: top;
+}
+
+.invoice-box table tr td:nth-child(2) {
+    text-align: right;
+}
+
+.invoice-box table tr.top table td {
+    padding-bottom: 20px;
+}
+
+.invoice-box table tr.top table td.title {
+    font-size: 45px;
+    line-height: 45px;
+    color: #333;
+}
+
+.invoice-box table tr.information table td {
+    padding-bottom: 40px;
+}
+
+.invoice-box table tr.heading td {
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+}
+
+.invoice-box table tr.details td {
+    padding-bottom: 20px;
+}
+
+.invoice-box table tr.item td{
+    border-bottom: 1px solid #eee;
+}
+
+.invoice-box table tr.item.last td {
+    border-bottom: none;
+}
+
+.invoice-box table tr.total td:nth-child(2) {
+    border-top: 2px solid #eee;
+    font-weight: bold;
+}
+
+/* Style footer */
+footer {
+    background: cornflowerblue;
+    color: white;
+    font-size: 13px;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+/* Make footer sticky to the bottom using Flexbox */
 html, body {
     height: 100%;
 }
+
 body {
     display: flex;
     flex-direction: column;
 }
+
 .main_body {
     flex: 1 0 auto;
     margin-bottom: 5%;
 }
+
 .footer {
     flex-shrink: 0;
 }
 
 
-
 /* Responsive */
-
 @media (max-width: 767px) {
     .fl-table {
         display: block;
