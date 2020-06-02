@@ -286,10 +286,14 @@ public class AgreementController {
     }
 
     @PostMapping("/saveCancel")
-    public String saveCancellation(@ModelAttribute("agreement") Agreement agreement) {
+    public String saveCancellation(@ModelAttribute("agreement") Agreement agreement, Model model) {
         agreementService.cancelAgreement(agreement.getId());
-        return "redirect:/agreement/viewAgreements";
-    }
+        agreement.setCancelled(true);
+        agreement.setItems(agreementService.findItemsForAgreement(agreement.getId()));
+        model.addAttribute("agreement", agreement);
+        return "showInvoice";
+    }                                                  
+
 
     //method for assigning vehicle and renter to the agreement
     public void setVehicleRenter (Agreement agreement) {
@@ -306,17 +310,5 @@ public class AgreementController {
             agreement.setRenter(renter);
         }
     }
-    /*@GetMapping("/showInvoice")
-    public String showInvoice(@RequestParam("agreementId") int agreementId, Model model) {
-        Agreement agreement = agreementService.findById(agreementId);
-        // set the item list associated with this agreement
-        List<Item> itemList = agreementService.findItemsForAgreement(agreement.getId());
-        agreement.setItems(itemList);
-        model.addAttribute("agreement", agreement);
-        model.addAttribute("now", LocalDate.now());
-        LocalDate dueDate = LocalDate.now( )
-                .plusMonths( 1 );
-        model.addAttribute("dueDate", dueDate);
-        return "showInvoice";
-    }*/
+ 
 }
