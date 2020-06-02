@@ -35,22 +35,21 @@
             <section>
                 <h2>Extra Items</h2>
                 <ul th:each="item: ${agreement.items}">
-                    <li><strong th:text="${item.name + ': '}"></strong> <span th:text="${item.quantity + ' x ' + item.price + ' EUR'}"></span></li>
+                    <li><strong th:text="${item.name + ': '}"></strong> <span th:text="${item.quantity + ' x ' + item.getSinglePrice() + ' = ' + item.price + ' EUR'}"></span></li>
                 </ul>
             </section>
-        </section>
 
-        <section class="grid-container">
-            <section>
+            <section th:if="${agreement.renter.firstName}">
                 <h2>Renter Information</h2>
                 <ul>
-                    <li><strong>CPR:</strong> <span th:text="${agreement.renter.cpr}"></span></li>
+                    <li><strong>Name:</strong> <span th:text="${agreement.renter.firstName + ' ' + agreement.renter.lastName}"></span></li>
+                    <li><strong th:text="${agreement.renter.country == 'Denmark'} ? 'CPR:' : 'Passport:'">CPR:</strong> <span th:text="${agreement.renter.cpr}"></span></li>
                     <li><strong>Email:</strong> <span th:text="${agreement.renter.email}"></span></li>
                     <li><strong>Phone:</strong> <span th:text="${agreement.renter.phone}"></span></li>
                     <li><strong>License Number:</strong> <span th:text="${agreement.renter.licenseNumber}"></span></li>
                 </ul>
             </section>
-            <section>
+            <section th:if="${agreement.renter.firstName}">
                 <h2>Renter Address</h2>
                 <ul>
                     <li th:text="${agreement.renter.street + ' ' + agreement.renter.building + ', ' + agreement.renter.floor + ' ' + agreement.renter.door}"></li>
@@ -58,10 +57,11 @@
                     <li th:text="${agreement.renter.country}"></li>
                 </ul>
             </section>
-        </section>
+            <section th:unless="${agreement.renter.firstName}">
+                <h2>Renter Deleted From The System</h2>
+            </section>
 
-        <section class="grid-container">
-            <section>
+            <section th:if="${agreement.vehicle.plates}">
                 <h2>Vehicle Information</h2>
                 <ul>
                     <li><strong>Plate:</strong> <span th:text="${agreement.vehicle.plates}"></span></li>
@@ -70,6 +70,9 @@
                     <li><strong>Beds:</strong> <span th:text="${agreement.vehicle.beds}"></span></li>
                     <li><strong>Price:</strong> <span th:text="${agreement.vehicle.price}"></span></li>
                 </ul>
+            </section>
+            <section th:unless="${agreement.vehicle.plates}">
+                <h2>Vehicle Deleted From The System</h2>
             </section>
         </section>
     </div>

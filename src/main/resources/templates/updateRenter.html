@@ -21,8 +21,8 @@
         <form th:action="@{'/updateRenter/'+${renter.id}}" method="post">
             <fieldset>
                 <p>Personal Information</p>
-                <label>Renter ID:</label>
-                <input type="text" name="id" th:value="${renter.id}" readonly="readonly" class="read-only"><br><br>
+                <label>Renter ID:</label><br>
+                <input type="text" name="id" th:value="${renter.id}" readonly="readonly" class="read-only"><br>
                 <label for="firstName">First name:</label><br>
                 <input type="text" maxlength="45" pattern="[A-Z][a-z]+" title="Must start with a capital letter followed by lowercase letters." id="firstName" name="firstName" required="required" placeholder="ex. John" th:value="${renter.firstName}"><br>
                 <label for="lastName">Last name:</label><br>

@@ -8,7 +8,7 @@
     failed message is added in case vehicle couldn't be deleted because of active/future contracts assigned to it
     vehicle isn't deleted and pop up window is shown with a fail message
     -->
-<body th:onload="${failed} ? 'return alert(&quot;Failed to delete the vehicle. Future/active contracts found.&quot;);'">
+<body th:onload="${failed} ? 'return alert(&quot;Failed to delete the vehicle. Future/active agreements found.&quot;);'">
     <!-- import menu-->
     <div th:insert="menu :: menu_template"></div>
 

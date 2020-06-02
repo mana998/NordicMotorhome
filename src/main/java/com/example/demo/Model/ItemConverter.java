@@ -8,9 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class ItemConverter implements Converter<String, Item> {
 
-    @Autowired
-    private AgreementRepository agreementRepository;
-
     @Override
     public Item convert(String item) {
         //retrieve return from toString method
