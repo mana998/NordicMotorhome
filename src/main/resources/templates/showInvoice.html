@@ -106,6 +106,16 @@
             </td>
         </tr>
 
+        <tr class="item">
+            <td>
+                Cancellation Fee
+            </td>
+
+            <td>
+                <span th:text="${agreement.cancelled} ? ${agreement.calculateCancellationFee()}"></span>
+            </td>
+        </tr>
+
         <tr class="item last">
             <td>
                 Extra km Fee
@@ -120,7 +130,7 @@
             <td></td>
 
             <td>
-                Total: <span th:text="${agreement.calculateTotalPrice() + ' ' + 'EUR'}"></span>
+                Total: <span th:text="${agreement.calculateInvoiceTotal() + ' ' + 'EUR'}"></span>
             </td>
         </tr>
     </table>
