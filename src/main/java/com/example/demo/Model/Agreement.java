@@ -36,7 +36,7 @@ public class Agreement {
     private LocalDate endDate;
     private Vehicle vehicle;
     private Renter renter;
-    private double drivenKm;
+    private double drivenKm; // km driven by the renter
     private double pickUpPoint;
     private double dropOffPoint;
     private List<Item> items;

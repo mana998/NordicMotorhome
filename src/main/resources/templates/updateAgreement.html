@@ -51,11 +51,12 @@
         </fieldset><br>
         <fieldset>
             <p>Pick-up and drop-off points</p>
-            <label>Pick-up point:</label>
-            <input type="number" min="0" max="999999" th:value="${agreement.pickUpPoint}"><br>
-            <label>Drop-off point:</label>
-            <input type="number" min="0" max="999999" th:field="${agreement.dropOffPoint}"><br>
-        </fieldset><br>
+            <label for="pickUpPoint">Pick-up:</label><br>
+            <input type="number" min="0" max="2147483647" title="Only numeric characters." id="pickUpPoint" name="pickUpPoint" placeholder="ex. 45" th:value="${agreement.pickUpPoint}"><br>
+            <label for="dropOffPoint">Drop-off:</label><br>
+            <input type="number" min="0" max="2147483647" title="Only numeric characters." id="dropOffPoint" name="dropOffPoint" placeholder="ex. 45" th:value="${agreement.dropOffPoint}"><br>
+            <br>
+        </fieldset> <br>
         <fieldset>
             <p>Extra charges</p><!-- Marianna -->
             <div th:each="item, itemStat: *{items}">
