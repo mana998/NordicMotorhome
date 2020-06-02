@@ -9,7 +9,6 @@ import com.example.demo.Repository.RenterRepository;
 import com.example.demo.Repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -65,9 +64,6 @@ public class AgreementService {
             Renter renter = renterRepository.findRenterById(renterId);
             agreement.setRenter(renter);
         }
-        // find and set the extra items for this agreement
-        //List<Item> itemList = agreementRepository.findItemsForAgreement(agreement.getId());
-        //agreement.setItems(itemList);
         return agreement;
     }
 
@@ -94,7 +90,4 @@ public class AgreementService {
     public List<Agreement> findByEndDate(LocalDate endDate) {
         return agreementRepository.findByEndDate(endDate);
     }
-
-
-
 }

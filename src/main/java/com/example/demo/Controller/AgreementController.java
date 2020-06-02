@@ -7,11 +7,9 @@ import com.example.demo.Service.RenterService;
 import com.example.demo.Service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -91,18 +89,16 @@ public class AgreementController {
     public String showNewRenterForm(@PathVariable("startDate") String startDate,
                                  @PathVariable("endDate") String endDate,
                                  @PathVariable("vehicleId") int vehicleId,
-                                 Model theModel) {
+                                 Model model) {
         Agreement agreement = new Agreement();
-        Renter theRenter = new Renter();
-        theModel.addAttribute("renter", theRenter);
-        theModel.addAttribute("startDate", startDate);
-        theModel.addAttribute("endDate", endDate);
-        theModel.addAttribute("vehicleId", vehicleId);
-        theModel.addAttribute("agreement", agreement);
+        model.addAttribute("startDate", startDate);
+        model.addAttribute("endDate", endDate);
+        model.addAttribute("vehicleId", vehicleId);
+        model.addAttribute("agreement", agreement);
         ItemCreation items = new ItemCreation(agreementService.findAllItems());
-        theModel.addAttribute("itemList", items);
+        model.addAttribute("itemList", items);
         List<String> countries = countryService.showCountriesList();
-        theModel.addAttribute("countries", countries);
+        model.addAttribute("countries", countries);
         return "addAgreementNewRenter";
     }
 
@@ -111,30 +107,27 @@ public class AgreementController {
     public String saveNewRenter(@PathVariable("startDate") String startDate,
                                 @PathVariable("endDate") String endDate,
                                 @PathVariable("vehicleId") int vehicleId,
-                                Model theModel,
                                 @ModelAttribute ("itemList") ItemCreation itemList,
-                                @ModelAttribute Renter renter, @ModelAttribute Agreement agreement) {
-        // adds renter to the database
-        renterService.addRenter(renter);
-        // fetches the new renter id
+                                @ModelAttribute Agreement agreement) {
+        // saves new renter to the database
+        renterService.addRenter(agreement.getRenter());
+        // fetches new renter id
         int renterId = renterService.findMaxRenterId();
-        // sets it to the new renter
-        renter.setId(renterId);
-        // and sets the new renter to the new agreement
-        agreement.setRenter(renter);
+        // sets new renter id to the new agreement
+        agreement.getRenter().setId(renterId);
         // finds vehicle based on vehicle id
         Vehicle vehicle = vehicleService.findVehicleById(vehicleId);
-        // and sets it to the new agreement
+        // sets vehicle to the new agreement
         agreement.setVehicle(vehicle);
-        // converts dates from string to LocalDate type and sets new agreement values
+        // converts dates from string to LocalDate type and sets to new agreement
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDateConverted = LocalDate.parse(startDate, formatter);
         LocalDate endDateConverted = LocalDate.parse(endDate, formatter);
         agreement.setStartDate(startDateConverted);
         agreement.setEndDate(endDateConverted);
-        // stores new agreement to the database
+        // saves new agreement
         agreementService.addAgreement(agreement);
-        // stores items associated with new agreement to the database
+        // saves extra items
         agreementService.addItems(agreement,itemList.getItems());
         return "redirect:/agreement/viewAgreements";
     }
@@ -144,12 +137,9 @@ public class AgreementController {
     public String listRenters(@PathVariable("startDate") String startDate,
                               @PathVariable("endDate") String endDate,
                               @PathVariable("vehicleId") int vehicleId,
-                              Model theModel, @RequestParam(defaultValue = "") String driverLicenseNumber) {
-        theModel.addAttribute("startDate", startDate);
-        theModel.addAttribute("endDate", endDate);
-        theModel.addAttribute("vehicleId", vehicleId);
+                              Model model, @RequestParam(defaultValue = "") String driverLicenseNumber) {
         List<Renter> renters = renterService.findByDriverLicenseNumber(driverLicenseNumber);
-        theModel.addAttribute("renters", renters);
+        model.addAttribute("renters", renters);
         return "addAgreementExistingRenter";
     }
 
@@ -175,8 +165,7 @@ public class AgreementController {
                                    @PathVariable("vehicleId") int vehicleId,
                                    @PathVariable("renterId") int renterId,
                                    @ModelAttribute ("itemList") ItemCreation itemList,
-                                   @ModelAttribute Agreement agreement,
-                                   Model model) {
+                                   @ModelAttribute Agreement agreement) {
         // converts the dates from string to LocalDate and sets the new agreement dates
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDateConverted = LocalDate.parse(startDate, formatter);
@@ -186,8 +175,9 @@ public class AgreementController {
         // finds the renter from the database based on renter id and associates it with new agreement
         agreement.setRenter(renterService.findRenterById(renterId));
         agreement.setVehicle(vehicleService.findVehicleById(vehicleId));
+        // saves new agreement
         agreementService.addAgreement(agreement);
-        //gets list of items from wrapper class and inserts them into db
+        // gets list of items from wrapper class and inserts them into db
         agreementService.addItems(agreement,itemList.getItems());
         return "redirect:/agreement/viewAgreements";
     }
@@ -254,7 +244,8 @@ public class AgreementController {
     }
 
     @PostMapping("/saveUpdate/{id}")
-    public String saveUpdate( @ModelAttribute ("itemList") ItemCreation itemList,@ModelAttribute("agreement") Agreement agreement, @PathVariable("id") int id) {
+    public String saveUpdate( @ModelAttribute ("itemList") ItemCreation itemList,
+                              @ModelAttribute("agreement") Agreement agreement, @PathVariable("id") int id) {
         // and save the agreement
         agreement.setId(id);
         agreementService.updateAgreement(agreement);
@@ -277,10 +268,16 @@ public class AgreementController {
 
     @PostMapping("/saveCancel")
     public String saveCancellation(@ModelAttribute("agreement") Agreement agreement, Model model) {
+        // updates agreement (sets is_cancelled = '1')
         agreementService.cancelAgreement(agreement.getId());
+        // we need to update the attribute here before we pass it into the model
         agreement.setCancelled(true);
         agreement.setItems(agreementService.findItemsForAgreement(agreement.getId()));
         model.addAttribute("agreement", agreement);
+        model.addAttribute("now", LocalDate.now());
+        LocalDate dueDate = LocalDate.now( )
+                .plusMonths( 1 );
+        model.addAttribute("dueDate", dueDate);
         return "showInvoice";
     }
 }
