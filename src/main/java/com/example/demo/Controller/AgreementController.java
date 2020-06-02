@@ -82,11 +82,7 @@ public class AgreementController {
     @GetMapping("/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}")
     public String showPageNewOrExistingRenter(@PathVariable("startDate") String startDate,
                                               @PathVariable("endDate") String endDate,
-                                              @PathVariable("vehicleId") int vehicleId,
-                                              Model theModel) {
-        theModel.addAttribute("startDate", startDate);
-        theModel.addAttribute("endDate", endDate);
-        theModel.addAttribute("carId", vehicleId);
+                                              @PathVariable("vehicleId") int vehicleId) {
         return "addAgreementNewOrExistingRenter";
     }
 
