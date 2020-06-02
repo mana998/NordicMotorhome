@@ -19,17 +19,14 @@
 
     <main class="main_body">
         <h1 class="heading">Add New Agreement</h1><br>
-
-        <h2 class="heading">Agreement Information</h2><br>
         <form action="#" th:action="@{/agreement/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}/existing-renter/{renterId}(startDate = ${startDate}, endDate=${endDate}, vehicleId=${vehicleId}, renterId=${renterId})}" th:object="${itemList}" method="post">
             <fieldset>
-                <p>Pick-up and drop-off</p>
-                <label>Pick-up point:</label>
-                <input type="number" min="0" max="999999" th:field="${agreement.pickUpPoint}" placeholder="distance in km" required><br>
-                <small>Must be non negative decimal number.</small><br><br>
-                <label>Drop-off point:</label>
-                <input type="number" min="0" max="999999" th:field="${agreement.dropOffPoint}" placeholder="distance in km" required><br>
-                <small>Must be non negative decimal number.</small><br><br>
+                <p>Pick-up and drop-off points</p>
+                <label for="pickUpPoint">Pick-up:</label><br>
+                <input type="number" min="0" max="2147483647" title="Only numeric characters." id="pickUpPoint" name="pickUpPoint" required="required" placeholder="ex. 45"><br>
+                <label for="dropOffPoint">Drop-off:</label><br>
+                <input type="number" min="0" max="2147483647" title="Only numeric characters." id="dropOffPoint" name="dropOffPoint" required="required" placeholder="ex. 45"><br>
+                <br>
             </fieldset> <br>
 
             <fieldset>

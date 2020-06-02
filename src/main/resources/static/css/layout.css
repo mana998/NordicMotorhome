@@ -328,10 +328,25 @@ input.btn-submit-add{
     cursor: pointer;
 }
 
+.btn-action-disabled{
+    border: none;
+    color: white;
+    background-color: #324960;
+    opacity: 50%;
+}
+
+.btn-cancel-disabled{
+    border: none;
+    color: white;
+    background-color: #FF5733;
+    opacity: 50%;
+}
+
 .btn-cancel{
     border: none;
     color: white;
     background-color: #FF5733;
+    cursor: pointer;
 }
 
 .btn-action:hover{

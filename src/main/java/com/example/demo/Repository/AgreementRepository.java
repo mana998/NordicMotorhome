@@ -46,9 +46,10 @@ public class AgreementRepository {
     }
 
     public void addAgreement(Agreement agreement) {
-        String sql = "INSERT INTO agreement (renterID, vehicleID, start_date, end_date, pick_up_point, drop_off_point) VALUES (?,?,?,?,?,?)";
-        template.update(sql, agreement.getRenter().getId(), agreement.getVehicle().getVehicleID(), agreement.getStartDate(),
-        agreement.getEndDate(), agreement.getPickUpPoint(), agreement.getDropOffPoint());
+        String sql = "INSERT INTO agreement (renterID, vehicleID, start_date, end_date, pick_up_point, drop_off_point) " +
+                     "VALUES (?,?,?,?,?,?)";
+        template.update(sql, agreement.getRenter().getId(), agreement.getVehicle().getVehicleID(),
+                agreement.getStartDate(), agreement.getEndDate(), agreement.getPickUpPoint(), agreement.getDropOffPoint());
     }
 
     public Item findItemById(int id) {
@@ -62,7 +63,8 @@ public class AgreementRepository {
             //only if the quantity is greater than 0
             if (item.getQuantity()>0) {
                 //and assign it to the corresponding agreement
-                String sql = "INSERT INTO agreement_has_extras (agreementID, extrasID, quantity) VALUES (?,?,?)";
+                String sql = "INSERT INTO agreement_has_extras (agreementID, extrasID, quantity) " +
+                             "VALUES (?,?,?)";
                 template.update(sql, agreementId, item.getId(), item.getQuantity());
             }
         }

@@ -34,11 +34,9 @@
             <label for="yes">yes</label>
             <input type="radio" id="no" name="levelGasoline" th:field="${agreement.levelGasoline}" value="0">
             <label for="no">no</label><br><br>
+            <label for="drivenKm">How many km has the renter driven?</label>
+            <input type="number" min="1" max="2147483647" title="Only numeric characters." id="drivenKm" name="drivenKm" required="required" placeholder="ex. 45"><br>
 
-            <!-- add number input for driven km -->
-            <label>How many km has the renter driven?:</label>
-            <input type="number" min="1" max="999999" th:field="${agreement.drivenKm}" placeholder="Driven kilometers" required><br>
-            <small>Must be non negative decimal number.</small><br>
         </fieldset>
         <input class="btn-submit-add" type="submit" value="Submit">
     </form>
