@@ -395,7 +395,6 @@ button:focus {
     font-size: 20px;
 }
 
-
 /* Display columns on SHOW pages*/
 .grid-container{
     display: grid;
@@ -495,6 +494,7 @@ footer {
     text-align: center;
     margin-bottom: 0;
 }
+
 /* Make footer sticky to the bottom using Flexbox */
 html, body {
     height: 100%;
@@ -513,7 +513,6 @@ body {
 .footer {
     flex-shrink: 0;
 }
-
 
 
 /* Responsive */
