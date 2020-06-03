@@ -62,8 +62,7 @@ public class AgreementController {
             agreement.setEndDate(agreement.getStartDate());
             agreement.setStartDate(tempDate);
         }
-        model.addAttribute("startDate", agreement.getStartDate());
-        model.addAttribute("endDate", agreement.getEndDate());
+        model.addAttribute("agreement", agreement);
         List<Vehicle> availableVehicles = vehicleService.findVehiclesAvailableForAgreement(agreement.getStartDate(),
                 agreement.getEndDate(), agreement.getVehicle().getBeds(), agreement.getVehicle().getPrice());
         // if there are no available vehicles based on search criteria, show no-results page
@@ -90,11 +89,7 @@ public class AgreementController {
                                  @PathVariable("endDate") String endDate,
                                  @PathVariable("vehicleId") int vehicleId,
                                  Model model) {
-        Agreement agreement = new Agreement();
-        model.addAttribute("startDate", startDate);
-        model.addAttribute("endDate", endDate);
-        model.addAttribute("vehicleId", vehicleId);
-        model.addAttribute("agreement", agreement);
+        model.addAttribute("agreement", new Agreement());
         ItemCreation items = new ItemCreation(agreementService.findAllItems());
         model.addAttribute("itemList", items);
         List<String> countries = countryService.showCountriesList();
@@ -287,7 +282,6 @@ public class AgreementController {
         return "showInvoice";
     }                                                  
 
-
     //method for assigning vehicle and renter to the agreement
     public void setVehicleRenter (Agreement agreement) {
         // find and set the vehicle for this agreement
@@ -303,5 +297,4 @@ public class AgreementController {
             agreement.setRenter(renter);
         }
     }
- 
 }
