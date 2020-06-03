@@ -11,13 +11,11 @@ public class PasswordGenerator{ //Ilias
         return encoder.encode(word);
     }
 
-//   Main method to manually encrypt words to hash
+////   Main method to manually encrypt words to hash
 //    public static void main(String[] args) {
 //        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//        String rawPassword = "Word";
+//        String rawPassword = "word";
 //        System.out.println(encoder.encode(rawPassword));
 //    }
-
-
 }
 
