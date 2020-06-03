@@ -7,8 +7,14 @@
 <body>
 <!-- import menu-->
 <div th:insert="menu :: menu_template"></div>
-
-<h1 class="heading">End Agreement</h1><br>
+<!-- back button-->
+<div class="btn-undermenu">
+    <a th:href="@{/agreement/viewAgreements}">
+        <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
+        <button class="btn-back" style="cursor: pointer"><strong>BACK</strong></button>
+    </a>
+</div>
+<h1 class="heading">Generate Invoice</h1><br>
 
 <main class="main_body">
     <form action="#" th:action="@{/agreement/save}" th:object="${agreement}" method="post">
@@ -36,8 +42,7 @@
             <label for="no">no</label><br><br>
             <label for="drivenKm">How many km has the renter driven?</label>
             <input type="number" min="1" max="2147483647" title="Only numeric characters." id="drivenKm" name="drivenKm" required="required" placeholder="ex. 45"><br>
-
-        </fieldset>
+        </fieldset><br>
         <input class="btn-submit-add" type="submit" value="Submit">
     </form>
 </main>

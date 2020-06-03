@@ -2,15 +2,13 @@ package com.example.demo.Model;
 
 import org.decimal4j.util.DoubleRounder;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
-
 import static java.lang.String.valueOf;
 import static java.time.temporal.ChronoUnit.DAYS;
 
-public class Agreement {
+public class Agreement { // Dimitrios
 
     // prices are in euros
     final double transferFeePerKm = 0.70;

@@ -17,9 +17,7 @@
 
     <main class="main_body">
         <h1 class="heading">Add New Agreement</h1><br>
-
-        <h2 class="heading">Available vehicles between <span th:text="${#temporals.format(startDate, 'dd-MM-yyyy')} + ' and ' + ${#temporals.format(endDate, 'dd-MM-yyyy')}"></span>:</h2><br>
-
+        <h2 class="heading">Available vehicles between <span th:text="${#temporals.format(agreement.startDate, 'dd-MM-yyyy')} + ' and ' + ${#temporals.format(agreement.endDate, 'dd-MM-yyyy')}"></span>:</h2><br>
         <div class="main table-wrapper" id="main">
             <table class="fl-table">
                 <thead>
@@ -43,8 +41,8 @@
                     <td th:text="${vehicle.price}"></td>
                     <td>
                         <!-- Add select button -->
-                        <a th:href="@{/agreement/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}(startDate = ${startDate},
-                        endDate = ${endDate}, vehicleId=${vehicle.vehicleID})}"><button class="btn-action">SELECT</button></a>
+                        <a th:href="@{/agreement/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}(startDate = ${agreement.startDate},
+                        endDate = ${agreement.endDate}, vehicleId=${vehicle.vehicleID})}"><button class="btn-action">SELECT</button></a>
                     </td>
                 </tr>
                 </tbody>
