@@ -4,7 +4,7 @@
     <title id="title">Update Renter</title>
     <!-- import header part-->
 </head>
-<body>
+<body onload="cprOrPass()">
     <!-- import menu-->
     <div th:insert="menu :: menu_template"></div>
 
@@ -52,7 +52,7 @@
                 <label for="zip">Zip:</label><br>
                 <input type="text" maxlength="10" pattern="\d+" title="Only numeric characters." id="zip" name="zip" required="required" placeholder="ex. 1050" th:value="${renter.zip}"><br>
                 <label for="country">Country:</label><br>
-                <select id="country" name="country" onchange="cprOrPass(this)" required>
+                <select id="country" name="country" onchange="cprOrPass()" required>
                     <option th:value="${renter.country}" selected hidden><span th:text="${renter.country}"></span></option>
                     <option th:each="country: ${countries}" th:value="${country}"><span th:text="${country}"></span></option>
                 </select> <br>

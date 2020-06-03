@@ -25,7 +25,9 @@ function showPriv(input){
     }
 }
 
-function cprOrPass(country){
+<!--    JS function to show cpr or passport input fields based on country Marianna-->
+function cprOrPass(){
+    var country = document.getElementById("country");
     if (country.value != 'Denmark'){
         document.getElementById("cprLabel").innerHTML="Passport:";
         document.getElementById("cpr").pattern="[A-Z0-9]+";
