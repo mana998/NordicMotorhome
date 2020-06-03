@@ -120,12 +120,12 @@ public class EmployeeRepository{ //Ilias
                 //Updates the database with username, encoded password, role
                 template.update(sql, emp.getUsername(), hashPass, emp.getRole(), id);
             } else {
-                // else just saves the role as restricted
+                // else just saves the role as restricted, with no access to the system
                 sql = "UPDATE users " +
                         "JOIN employee USING(userID) " +
-                        "SET role = ? " +
+                        "SET role = ?, username = ?, password = ? " +
                         "WHERE employeeID = ?";
-                template.update(sql, emp.getRole(), id);
+                template.update(sql, emp.getRole(), null, null, id);
             }
         }
         return null;
