@@ -19,15 +19,17 @@
         <form action="#" th:action="@{/agreement/create/selectDates}" th:object="${agreement}" method="post">
             <fieldset style="width: 300px;">
             <p>Time period, number of beds and price</p>
-            <label for="startDate">From:</label><br>
-            <input type="date" th:attr="min=${now}" id="startDate" name="startDate" required="required"><br>
-            <label for="endDate">To:</label><br>
-            <input type="date" th:attr="min=${now}" id="endDate" name="endDate" required="required"><br>
-            <label for="beds">Minimum number of beds:</label><br>
-            <input type="number" min="0" max="2147483647" title="Only numeric characters." id="beds" name="vehicle.beds" required="required" placeholder="ex. 4"><br>
-            <label for="price">Maximum price in EUR:</label><br>
-            <input type="number" min="0" max="2147483647" title="Only numeric characters." id="price" name="vehicle.price" required="required" placeholder="ex. 500"><br>
-        </fieldset><br>
+                <div class="select-dates">
+                <label for="startDate">From:</label><br>
+                <input type="date" th:attr="min=${now}" id="startDate" name="startDate" required="required"><br>
+                <label for="endDate">To:</label><br>
+                <input type="date" th:attr="min=${now}" id="endDate" name="endDate" required="required"><br>
+                <label for="beds">Minimum number of beds:</label><br>
+                <input type="number" min="0" max="2147483647" title="Only numeric characters." id="beds" name="vehicle.beds" required="required" placeholder="ex. 4"><br>
+                <label for="price">Maximum price in EUR:</label><br>
+                <input type="number" min="0" max="2147483647" title="Only numeric characters." id="price" name="vehicle.price" required="required" placeholder="ex. 500"><br>
+                </div>
+            </fieldset><br>
         <input class="btn-submit-add" type="submit" value="Find Available Vehicles">
         </form>
     </main>

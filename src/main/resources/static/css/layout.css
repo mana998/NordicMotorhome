@@ -248,6 +248,10 @@ input.btn-submit-add{
     display:block;
 }
 
+.select-dates{
+    margin-left: 75px;
+}
+
 /* Style buttons which are below the menu*/
 .btn-undermenu{
     display: inline-block;
