@@ -5,7 +5,8 @@
     <!--    Import JS file-->
     <script src="http://localhost:8080/js/scripts.js"></script>
 </head>
-<body>
+<body onload="cprOrPass()">
+
 <!-- import menu-->
 <div th:insert="menu :: menu_template"></div>
 
@@ -55,7 +56,7 @@
             <input type="text" name="zip" maxlength="10" pattern="\d+" title="Only numeric characters." th:value="${employee.zip}" placeholder="ex. 1050" required><br><br>
             <label>Country:</label>
             <!--    Country drop down list            -->
-            <select id="country" name="country" onchange="cprOrPass(this)" required>
+            <select id="country" name="country" onchange="cprOrPass()" required>
                 <option th:value="${employee.country}" selected hidden><span th:text="${employee.country}"></span></option>
                 <option th:each="country: ${countries}" th:value="${country}"><span th:text="${country}"></span></option>
             </select><br><br>

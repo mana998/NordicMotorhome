@@ -51,7 +51,7 @@
                 <input type="text" maxlength="10" name="zip" pattern="\d+" title="Only numeric characters." placeholder="ex. 2545" required><br><br>
                 <label>Country:</label>
                 <!--    Country drop down list            -->
-                <select id="country" name="country" onchange="cprOrPass(this)">
+                <select id="country" name="country" onchange="cprOrPass()">
                     <option value="Denmark" selected hidden>Denmark</option>
                     <option th:each="country: ${countries}" th:value="${country}"><span th:text="${country}"></span></option>
                 </select><br><br>
