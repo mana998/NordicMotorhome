@@ -10,8 +10,8 @@
 
     <!-- back button-->
     <div class="btn-undermenu">
-        <a th:href="@{/agreement/viewAgreements}">
-            <img src="../SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
+        <a th:href="@{/viewAgreements}">
+            <img src="SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
             <button class="btn-back" style="cursor: pointer"><strong>BACK</strong></button>
         </a>
     </div>
@@ -19,7 +19,7 @@
     <h1 class="heading">Add New Agreement</h1><br>
 
     <main class="main_body">
-        <form th:action="@{/agreement/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}/new-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}" th:object="${itemList}" method="post">
+        <form th:action="@{/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}/new-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}" th:object="${itemList}" method="post">
             <!-- Add hidden form field to handle the update -->
             <input type="hidden" th:field="${agreement.id}" />
             <fieldset>

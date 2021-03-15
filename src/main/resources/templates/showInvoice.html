@@ -9,8 +9,8 @@
 <div th:insert="menu :: menu_template"></div>
 <!-- back button-->
 <div class="btn-undermenu">
-    <a th:href="@{/agreement/viewAgreements}">
-        <img src="../SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
+    <a th:href="@{/viewAgreements}">
+        <img src="SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
         <button class="btn-back" style="cursor: pointer"><strong>BACK</strong></button>
     </a>
 </div>
@@ -24,7 +24,7 @@
                 <table>
                     <tr>
                         <td class="title">
-                            <img src="../image/logo.png" style="width: 100px; height: 100px;">
+                            <img src="image/logo.png" style="width: 100px; height: 100px;">
                         </td>
                         <td>
                             Invoice for Agreement <span th:text="${agreement.id}"></span><br>

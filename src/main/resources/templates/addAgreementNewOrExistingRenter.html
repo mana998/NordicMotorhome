@@ -9,8 +9,8 @@
 
 <!-- back button-->
 <div class="btn-undermenu">
-    <a th:href="@{/agreement/viewAgreements}">
-        <img src="../SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
+    <a th:href="@{/viewAgreements}">
+        <img src="SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
         <button class="btn-back" style="cursor: pointer"><strong>BACK</strong></button>
     </a>
 </div>
@@ -28,8 +28,8 @@
                 <tbody>
                 <tr>
                     <td>
-                        <a th:href="@{/agreement/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}/new-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}"><button class="btn-action" style="font-size: 14px">New Renter</button></a>
-                        <a th:href="@{/agreement/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}/existing-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}"><button class="btn-action" style="font-size: 14px">Existing Renter</button></a>
+                        <a th:href="@{/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}/new-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}"><button class="btn-action" style="font-size: 14px">New Renter</button></a>
+                        <a th:href="@{/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}/existing-renter(startDate=${startDate}, endDate=${endDate}, vehicleId=${vehicleId})}"><button class="btn-action" style="font-size: 14px">Existing Renter</button></a>
                     </td>
                 </tr>
                 </tbody>

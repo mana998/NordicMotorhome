@@ -9,8 +9,8 @@
     <div th:insert="menu :: menu_template"></div>
     <!-- back button-->
     <div class="btn-undermenu">
-        <a th:href="@{/agreement/create/selectDates}">
-            <img src="../../SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
+        <a th:href="@{/create/selectDates}">
+            <img src="SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
             <button class="btn-back" style="cursor: pointer"><strong>BACK</strong></button>
         </a>
     </div>
@@ -41,7 +41,7 @@
                     <td th:text="${vehicle.price}"></td>
                     <td>
                         <!-- Add select button -->
-                        <a th:href="@{/agreement/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}(startDate = ${agreement.startDate},
+                        <a th:href="@{/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}(startDate = ${agreement.startDate},
                         endDate = ${agreement.endDate}, vehicleId=${vehicle.vehicleID})}"><button class="btn-action">SELECT</button></a>
                     </td>
                 </tr>

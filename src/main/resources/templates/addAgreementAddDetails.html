@@ -10,8 +10,8 @@
 
     <!-- back button-->
     <div class="btn-undermenu">
-        <a th:href="@{/agreement/viewAgreements}">
-            <img src="../SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
+        <a th:href="@{/viewAgreements}">
+            <img src="SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
             <button class="btn-back" style="cursor: pointer"><strong>BACK</strong></button>
         </a>
     </div>
@@ -19,7 +19,7 @@
 
     <main class="main_body">
         <h1 class="heading">Add New Agreement</h1><br>
-        <form action="#" th:action="@{/agreement/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}/existing-renter/{renterId}(startDate = ${startDate}, endDate=${endDate}, vehicleId=${vehicleId}, renterId=${renterId})}" th:object="${itemList}" method="post">
+        <form action="#" th:action="@{/create/{startDate}/{endDate}/selectVeh*cle/{vehicleId}/existing-renter/{renterId}(startDate = ${startDate}, endDate=${endDate}, vehicleId=${vehicleId}, renterId=${renterId})}" th:object="${itemList}" method="post">
             <fieldset>
                 <p>Pick-up and drop-off points</p>
                 <label for="pickUpPoint">Pick-up:</label><br>

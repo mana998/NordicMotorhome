@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
-@RequestMapping("/agreement")
+@RequestMapping("/")
 public class AgreementController {
 
     private AgreementService agreementService;

@@ -9,14 +9,14 @@
     <div th:insert="menu :: menu_template"></div>
     <!-- back button-->
     <div class="btn-undermenu">
-        <a th:href="@{/agreement/viewAgreements}">
-            <img src="../SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
+        <a th:href="@{/viewAgreements}">
+            <img src="SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
             <button class="btn-back" style="cursor: pointer"><strong>BACK</strong></button>
         </a>
     </div>
     <main class="main_body">
         <h1 class="heading">Add New Agreement</h1>
-        <form action="#" th:action="@{/agreement/create/selectDates}" th:object="${agreement}" method="post">
+        <form action="#" th:action="@{/create/selectDates}" th:object="${agreement}" method="post">
             <fieldset style="width: 300px;">
             <p>Time period, number of beds and price</p>
                 <div class="select-dates">

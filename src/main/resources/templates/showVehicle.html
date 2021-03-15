@@ -37,7 +37,7 @@
                     <li><strong>Id:</strong> <span th:text="${agreement.id}"></span></li>
                     <li><strong>Dates:</strong> <span th:text="${#temporals.format(agreement.startDate, 'dd/MM/yyyy') + ' - ' + #temporals.format(agreement.endDate, 'dd/MM/yyyy')}"></span></li>
                     <li><strong>Renter:</strong> <span th:text="${agreement.renter.firstName + ' ' + agreement.renter.lastName}"></span></li>
-                    <li><a th:href="@{/agreement/viewAgreement(agreementId=${agreement.id})}"><button class="btn-action">VIEW</button></a></li>
+                    <li><a th:href="@{/viewAgreement(agreementId=${agreement.id})}"><button class="btn-action">VIEW</button></a></li>
                 </ul>
                 </hr>
             </article>
@@ -51,7 +51,7 @@
                     <li><strong>Id:</strong> <span th:text="${agreement.id}"></span></li>
                     <li><strong>Dates:</strong> <span th:text="${#temporals.format(agreement.startDate, 'dd/MM/yyyy') + ' - ' + #temporals.format(agreement.endDate, 'dd/MM/yyyy')}"></span></li>
                     <li><strong>Renter:</strong> <span th:text="${agreement.renter.firstName + ' ' + agreement.renter.lastName}"></span></li>
-                    <li><a th:href="@{/agreement/viewAgreement(agreementId=${agreement.id})}"><button class="btn-action">VIEW</button></a></li>
+                    <li><a th:href="@{/viewAgreement(agreementId=${agreement.id})}"><button class="btn-action">VIEW</button></a></li>
                 </ul>
                 </hr>
             </article>
@@ -65,7 +65,7 @@
                     <li><strong>Dates:</strong> <span th:text="${#temporals.format(agreement.startDate, 'dd/MM/yyyy') + ' - ' + #temporals.format(agreement.endDate, 'dd/MM/yyyy')}"></span></li>
                     <li><strong>Renter:</strong> <span th:text="${agreement.renter.firstName + ' ' + agreement.renter.lastName}"></span></li>
                     <strong><li th:text="${agreement.cancelled} ? 'Cancelled'" style="color: red">Cancelled</li></strong>
-                    <li><a th:href="@{/agreement/viewAgreement(agreementId=${agreement.id})}"><button class="btn-action">VIEW</button></a></li>
+                    <li><a th:href="@{/viewAgreement(agreementId=${agreement.id})}"><button class="btn-action">VIEW</button></a></li>
                 </ul>
                 </hr>
             </article>
