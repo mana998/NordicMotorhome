@@ -5,35 +5,35 @@
 
             <!-- Home tab menu link           -->
             <a href="/" class="menu_link" title="Main menu" th:classappend="${#strings.equals(view,'/')? 'active' : ''}" id="home">
-                <img src="http://localhost:8080/SVG/home-solid.svg" class="svg menu_icons" height="20" width="20">
+                <img src="{URL}SVG/home-solid.svg" class="svg menu_icons" height="20" width="20">
                 <br>
                 <button class="menu_item" title="Main menu"><strong>Home</strong></button>
             </a>
 
             <!-- Vehicles tab menu link           -->
             <a href="/viewVehicles" class="menu_link" th:classappend="${#strings.contains(view,'Vehicle')? 'active' : ''}" title="Vehicles menu" id="vehicle">
-                <img src="http://localhost:8080/SVG/bus-solid.svg" class="svg menu_icons" height="20" width="20">
+                <img src="{URL}SVG/bus-solid.svg" class="svg menu_icons" height="20" width="20">
                 <br>
                 <button class="menu_item" title="Vehicles menu"><strong>Vehicles</strong></button>
             </a>
 
             <!-- Renters tab menu link           -->
             <a href="/viewRenters" class="menu_link" th:classappend="${#strings.contains(view,'Renter')? 'active' : ''}" title="Renters menu" id="renters">
-                <img src="http://localhost:8080/SVG/user-friends-solid.svg" class="svg menu_icons" height="20" width="20">
+                <img src="{URL}SVG/user-friends-solid.svg" class="svg menu_icons" height="20" width="20">
                 <br>
                 <button class="menu_item" title="Renters menu"><strong>Renters</strong></button>
             </a>
 
             <!-- Agreements tab menu link           -->
             <a href="/agreement/viewAgreements" class="menu_link" th:classappend="${#strings.contains(view,'agreement')? 'active' : ''}" title="Agreements menu" id="agreements">
-                <img src="http://localhost:8080/SVG/window-restore-solid.svg" class="svg menu_icons" height="20" width="20">
+                <img src="{URL}SVG/window-restore-solid.svg" class="svg menu_icons" height="20" width="20">
                 <br>
                 <button class="menu_item" title="Agreements menu"><strong>Agreements</strong></button>
             </a>
 
             <!-- Employees tab menu link (only shows if the logged-in user has admin privileges)          -->
             <a th:if="${#authorization.expression('hasAuthority(''admin'')')}" th:href="@{/viewEmployees}" class="menu_link" th:classappend="${#strings.contains(view,'Employee')? 'active' : ''}" title="Employee menu - Admin only" id="employees">
-                <img src="http://localhost:8080/SVG/user-edit-solid.svg" class="svg menu_icons" height="20" width="20">
+                <img src="{URL}SVG/user-edit-solid.svg" class="svg menu_icons" height="20" width="20">
                 <br>
                 <button class="menu_item" title="Employee menu - Admin only"><strong>Employees</strong></button>
             </a>
@@ -41,13 +41,13 @@
     </div>
 
     <div>
-        <a href="/" id="banner"><img src="http://localhost:8080/image/banner.png" height="90"></a>
+        <a href="/" id="banner"><img src="{URL}image/banner.png" height="90"></a>
     </div>
 
     <div id="logout">
         <a href="/logout" class="menu_link">
             <button class="logout"><strong>LOG OUT</strong> </button>
-            <img src="http://localhost:8080/SVG/sign-out-alt-solid.svg" class="svg logout_button" height="30" width="30">
+            <img src="{URL}SVG/sign-out-alt-solid.svg" class="svg logout_button" height="30" width="30">
         </a>
     </div>
 </div>

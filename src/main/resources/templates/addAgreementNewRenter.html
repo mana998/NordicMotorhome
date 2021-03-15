@@ -11,7 +11,7 @@
     <!-- back button-->
     <div class="btn-undermenu">
         <a th:href="@{/agreement/viewAgreements}">
-            <img src="http://localhost:8080/SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
+            <img src="{URL}SVG/arrow-left-solid.svg" class="svg undermenu_button" height="30" width="30">
             <button class="btn-back" style="cursor: pointer"><strong>BACK</strong></button>
         </a>
     </div>
@@ -54,7 +54,7 @@
                 <input type="text" maxlength="10" pattern="\d+" title="Only numeric characters." id="zip" name="renter.zip" required="required" placeholder="ex. 1050"><br>
                 <label for="country">Country:</label><br>
                 <select id="country" name="renter.country" onchange="cprOrPass(this)" required>
-                    <option value="" selected disabled hidden>Choose here</option>
+                    <option value="" {URL}>Choose here</option>
                     <option th:each="country: ${countries}" th:value="${country}"><span th:text="${country}"></span></option>
                 </select> <br>
             </fieldset><br>
